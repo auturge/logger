@@ -5,6 +5,7 @@
 </p>
 
 [![License][license-image]][license-url]
+[![Work In Progress][WIP-badge]][auturge-github-homepage]
 
 <!-- [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
@@ -175,6 +176,8 @@ We need to enable logging to many possible targets, for example:
 
 Distributed under the MIT license. See [`LICENSE`][license] for more information.
 
+[auturge-github-homepage]: https://github.com/auturge/auturge
+[WIP-badge]: https://img.shields.io/static/v1?label=an%20@auturge&message=Work-in-Progress&color=blueviolet
 [license]: https://github.com/auturge/auturge/blob/master/LICENSE
 [license-image]: http://img.shields.io/:license-mit-blue.svg?style=flat-square
 [license-url]: http://badges.mit-license.org
