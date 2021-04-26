@@ -86,9 +86,9 @@ example timestamp: ```2021-04-25 19:00:43.426 GMT-7 (America/Los Angeles)```
 | Date Format | desired result | date token |
 |:---|:---|:---|
 | Default | ```2021-04-25 19:00:43.426 -07:00``` | ```%{ date }``` |
-| "long" format | ```2021-04-26 19:00:43 -0700``` |  ```%{ date | yyyy-MM-dd HH:mm:ss ZZZZ }``` |
-| ISO-8601 (UTC) | ```2021-04-26T02:00:43.426Z``` | ```%{ date | yyyy-MM-dd'T'HH:mm:ss.SSS'Z' | UTC }``` |
-| UTC format |	```Mon, 26 Apr 2021 02:00:43 UTC``` |	```%{ date | EEE',' dd MMM yyyy HH:mm:ss xxx | UTC }``` |
+| "long" format | ```2021-04-26 19:00:43 -0700``` | ```%{ date \| yyyy-MM-dd HH:mm:ss ZZZZ }``` |
+| ISO-8601 (UTC) | ```2021-04-26T02:00:43.426Z``` | ```%{ date \| yyyy-MM-dd'T'HH:mm:ss.SSS'Z' \| UTC }``` |
+| UTC format |	```Mon, 26 Apr 2021 02:00:43 UTC``` |	```%{ date \| EEE',' dd MMM yyyy HH:mm:ss xxx \| UTC }``` |
 
 <br/>
 
