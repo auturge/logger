@@ -1,6 +1,6 @@
 import { TokenDefinition } from "./TokenDefinition";
 import { TokenMatch } from "./ITokenMatch";
-import { ILogEntry } from "../../../ILogEntry";
+import { ILogEntry } from "../../ILogEntry";
 import { DateFormat, formatDate } from "@src/functions/formatDate";
 
 export class DateToken extends TokenDefinition {

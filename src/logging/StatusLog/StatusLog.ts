@@ -33,18 +33,32 @@ export interface IStatusLog extends ILog<IStatusLog, IStatusEntry> {
 
 export class StatusLog implements IStatusLog {
 
-    private dateStamper = () => { return new Date(); };
-    private readonly _channels: IChannel[];
+    private _dateStamper = () => { return new Date(); };
+    private _enabled: boolean = true;
+
+    public readonly channels: IChannel[];
     public readonly name: string;
+    public reconfigured: Emitter<IStatusLog> = new Emitter();
 
     public constructor(name: string, channels: IChannel[]) {
         throwIfNullOrEmpty(name, 'name');
         throwIfNullOrEmpty(channels, 'channels');
-        this._channels = channels;
+        this.channels = channels;
         this.name = name;
     }
 
-    reconfigured: Emitter<IStatusLog> = new Emitter();
+    public setLevel(level: LogLevel): void {
+        this.channels.forEach(it => it.level = level);
+    }
+
+    public get enabled(): boolean { return this._enabled; }
+    public set enabled(value: boolean) {
+        if (this._enabled == value)
+            return;
+
+        this._enabled = value;
+        this.reconfigured.emit(this);
+    }
 
     public fatal(message: string, obj?: any, prettyPrint?: boolean): void {
         this.buildAndWrite(LogLevel.FATAL, LogStatus.INFO, message, obj, prettyPrint);
@@ -74,14 +88,12 @@ export class StatusLog implements IStatusLog {
         this.buildAndWrite(LogLevel.INFO, LogStatus.FAILURE, message, obj, prettyPrint);
     }
 
-
-
-
-
     private buildAndWrite(level: LogLevel, status: LogStatus, message: string, obj: any, prettyPrint?: boolean): void {
+        if (!this._enabled) return;
         const entry = this.buildEntry(level, status, message, obj, prettyPrint);
         this.output(entry);
     }
+
     private buildEntry(level: LogLevel, status: LogStatus, message: string, obj?: any, prettyPrint?: boolean): ILogEntry<IStatusData> {
         throwIfNullOrUndefined(level, 'level');
         throwIfNullOrUndefined(status, 'status');
@@ -93,7 +105,7 @@ export class StatusLog implements IStatusLog {
             level: level,
             message: message,
             source: this.name,
-            timestamp: this.dateStamper()
+            timestamp: this._dateStamper()
         };
 
         entry.data = {
@@ -104,8 +116,10 @@ export class StatusLog implements IStatusLog {
 
         return entry;
     }
+
     private output(entry: IStatusEntry): void {
-        this._channels.forEach((channel: IChannel<IStatusEntry>) => {
+        if (!this._enabled) return;
+        this.channels.forEach((channel: IChannel<IStatusEntry>) => {
             if (channel.isEnabledFor(entry.level)) {
                 channel.log(entry);
             }

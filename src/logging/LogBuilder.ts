@@ -3,12 +3,12 @@ import { areNumbersAlmostEqual, throwIfNullOrUndefined } from "@src/functions/gu
 
 import { IChannel } from "./IChannel";
 import { ILog } from "./ILog";
-import { Channel } from "./impl/Channel";
+import { Channel } from "./Channel";
 import { IWriter } from "./IWriter";
 import { LogLevel } from "./LogLevel";
-import { IStatusEntry } from "./impl/IStatusEntry";
+import { IStatusEntry } from "./StatusLog/IStatusEntry";
 import { ILogEntry } from "./ILogEntry";
-import { IStatusLog } from "./impl/StatusLog";
+import { IStatusLog } from "./StatusLog/StatusLog";
 
 export abstract class LogBuilder<
     TEntry extends ILogEntry = IStatusEntry,

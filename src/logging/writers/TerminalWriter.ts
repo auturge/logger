@@ -1,4 +1,4 @@
-import { IWriter } from "../../IWriter";
+import { IWriter } from "../IWriter";
 import { ColorPatternFormatter } from "../formatters/ColorPatternFormatter";
 import { ConsoleWriter } from "./ConsoleWriter";
 

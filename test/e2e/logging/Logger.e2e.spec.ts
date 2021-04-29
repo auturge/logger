@@ -3,7 +3,7 @@
 // import { stub, unwrap } from "@test/helpers";
 // import { TEST_CHANNEL } from '@test/objects';
 
-// import { StatusLogger } from '@src/logging/impl/StatusLogger';
+// import { StatusLogger } from '@src/logging/StatusLog/StatusLogger';
 
 // describe('Logger E2E', () => {
 

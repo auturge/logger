@@ -1,19 +1,19 @@
 import { assert } from 'chai';
 
-import { ITokenMatch, TokenMatch } from '@src/logging/impl/formatters/pattern-tokens/ITokenMatch';
-import { PatternTokenizer } from '@src/logging/impl/formatters/pattern-tokens/PatternTokenizer';
+import { ITokenMatch, TokenMatch } from '@src/logging/formatters/pattern-tokens/ITokenMatch';
+import { PatternTokenizer } from '@src/logging/formatters/pattern-tokens/PatternTokenizer';
 
 describe('PatternTokenizer', () => {
 
     var tokenizer;
 
     function tokenMatches(expected: TokenMatch, actual: ITokenMatch) {
-        const sameType = actual.tokenType == expected.tokenType;
-        const sameStart = actual.startIndex == expected.startIndex;
-        const sameEnd = actual.endIndex == expected.endIndex;
-        const sameValue = actual.value == expected.value;
-
-        return sameType && sameStart && sameEnd && sameValue;
+        assert.equal(actual.tokenType, expected.tokenType, 'wrong token type');
+        assert.equal(actual.startIndex, expected.startIndex, 'wrong start index');
+        assert.equal(actual.endIndex, expected.endIndex, 'wrong end index');
+        assert.equal(actual.value, expected.value, 'wrong value');
+        assert.equal(actual.matched, expected.matched, 'wrong matched value');
+        return true;
     }
 
     describe('tokenize', () => {
@@ -59,49 +59,62 @@ describe('PatternTokenizer', () => {
             var tokens = tokenizer.tokenize(pattern);
 
             assert.equal(tokens.length, 7);
-            assert.isTrue(tokenMatches(tokens[ 0 ], {
+            tokenMatches(tokens[ 0 ], {
                 tokenType: 'PatternTextToken',
                 startIndex: 0,
                 endIndex: 0,
                 value: '[',
+                matched: '[',
                 arguments: []
-            }));
-            assert.isTrue(tokenMatches(tokens[ 1 ], {
+            });
+            tokenMatches(tokens[ 1 ], {
                 tokenType: 'DateToken',
                 startIndex: 1,
-                endIndex: 2,
-                value: '%{d}', arguments: []
-            }));
-            assert.isTrue(tokenMatches(tokens[ 2 ], {
+                endIndex: 4,
+                matched: '%{d}',
+                value: "",
+                arguments: []
+            });
+            tokenMatches(tokens[ 2 ], {
                 tokenType: 'PatternTextToken',
-                startIndex: 3,
-                endIndex: 3,
-                value: ' ', arguments: []
-            }));
-            assert.isTrue(tokenMatches(tokens[ 3 ], {
-                tokenType: 'LogLevelToken',
-                startIndex: 4,
+                startIndex: 5,
                 endIndex: 5,
-                value: '%{l}', arguments: []
-            }));
-            assert.isTrue(tokenMatches(tokens[ 4 ], {
-                tokenType: 'PatternTextToken',
+                matched: ' ',
+                value: ' ',
+                arguments: []
+            });
+            tokenMatches(tokens[ 3 ], {
+                tokenType: 'LogLevelToken',
                 startIndex: 6,
-                endIndex: 7,
-                value: '] ', arguments: []
-            }));
-            assert.isTrue(tokenMatches(tokens[ 5 ], {
-                tokenType: 'MessageToken',
-                startIndex: 8,
                 endIndex: 9,
-                value: '%{m}', arguments: []
-            }));
-            assert.isTrue(tokenMatches(tokens[ 6 ], {
+                matched: '%{l}',
+                value: "",
+                arguments: []
+            });
+            tokenMatches(tokens[ 4 ], {
                 tokenType: 'PatternTextToken',
                 startIndex: 10,
                 endIndex: 11,
-                value: '\\n', arguments: []
-            }));
+                matched: '] ',
+                value: '] ',
+                arguments: []
+            });
+            tokenMatches(tokens[ 5 ], {
+                tokenType: 'MessageToken',
+                startIndex: 12,
+                endIndex: 15,
+                matched: '%{m}',
+                value: "",
+                arguments: []
+            });
+            tokenMatches(tokens[ 6 ], {
+                tokenType: 'PatternTextToken',
+                startIndex: 16,
+                endIndex: 17,
+                matched: '\\n',
+                value: '\\n',
+                arguments: []
+            });
         });
     });
 
@@ -151,22 +164,25 @@ describe('PatternTokenizer', () => {
             assert.isTrue(tokenMatches(tokens[ 0 ], {
                 tokenType: 'DateToken',
                 startIndex: 1,
-                endIndex: 2,
-                value: '%{d}',
+                endIndex: 4,
+                matched: '%{d}',
+                value: '',
                 arguments: []
             }));
             assert.isTrue(tokenMatches(tokens[ 1 ], {
                 tokenType: 'LogLevelToken',
-                startIndex: 4,
-                endIndex: 5,
-                value: '%{l}',
+                startIndex: 6,
+                endIndex: 9,
+                matched: '%{l}',
+                value: '',
                 arguments: []
             }));
             assert.isTrue(tokenMatches(tokens[ 2 ], {
                 tokenType: 'MessageToken',
-                startIndex: 8,
-                endIndex: 9,
-                value: '%{m}',
+                startIndex: 12,
+                endIndex: 15,
+                matched: '%{m}',
+                value: '',
                 arguments: []
             }));
         });
@@ -198,19 +214,19 @@ describe('PatternTokenizer', () => {
                 {
                     tokenType: 'DateToken',
                     startIndex: 1,
-                    endIndex: 2,
+                    endIndex: 4,
                     value: '%{d}',
                     arguments: []
                 }, {
                     tokenType: 'LogLevelToken',
-                    startIndex: 4,
-                    endIndex: 5,
+                    startIndex: 6,
+                    endIndex: 9,
                     value: '%{l}',
                     arguments: []
                 }, {
                     tokenType: 'MessageToken',
-                    startIndex: 8,
-                    endIndex: 9,
+                    startIndex: 12,
+                    endIndex: 15,
                     value: '%{m}',
                     arguments: []
                 }
@@ -224,26 +240,30 @@ describe('PatternTokenizer', () => {
                 startIndex: 0,
                 endIndex: 0,
                 value: '[',
+                matched: '[',
                 arguments: []
             }));
             assert.isTrue(tokenMatches(tokens[ 1 ], {
                 tokenType: 'PatternTextToken',
-                startIndex: 3,
-                endIndex: 3,
+                startIndex: 5,
+                endIndex: 5,
                 value: ' ',
+                matched: ' ',
                 arguments: []
             }));
             assert.isTrue(tokenMatches(tokens[ 2 ], {
                 tokenType: 'PatternTextToken',
-                startIndex: 6,
-                endIndex: 7,
+                startIndex: 10,
+                endIndex: 11,
+                matched: '] ',
                 value: '] ',
                 arguments: []
             }));
             assert.isTrue(tokenMatches(tokens[ 3 ], {
                 tokenType: 'PatternTextToken',
-                startIndex: 10,
-                endIndex: 11,
+                startIndex: 16,
+                endIndex: 17,
+                matched: '\\n',
                 value: '\\n',
                 arguments: []
             }));

@@ -1,6 +1,6 @@
 import { IChannel } from "@src/logging";
 import { LogLevel } from "@src/logging/LogLevel";
-import { IStatusEntry } from "@src/logging/impl/IStatusEntry";
+import { IStatusEntry } from "@src/logging/StatusLog/IStatusEntry";
 import { CONSOLE } from "@src/logging/DEFAULTS";
 
 export const TEST_CHANNEL_1: IChannel = {

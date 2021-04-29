@@ -1,7 +1,7 @@
 import { throwIfNullOrUndefined } from "@src/functions/guards";
 import { LogLevel } from "@src/logging/LogLevel";
-import { ILogEntry } from "../../ILogEntry";
-import { IWriter } from "../../IWriter";
+import { ILogEntry } from "../ILogEntry";
+import { IWriter } from "../IWriter";
 import { PatternFormatter } from "../formatters/PatternFormatter";
 
 

@@ -2,17 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Demo TS",
-            "type": "pwa-node",
-            "console": "integratedTerminal",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "args": ["${workspaceFolder}/test/objects/demo.ts"],
-            "runtimeArgs": ["--nolazy","-r", "ts-node/register", "-r", "tsconfig-paths/register"]
-        },
-        {
             "name": "Launch Demo JS",
             "type": "pwa-node",
             "console": "integratedTerminal",
@@ -22,6 +11,17 @@
                 "<node_internals>/**"
             ],
             "preLaunchTask": "rollup",
+        },
+        {
+            "name": "Launch Demo TS",
+            "type": "pwa-node",
+            "console": "integratedTerminal",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "args": ["${workspaceFolder}/test/objects/demo.ts"],
+            "runtimeArgs": ["--nolazy","-r", "ts-node/register", "-r", "tsconfig-paths/register"]
         }
     ]
 }

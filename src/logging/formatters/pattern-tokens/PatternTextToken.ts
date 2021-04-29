@@ -29,7 +29,8 @@ export class PatternTextToken extends TokenDefinition {
             // everything is the same :(
             var match = new TokenMatch(new PatternTextToken(), 0);
             match.endIndex = pattern.length - 1;
-            match.value = pattern;
+            match.matched = pattern;
+            match.value = match.matched;
             return [ match ];
         }
 
@@ -43,7 +44,8 @@ export class PatternTextToken extends TokenDefinition {
         var token = tokens[ 0 ];
         if (token.startIndex > 0) {
             var match = new TokenMatch(this._instance, 0, token.startIndex - 1);
-            match.value = pattern.substr(0, match.length);
+            match.matched = pattern.substr(0, match.length);
+            match.value = match.matched;
             result.push(match);
         }
 
@@ -56,7 +58,8 @@ export class PatternTextToken extends TokenDefinition {
                 const distance = nextToken.startIndex - token.endIndex;
                 if (distance > 1) {
                     var match = new TokenMatch(this._instance, token.endIndex + 1, nextToken.startIndex - 1);
-                    match.value = pattern.substr(match.startIndex, match.length);
+                    match.matched = pattern.substr(match.startIndex, match.length);
+                    match.value = match.matched;
                     result.push(match);
                 }
             }
@@ -67,7 +70,8 @@ export class PatternTextToken extends TokenDefinition {
 
         if (pattern.length > token.endIndex + 1) {
             var match = new TokenMatch(this._instance, token.endIndex + 1, pattern.length - 1);
-            match.value = pattern.substr(match.startIndex, match.length);
+            match.matched = pattern.substr(match.startIndex, match.length);
+            match.value = match.matched;
             result.push(match);
         }
 

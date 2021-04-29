@@ -1,5 +1,5 @@
 import { AnyRandom, CharacterSet, Scale } from "@auturge/testing";
-import { IStatusData } from "@src/logging/impl/IStatusData";
+import { IStatusData } from "@src/logging/StatusLog/IStatusData";
 import { LogStatus } from "@src/logging/LogStatus";
 
 export function string(): string {
@@ -39,12 +39,14 @@ export function undeclared(): any {
     return;
 }
 
+const dataObject = { foo: AnyRandom.string(5, 8) };
+
 export function data(status: LogStatus, prettyPrint: boolean = false): IStatusData {
-    var data: IStatusData = { status: status, obj: { foo: AnyRandom.string(5, 8) } }
+    var data: IStatusData = { status: status, obj: dataObject }
     if (prettyPrint)
         data.prettyPrint = true;
     return data;
 };
 
-export function formatted(data) { return JSON.stringify(data); }
-export function pretty(data) { return JSON.stringify(data, null, 2); }
+export function formatted(data) { return JSON.stringify(data.obj); }
+export function pretty(data) { return JSON.stringify(data.obj, null, 2); }

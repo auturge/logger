@@ -1,6 +1,6 @@
 import { TokenDefinition } from "./TokenDefinition";
 import { TokenMatch } from "./ITokenMatch";
-import { ILogEntry } from "../../../ILogEntry";
+import { ILogEntry } from "../../ILogEntry";
 
 export class LogLevelToken extends TokenDefinition {
 

@@ -1,22 +1,17 @@
-import { getNullOrUndefinedErrorMessage, throwIfNullOrUndefined } from "@src/functions/guards";
+import { getNullOrUndefinedErrorMessage, throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
 import { ILog } from "./ILog";
 import { ILogEntry } from "./ILogEntry";
 import { LogBuilder } from "./LogBuilder";
-import { LogConfigurator } from "./LogConfigurator";
 
 export class LogManager<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry>> {
 
     private _logNames: string[] = [];
     private _logs: TLog[] = [];
-    private _rebuilder: LogConfigurator<TEntry, TLog>;
 
-    constructor(builder: LogBuilder<TEntry, TLog>, rebuilder: LogConfigurator<TEntry, TLog>) {
+    constructor(builder: LogBuilder<TEntry, TLog>) {
         if (builder == null)
             throw new Error(getNullOrUndefinedErrorMessage('builder'));
-        if (rebuilder == null)
-            throw new Error(getNullOrUndefinedErrorMessage('rebuilder'));
 
-        this._rebuilder = rebuilder;
         this.initialize = builder;
         this.initialize.logCreated.subscribe((log) => this.OnLogCreated(log));
     }
@@ -24,17 +19,36 @@ export class LogManager<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry
     /** A builder for generating new ILog channels. */
     public readonly initialize: LogBuilder<TEntry, TLog>;
 
-    public reconfigure(log: TLog): LogConfigurator<TEntry, TLog>;
-    public reconfigure(logName: string): LogConfigurator<TEntry, TLog>;
-    public reconfigure(logOrName: ILog<TLog, TEntry> | string): LogConfigurator<TEntry, TLog> {
-        const name = (typeof logOrName === "string")
-            ? logOrName : logOrName.name;
+    /** Disables all channels on the log. */
+    public disable(log: TLog): ILog<TLog, TEntry>;
+    public disable(logName: string): ILog<TLog, TEntry>;
+    public disable(logOrName: ILog<TLog, TEntry> | string): ILog<TLog, TEntry> {
+        throwIfNullOrUndefined(logOrName, 'logOrName');
+        var log = typeof logOrName === "string" ? this.getLog(logOrName) : logOrName;
+        log.enabled = false;
+        return log;
+    };
 
-        const index = this._logNames.indexOf(name);
+    /** Enables all channels on the log. */
+    public enable(log: TLog): ILog<TLog, TEntry>;
+    public enable(logName: string): ILog<TLog, TEntry>;
+    public enable(logOrName: ILog<TLog, TEntry> | string): ILog<TLog, TEntry> {
+        throwIfNullOrUndefined(logOrName, 'logOrName');
+        var log = typeof logOrName === "string" ? this.getLog(logOrName) : logOrName;
+        log.enabled = true;
+        return log;
+    };
+
+    public getLog(logName: string): ILog<TLog, TEntry> {
+        throwIfNullOrEmpty(logName, 'logOrName');
+
+        const index = this._logNames.indexOf(logName);
+        if (index == -1)
+            throw new Error('No log by that name.');
+
         const log = this._logs[ index ];
-
-        return this._rebuilder = this._rebuilder.bind(log);
-    }
+        return log;
+    };
 
     private OnLogCreated(log: TLog): void {
         throwIfNullOrUndefined(log, 'log');
@@ -42,7 +56,7 @@ export class LogManager<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry
         // use a special array of JUST the names,
         // in the same exact order as the array of logs.
         // search for the index in the NAMES array,
-        // which will be faster than searching the 'primary' array.
+        // which will be faster than searching the 'primary' array of logs.
         const index = this._logNames.indexOf(log.name);
         if (index != -1) {
             this._logNames.slice[ index ];
@@ -50,5 +64,5 @@ export class LogManager<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry
         }
         this._logNames.push(log.name);
         this._logs.push(log);
-    }
+    };
 }

@@ -5,7 +5,7 @@ import { cyan, green, magenta, red, yellow } from 'colorette';
 import { ILogEntry } from '@src/logging/ILogEntry';
 import { LogStatus } from '@src/logging/LogStatus';
 import { LogLevel } from '@src/logging/LogLevel';
-import { ColorPatternFormatter } from '@src/logging/impl/formatters/ColorPatternFormatter';
+import { ColorPatternFormatter } from '@src/logging/formatters/ColorPatternFormatter';
 import { data, formatted, pretty } from '@test/objects/test__objects';
 
 describe('ColorPatternFormatter', () => {

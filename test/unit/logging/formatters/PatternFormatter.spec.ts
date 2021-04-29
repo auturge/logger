@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { AnyRandom, CharacterSet } from '@auturge/testing';
 
-import { PatternFormatter } from "@src/logging/impl/formatters/PatternFormatter";
+import { PatternFormatter } from "@src/logging/formatters/PatternFormatter";
 import { ILogEntry, LogLevel } from '@src/logging';
 import { LogStatus } from '@src/logging/LogStatus';
 import { DateFormat, formatDate } from '@src/functions/formatDate';

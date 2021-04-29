@@ -1,19 +1,23 @@
 import { LogManager as LogManagerClass } from './LogManager';
 import { IWriter } from "./IWriter";
 import { LogLevel } from "./LogLevel";
-import { TerminalWriter } from './impl/writers/TerminalWriter';
-import { ConsoleWriter } from './impl/writers/ConsoleWriter';
-import { StatusLogBuilder } from './impl/StatusLogBuilder';
-import { StatusLogConfigurator } from "./impl/StatusLogConfigurator";
+import { TerminalWriter } from './writers/TerminalWriter';
+import { ConsoleWriter } from './writers/ConsoleWriter';
+import { StatusLogBuilder } from './StatusLog/StatusLogBuilder';
 import { DateFormat } from '@src/functions/formatDate';
 
+const logBuilder = new StatusLogBuilder();
+
+/** Console Writer */
 export const CONSOLE: IWriter = new ConsoleWriter();
+
+/** Terminal Writer */
 export const TERMINAL: IWriter = new TerminalWriter('%{date}| %{level} | %{message}');
 
-const logBuilder = new StatusLogBuilder();
-const rebuilder = new StatusLogConfigurator();
-export const LogManager = new LogManagerClass(logBuilder, rebuilder);
+/** Default StatusLog Manager */
+export const LogManager = new LogManagerClass(logBuilder);
 
+/** Default StatusLog */
 export const Log = LogManager.initialize
     .newLogger('main')
     .newChannel('main', TERMINAL, LogLevel.INFO)

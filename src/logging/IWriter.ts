@@ -1,5 +1,5 @@
 import { ILogEntry } from "./ILogEntry";
-import { IStatusEntry } from "./impl/IStatusEntry";
+import { IStatusEntry } from "./StatusLog/IStatusEntry";
 
 /** An interface describing a log-entry writing implementation. */
 export interface IWriter<TEntry extends ILogEntry = IStatusEntry> {

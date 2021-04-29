@@ -1,4 +1,4 @@
-import { ILogEntry } from "../../ILogEntry";
+import { ILogEntry } from "../ILogEntry";
 
 /** An interface describing a log-entry formatting implementation. */
 export interface IEntryFormatter {

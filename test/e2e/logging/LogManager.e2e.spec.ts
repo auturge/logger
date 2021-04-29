@@ -2,12 +2,12 @@
 // import { channelMatches } from '@test/helpers';
 
 // import { LogManager } from '@src/logging';
-// import { ChannelBuilder } from '@src/logging/impl/ChannelBuilder';
+// import { ChannelBuilder } from '@src/logging/ChannelBuilder';
 // import { AnyRandom, CharacterSet } from '@auturge/testing';
 // import { LogLevel } from '@src/logging/LogLevel';
 // import { CONSOLE, NULL as NULL_TARGET } from '@src/logging/ITarget';
 // import { PATTERN, NULL as NULL_FORMATTER } from '@src/logging/MessageFormatter';
-// import { DEFAULT as DEFAULT_CHANNEL } from '@src/logging/impl/Channel';
+// import { DEFAULT as DEFAULT_CHANNEL } from '@src/logging/Channel';
 // import { DEFAULT_CHANNEL as DEFAULT_CHANNEL_CONFIG } from '@src/logging/Defaults';
 
 // describe('LogManager E2E', () => {

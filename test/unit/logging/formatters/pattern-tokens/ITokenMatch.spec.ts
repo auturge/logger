@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 import { AnyRandom } from '@auturge/testing';
-import { TokenMatch } from '@src/logging/impl/formatters/pattern-tokens/ITokenMatch';
-import { KNOWN_TOKENS } from '@src/logging/impl/formatters/pattern-tokens/TOKENS';
+import { TokenMatch } from '@src/logging/formatters/pattern-tokens/ITokenMatch';
+import { KNOWN_TOKENS } from '@src/logging/formatters/pattern-tokens/TOKENS';
 
 describe('TokenMatch', () => {
 

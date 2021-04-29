@@ -1,4 +1,4 @@
-import { IStatusData } from "./impl/IStatusData";
+import { IStatusData } from "./StatusLog/IStatusData";
 import { LogLevel } from "./LogLevel";
 
 export interface ILogEntryData {

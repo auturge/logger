@@ -4,9 +4,9 @@
  * Entry point from which you should import all public-facing APIs.
  */
 
-export { Log, LogManager } from './logging/DEFAULTS';
+export { Log, LogManager, CONSOLE, TERMINAL } from './logging/DEFAULTS';
 export {
     ILog, IChannel, ILogEntry, ILogEntryWriter, IWriter, ILogEntryData, ILoggerBase,
     LogLevel, LogStatus,
-    LogBuilder, LogConfigurator, LogManagerClass,
+    LogBuilder, LogManagerClass,
 } from './logging/index';
