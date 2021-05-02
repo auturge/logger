@@ -5,7 +5,9 @@ import { DateFormat, formatDate } from "@src/functions/formatDate";
 
 export class DateToken extends TokenDefinition {
 
-    /** Gets and formats the timestamp using the format specified in the first argument.
+    /** Gets and formats the timestamp using
+     * - the format specified in the first argument, and
+     * - the IANA timezone string specified in the second argument.
      *
      * If no arguments are supplied, then returns the ISO-8601 date/time stamp (YYYY-MM-DDTHH:mm:ss.sssZ).
      *
@@ -14,8 +16,10 @@ export class DateToken extends TokenDefinition {
     getValue(match: TokenMatch, entry: ILogEntry): string {
         if (match.arguments.length > 2) {
             throw new Error(`Token [${ match.tokenType }] takes up to two arguments, but you provided ${ match.arguments.length }.`);
+        } else if (match.arguments.length > 1) {
+            return formatDate(entry.timestamp, match.arguments[ 0 ], match.arguments[ 1 ]);
         } else if (match.arguments.length > 0) {
-            return formatDate(entry.timestamp, ...match.arguments);
+            return formatDate(entry.timestamp, match.arguments[ 0 ]);
         }
         return formatDate(entry.timestamp, DateFormat.DEFAULT);
     }

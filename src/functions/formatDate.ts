@@ -1,6 +1,7 @@
 import { throwIfNullOrUndefined } from "./guards";
 import { format, utcToZonedTime } from 'date-fns-tz';
 import { parseISO } from "date-fns";
+import { isNullUndefinedOrEmpty } from "./types";
 
 const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -30,9 +31,12 @@ class DateFormatOptions implements IDateFormatOptions {
 
 // https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 
-export function formatDate(timestamp: Date, ...args: string[]): string {
+export function formatDate(timestamp: Date): string;
+export function formatDate(timestamp: Date, formatString: string): string;
+export function formatDate(timestamp: Date, formatString: string, timezone: string): string;
+export function formatDate(timestamp: Date, formatString?: string, timezone?: string): string {
     throwIfNullOrUndefined(timestamp, 'timestamp');
-    const options: IDateFormatOptions = getOptions(args);
+    const options: IDateFormatOptions = getOptions(formatString, timezone);
 
     options.format = options.format.trim();
     options.timezone = options.timezone.trim();
@@ -53,19 +57,17 @@ export function formatDate(timestamp: Date, ...args: string[]): string {
 }
 
 
-function getOptions(args: string[]): IDateFormatOptions {
+function getOptions(formatString?: string, timezone?: string): IDateFormatOptions {
 
     var options: IDateFormatOptions = Object.assign({}, DateFormatOptions.DEFAULT);
 
-    if (args.length == 0)
-        return options;
-    if (args.length > 2)
-        throw new Error("Too many arguments.");
+    if (!isNullUndefinedOrEmpty(formatString)) {
+        options.format = formatString.trim();
+    }
 
-    options.format = args[ 0 ];
-    if (args.length == 1)
-        return options;
+    if (!isNullUndefinedOrEmpty(timezone)) {
+        options.timezone = timezone.trim();
+    }
 
-    options.timezone = args[ 1 ];
     return options;
 }
