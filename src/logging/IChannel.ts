@@ -25,7 +25,7 @@ export interface IChannel<TEntry extends ILogEntry = IStatusEntry>
     readonly name: string;
 
     /** The output pattern to be used with this channel. */
-    pattern: string;
+    // pattern: string;
 
     /** The event which fires when the channel is reconfigured. */
     reconfigured: Emitter<IChannel<TEntry>>;

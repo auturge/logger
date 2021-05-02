@@ -62,13 +62,13 @@ export abstract class LogBuilder<
         return this;
     }
 
-    /** Sets each channel to use the specified output pattern. */
-    public withPattern(pattern: string): LogBuilder<TEntry, TLog> {
-        this._channels.forEach(channel => {
-            channel.pattern = pattern;
-        });
-        return this;
-    }
+    // /** Sets each channel to use the specified output pattern. */
+    // public withPattern(pattern: string): LogBuilder<TEntry, TLog> {
+    //     this._channels.forEach(channel => {
+    //         channel.pattern = pattern;
+    //     });
+    //     return this;
+    // }
 
     /** Validates the configuration defined in the builder,
      * and then creates and returns a new logger. */

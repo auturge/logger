@@ -16,7 +16,6 @@ var l2 = LogManager.initialize
 const l3 = LogManager.initialize
     .newLog('console')
     .newChannel('console', CONSOLE, LogLevel.INFO)
-    .withPattern('%{l} %{m}')
     .andGetLogger();
 
 l3.info('what what!');

@@ -1,7 +1,7 @@
 import { throwIfNullOrUndefined } from "@src/functions/guards";
 import { LogLevel } from "@src/logging/LogLevel";
 import { ILogEntry } from "../ILogEntry";
-import { IWriter } from "../IWriter";
+import { IPatternWriterConfig, IWriter } from "../IWriter";
 import { PatternFormatter } from "../formatters/PatternFormatter";
 import { nullWriterFn, WriterFn } from "./WriterFn";
 
@@ -9,23 +9,15 @@ export class ConsoleWriter implements IWriter {
 
     protected formatter: PatternFormatter;
 
-    private _pattern: string = "%{l} %{m}";
-    public get pattern(): string { return this._pattern; }
-    public set pattern(value: string) {
-        if (this._pattern == value)
-            return;
-
-        this._pattern = value;
-
-        if (this.formatter)
-            this.formatter.pattern = value;
-    }
-
     constructor();
     constructor(pattern: string);
     constructor(pattern: string = "%{l} %{m}") {
-        this.pattern = pattern;
         this.formatter = new PatternFormatter(pattern);
+    }
+
+    public reconfigure(config: IPatternWriterConfig): void {
+        throwIfNullOrUndefined(config, 'config');
+        this.formatter.pattern = config.pattern;
     }
 
     public write(entry: ILogEntry): void {
