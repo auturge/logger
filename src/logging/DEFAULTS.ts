@@ -1,4 +1,4 @@
-import { LogManager as LogManagerClass } from './LogManager';
+import { LogManager } from './LogManager';
 import { IWriter } from "./IWriter";
 import { LogLevel } from "./LogLevel";
 import { TerminalWriter } from './writers/TerminalWriter';
@@ -6,20 +6,27 @@ import { ConsoleWriter } from './writers/ConsoleWriter';
 import { StatusLogBuilder } from './StatusLog/StatusLogBuilder';
 import { DateFormat } from '@src/functions/formatDate';
 
-const logBuilder = new StatusLogBuilder();
-
 /** Console Writer */
-export const CONSOLE: IWriter = new ConsoleWriter();
+export const CONSOLE: IWriter = new ConsoleWriter('%{l} %{m}');
 
 /** Terminal Writer */
 export const TERMINAL: IWriter = new TerminalWriter('%{date}| %{level} | %{message}');
 
-/** Default StatusLog Manager */
-export const LogManager = new LogManagerClass(logBuilder);
+const logBuilder = new StatusLogBuilder('main');
 
-/** Default StatusLog */
-export const Log = LogManager.initialize
-    .newLogger('main')
-    .newChannel('main', TERMINAL, LogLevel.INFO)
+/** Default StatusLog Manager. */
+export const StatusLogManager = new LogManager(logBuilder);
+
+/** A StatusLog for use in a browser console. */
+export const ConsoleLog = StatusLogManager.initialize
+    .newLog('console')
+    .newChannel('console', CONSOLE, LogLevel.INFO)
+    .withPattern('%{l} %{m}')
+    .andGetLogger();
+
+/** A StatusLog for use on the Terminal. */
+export const TerminalLog = StatusLogManager.initialize
+    .newLog('terminal')
+    .newChannel('terminal', TERMINAL, LogLevel.INFO)
     .withPattern(` %{ date | ${ DateFormat.DEFAULT } } | %{level} | %{message}`)
     .andGetLogger();

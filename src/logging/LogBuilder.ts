@@ -1,5 +1,5 @@
 import { Emitter } from "@src/core/events";
-import { areNumbersAlmostEqual, throwIfNullOrUndefined } from "@src/functions/guards";
+import { throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
 
 import { IChannel } from "./IChannel";
 import { ILog } from "./ILog";
@@ -15,29 +15,37 @@ export abstract class LogBuilder<
     TLog extends ILog<TLog, TEntry> = IStatusLog
     > {
 
-    public logCreated: Emitter<TLog> = new Emitter();
-
     public static DEFAULT_NAME: string = 'main';
 
-    protected _name: string = "";
+    public logCreated: Emitter<TLog> = new Emitter();
+
+    protected _logName: string = '';
     protected _channels: IChannel[] = [];
 
-    newLogger(): LogBuilder<TEntry, TLog>;
-    newLogger(name: string): LogBuilder<TEntry, TLog>;
-    newLogger(name: string = LogBuilder.DEFAULT_NAME): LogBuilder<TEntry, TLog> {
-        this._name = name;
-        return this;
+    /** Instantiates a new `LogBuilder` to store the configuration for a logger. */
+    protected abstract createBuilder(logName: string): LogBuilder<TEntry, TLog>;
+
+    /** Instantiates a new logger based on the configuration stored in this builder. */
+    protected abstract createLogger(): TLog;
+
+    public constructor(logName: string) {
+        throwIfNullOrEmpty(logName, 'log name');
+        this._logName = logName;
     }
 
+    /** Configures the builder to generate a new logger. */
+    public newLog(): LogBuilder<TEntry, TLog>;
+    public newLog(logName: string): LogBuilder<TEntry, TLog>;
+    public newLog(logName: string = LogBuilder.DEFAULT_NAME): LogBuilder<TEntry, TLog> {
+        throwIfNullOrUndefined(logName, 'logName');
+        return this.createBuilder(logName);
+    }
 
-    /** Generates a builder for a new logger channel. */
-    newChannel(name: string, writer: IWriter<TEntry>): LogBuilder<TEntry, TLog>;
-
-    newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): LogBuilder<TEntry, TLog>;
-
-    newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel, pattern: string): LogBuilder<TEntry, TLog>;
-
-    newChannel(name: string, writer: IWriter<TEntry>, level?: LogLevel, pattern?: string): LogBuilder<TEntry, TLog> {
+    /** Configures the builder to generate a new logger channel. */
+    public newChannel(name: string, writer: IWriter<TEntry>): LogBuilder<TEntry, TLog>;
+    public newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): LogBuilder<TEntry, TLog>;
+    public newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel, pattern: string): LogBuilder<TEntry, TLog>;
+    public newChannel(name: string, writer: IWriter<TEntry>, level?: LogLevel, pattern?: string): LogBuilder<TEntry, TLog> {
         throwIfNullOrUndefined(name, 'name');
         throwIfNullOrUndefined(writer, 'writer');
         this._channels = this._channels.filter(it => it.name != name);
@@ -47,7 +55,7 @@ export abstract class LogBuilder<
     }
 
     /** Generates or augments a builder for a logger channel that outputs at any level at least as high the specified level. */
-    atLevel(level: LogLevel): LogBuilder<TEntry, TLog> {
+    public atLevel(level: LogLevel): LogBuilder<TEntry, TLog> {
         this._channels.forEach(channel => {
             channel.level = level;
         });
@@ -55,13 +63,24 @@ export abstract class LogBuilder<
     }
 
     /** Sets each channel to use the specified output pattern. */
-    withPattern(pattern: string): LogBuilder<TEntry, TLog> {
+    public withPattern(pattern: string): LogBuilder<TEntry, TLog> {
         this._channels.forEach(channel => {
             channel.pattern = pattern;
         });
         return this;
     }
 
-    /** Validates the configuration defined in the builder, and generates a new logger. */
-    abstract andGetLogger(): TLog;
+    /** Validates the configuration defined in the builder,
+     * and then creates and returns a new logger. */
+    public andGetLogger(): TLog {
+        this.validate();
+        var log = this.createLogger();
+        return log;
+    }
+
+    /** Validates the configuration defined in the builder. */
+    protected validate(): void {
+        throwIfNullOrEmpty(this._logName, "_logName");
+        throwIfNullOrEmpty(this._channels, "_channels");
+    }
 }

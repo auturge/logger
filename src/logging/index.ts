@@ -1,5 +1,5 @@
 
-export { Log, LogManager, CONSOLE, TERMINAL } from './DEFAULTS';
+export { TerminalLog as Log, ConsoleLog, StatusLogManager, CONSOLE, TERMINAL } from './DEFAULTS';
 
 // 'barrel' export
 export { IChannel, ILogEntryWriter } from './IChannel';
@@ -9,4 +9,4 @@ export { IWriter } from './IWriter';
 export { LogBuilder } from './LogBuilder';
 export { LogLevel } from "./LogLevel";
 export { LogStatus } from "./LogStatus";
-export { LogManager as LogManagerClass } from './LogManager';
+export { LogManager } from './LogManager';

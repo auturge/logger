@@ -3,17 +3,13 @@ import { LogLevel } from "@src/logging/LogLevel";
 import { ILogEntry } from "../ILogEntry";
 import { IWriter } from "../IWriter";
 import { PatternFormatter } from "../formatters/PatternFormatter";
-
-
-type WriterFn = (...data: any[]) => void;
-
-const NullWriter: WriterFn = (...data: any) => { };
+import { nullWriterFn, WriterFn } from "./WriterFn";
 
 export class ConsoleWriter implements IWriter {
 
     protected formatter: PatternFormatter;
 
-    private _pattern: string = "%{m}";
+    private _pattern: string = "%{l} %{m}";
     public get pattern(): string { return this._pattern; }
     public set pattern(value: string) {
         if (this._pattern == value)
@@ -27,12 +23,12 @@ export class ConsoleWriter implements IWriter {
 
     constructor();
     constructor(pattern: string);
-    constructor(pattern: string = "%{m}") {
+    constructor(pattern: string = "%{l} %{m}") {
         this.pattern = pattern;
         this.formatter = new PatternFormatter(pattern);
     }
 
-    write(entry: ILogEntry): void {
+    public write(entry: ILogEntry): void {
         throwIfNullOrUndefined(entry, 'entry');
 
         const [ message, data ] = this.formatEntry(entry);
@@ -53,7 +49,7 @@ export class ConsoleWriter implements IWriter {
     protected getWriterFunction(level: LogLevel): WriterFn {
         switch (level) {
             case LogLevel.OFF:
-                return NullWriter;
+                return nullWriterFn;
             case LogLevel.FATAL:
             case LogLevel.ERROR:
                 return console.error;

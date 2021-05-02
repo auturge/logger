@@ -13,7 +13,7 @@ export class LogManager<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry
             throw new Error(getNullOrUndefinedErrorMessage('builder'));
 
         this.initialize = builder;
-        this.initialize.logCreated.subscribe((log) => this.OnLogCreated(log));
+        this.initialize.logCreated.subscribe((log) => this.onLogCreated(log));
     }
 
     /** A builder for generating new ILog channels. */
@@ -25,6 +25,10 @@ export class LogManager<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry
     public disable(logOrName: ILog<TLog, TEntry> | string): ILog<TLog, TEntry> {
         throwIfNullOrUndefined(logOrName, 'logOrName');
         var log = typeof logOrName === "string" ? this.getLog(logOrName) : logOrName;
+
+        if (log == null)
+            throw new Error(`No log exists with the name ${ logOrName }.`)
+
         log.enabled = false;
         return log;
     };
@@ -35,22 +39,26 @@ export class LogManager<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry
     public enable(logOrName: ILog<TLog, TEntry> | string): ILog<TLog, TEntry> {
         throwIfNullOrUndefined(logOrName, 'logOrName');
         var log = typeof logOrName === "string" ? this.getLog(logOrName) : logOrName;
+
+        if (log == null)
+            throw new Error(`No log exists with the name ${ logOrName }.`)
+
         log.enabled = true;
         return log;
     };
 
-    public getLog(logName: string): ILog<TLog, TEntry> {
+    public getLog(logName: string): ILog<TLog, TEntry> | null {
         throwIfNullOrEmpty(logName, 'logOrName');
 
         const index = this._logNames.indexOf(logName);
         if (index == -1)
-            throw new Error('No log by that name.');
+            return null;
 
         const log = this._logs[ index ];
         return log;
     };
 
-    private OnLogCreated(log: TLog): void {
+    private onLogCreated(log: TLog): void {
         throwIfNullOrUndefined(log, 'log');
 
         // use a special array of JUST the names,
@@ -65,4 +73,13 @@ export class LogManager<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry
         this._logNames.push(log.name);
         this._logs.push(log);
     };
+
+    // private onBuilderCreated(builder: LogBuilder<TEntry, TLog>): void {
+    //     throwIfNullOrUndefined(builder, 'builder');
+    //     const index = this._logNames.indexOf(builder.name);
+    //     if (index != -1) {
+    //         this._builders[ index ];
+    //     }
+    //     this._builders.push(builder);
+    // };
 }
