@@ -59,7 +59,10 @@ logger.info('Doing a thing...');
 ```ts
 import { LogManager, TerminalWriter } from ('@auturge/logger');
 
+// use the included terminal writer
 const TERMINAL: IWriter = new TerminalWriter(` %{ date | ${ DateFormat.DEFAULT } } | %{level} | %{message}`);
+
+// write your own file-writer
 const MY_FILE_WRITER: IWriter = new MyFileWriter('%{date} | %{level} | %{message}');
 
 const logger = LogManager.initialize
