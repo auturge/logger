@@ -31,24 +31,24 @@ export interface IEmitter<TEventArgs extends EventArgsMap = void> {
 export class Emitter<TEventArgs extends EventArgsMap = void> implements IEmitter<TEventArgs> {
     private _handlers: EventHandler<TEventArgs>[] = [];
 
-    get subscribers(): EventHandler<TEventArgs>[] {
+    public get subscribers(): EventHandler<TEventArgs>[] {
         return this._handlers;
     }
 
-    emit(args: TEventArgs): void {
+    public emit(args: TEventArgs): void {
         // iterate over a copy of the array of listeners, and call them.
         this._handlers.slice(0).forEach(h => h(args));
     }
 
-    subscribe(handler: EventHandler<TEventArgs>): void {
+    public subscribe(handler: EventHandler<TEventArgs>): void {
         this._handlers.push(handler);
     }
 
-    unsubscribe(handler: EventHandler<TEventArgs>): void {
+    public unsubscribe(handler: EventHandler<TEventArgs>): void {
         this._handlers = this._handlers.filter(h => h !== handler);
     }
 
-    clear(): void {
+    public clear(): void {
         this._handlers = [];
     }
 }
