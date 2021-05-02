@@ -17,7 +17,6 @@ export class Channel implements IChannel<IStatusEntry> {
 
     public constructor(name: string, writer: IWriter);
     public constructor(name: string, writer: IWriter, level: LogLevel | undefined);
-    public constructor(name: string, writer: IWriter, level: LogLevel | undefined, pattern: string | undefined);
     public constructor(name: string, writer: IWriter, level?: LogLevel) {
         throwIfNullOrEmpty(name, 'name');
         throwIfNullOrUndefined(writer, 'writer');

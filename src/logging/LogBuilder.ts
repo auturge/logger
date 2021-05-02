@@ -44,12 +44,12 @@ export abstract class LogBuilder<
     /** Configures the builder to generate a new logger channel. */
     public newChannel(name: string, writer: IWriter<TEntry>): LogBuilder<TEntry, TLog>;
     public newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): LogBuilder<TEntry, TLog>;
-    public newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel, pattern: string): LogBuilder<TEntry, TLog>;
-    public newChannel(name: string, writer: IWriter<TEntry>, level?: LogLevel, pattern?: string): LogBuilder<TEntry, TLog> {
+    public newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): LogBuilder<TEntry, TLog>;
+    public newChannel(name: string, writer: IWriter<TEntry>, level?: LogLevel): LogBuilder<TEntry, TLog> {
         throwIfNullOrUndefined(name, 'name');
         throwIfNullOrUndefined(writer, 'writer');
         this._channels = this._channels.filter(it => it.name != name);
-        const newChannel = new Channel(name, writer, level, pattern);
+        const newChannel = new Channel(name, writer, level);
         this._channels.push(newChannel);
         return this;
     }
@@ -61,14 +61,6 @@ export abstract class LogBuilder<
         });
         return this;
     }
-
-    // /** Sets each channel to use the specified output pattern. */
-    // public withPattern(pattern: string): LogBuilder<TEntry, TLog> {
-    //     this._channels.forEach(channel => {
-    //         channel.pattern = pattern;
-    //     });
-    //     return this;
-    // }
 
     /** Validates the configuration defined in the builder,
      * and then creates and returns a new logger. */

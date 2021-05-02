@@ -46,9 +46,7 @@ Log.info('Doing a thing...');
 
 ```ts
 const logger = LogManager.initialize
-                         .newLogger('main')
-                         .newChannel('main', TERMINAL, LogLevel.INFO)
-                         .withPattern(` %{ date | ${ DateFormat.DEFAULT } } | %{level} | %{message}`)
+                         .newChannel('terminal', TERMINAL, LogLevel.INFO)
                          .andGetLogger();
 
 logger.info('Doing a thing...');
@@ -59,9 +57,14 @@ logger.info('Doing a thing...');
 ### Create and configure a multiplexing logger:
 
 ```ts
+import { LogManager, TerminalWriter } from ('@auturge/logger');
+
+const TERMINAL: IWriter = new TerminalWriter(` %{ date | ${ DateFormat.DEFAULT } } | %{level} | %{message}`);
+const MY_FILE_WRITER: IWriter = new MyFileWriter('%{date} | %{level} | %{message}');
+
 const logger = LogManager.initialize
-                         .newChannel('main', LogLevel.INFO, Writer.TERMINAL, '%{level} | %{message}')
-                         .newChannel('debug', LogLevel.TRACE, Writer.FILE, '%{date} | %{level} | %{message}')
+                         .newChannel('terminal', LogLevel.INFO, TERMINAL)
+                         .newChannel('file', LogLevel.TRACE, MY_FILE_WRITER)
                          .andGetLogger();
 
 logger.error('Look! An error which will appear in both logs...', error);

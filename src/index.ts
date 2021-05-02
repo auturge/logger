@@ -8,7 +8,7 @@ export {
     ConsoleLog,
     TerminalLog,
     TerminalLog as Log,
-    StatusLogManager,
+    LogManager,
     CONSOLE,
     TERMINAL
 } from './logging/DEFAULTS';
@@ -16,5 +16,5 @@ export {
 export {
     ILog, IChannel, ILogEntry, ILogEntryWriter, IWriter, ILogEntryData, ILoggerBase,
     LogLevel, LogStatus,
-    LogBuilder, LogManager,
+    LogBuilder, LogManagerClass,
 } from './logging/index';

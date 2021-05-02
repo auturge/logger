@@ -2,7 +2,8 @@ const logger = require('../../dist/index');
 const CONSOLE = logger.CONSOLE;
 const LogLevel = logger.LogLevel;
 
-const LogManager = logger.StatusLogManager;
+/** Default StatusLog Manager. */
+const LogManager = logger.LogManager;
 
 const Log = logger.Log;
 Log.error('wacka wacka');

@@ -3,7 +3,7 @@ import { ILog } from "./ILog";
 import { ILogEntry } from "./ILogEntry";
 import { LogBuilder } from "./LogBuilder";
 
-export class LogManager<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry>> {
+export class LogManagerClass<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry>> {
 
     private _logNames: string[] = [];
     private _logs: TLog[] = [];
