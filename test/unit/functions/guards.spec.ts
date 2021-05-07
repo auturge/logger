@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { string, num, bigInt, bool, date, infiniteFn, obj, symbol, regExp } from '@test/objects';
+import { string, num, bigInt, bool, date, infiniteFn, object, symbol, regExp } from '@test/objects';
 
 import { throwIfEmpty, throwIfEqualTo, throwIfNull, throwIfNullOrEmpty, throwIfNullOrGreaterThan, throwIfNullOrGTE, throwIfNullOrLessThan, throwIfNullOrLTE, throwIfNullOrUndefined, throwIfUndefined } from '@src/functions/guards';
 import { AnyRandom, CharacterSet } from '@auturge/testing';
@@ -30,7 +30,7 @@ describe('guards', () => {
             { key: 'never', value: infiniteFn },
             // { key: 'null', value: null },
             { key: 'number', value: num() },
-            { key: 'object', value: obj() },
+            { key: 'object', value: object() },
             { key: 'string', value: string() },
             { key: 'symbol', value: symbol() },
             { key: 'RegExp', value: regExp() },
@@ -84,7 +84,7 @@ describe('guards', () => {
             { key: 'never', value: infiniteFn },
             { key: 'null', value: null },
             { key: 'number', value: num() },
-            { key: 'object', value: obj() },
+            { key: 'object', value: object() },
             { key: 'string', value: string() },
             { key: 'symbol', value: symbol() },
             { key: 'RegExp', value: regExp() },
@@ -153,7 +153,7 @@ describe('guards', () => {
             { key: 'never', value: infiniteFn },
             { key: 'null', value: null },
             { key: 'number', value: num() },
-            { key: 'object', value: obj() },
+            { key: 'object', value: object() },
             { key: 'string', value: string() },
             { key: 'symbol', value: symbol() },
             { key: 'RegExp', value: regExp() },
@@ -222,7 +222,7 @@ describe('guards', () => {
             { key: 'never', value: infiniteFn },
             // { key: 'null', value: null },
             { key: 'number', value: num() },
-            { key: 'object', value: obj() },
+            { key: 'object', value: object() },
             { key: 'string', value: string() },
             { key: 'symbol', value: symbol() },
             { key: 'RegExp', value: regExp() },
@@ -293,7 +293,7 @@ describe('guards', () => {
             { key: 'never', value: infiniteFn },
             // { key: 'null', value: null },
             { key: 'number', value: num() },
-            { key: 'object', value: obj() },
+            { key: 'object', value: object() },
             { key: 'string', value: string() },
             { key: 'symbol', value: symbol() },
             { key: 'RegExp', value: regExp() },

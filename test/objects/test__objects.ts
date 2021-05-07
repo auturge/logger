@@ -11,7 +11,7 @@ export function bool(): boolean {
 export function num(): number {
     return AnyRandom.number(-100, 100, Scale.EXPONENTIAL);
 }
-export function obj(): object {
+export function object(): object {
     var result = {};
     result[ AnyRandom.string(5, 8, CharacterSet.ALPHA) ] = AnyRandom.string(5, 8, CharacterSet.ALPHANUMERIC);
     result[ AnyRandom.string(5, 8, CharacterSet.ALPHA) ] = AnyRandom.int(-100, 100);

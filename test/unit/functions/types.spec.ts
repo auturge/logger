@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { string, num, bigInt, bool, date, infiniteFn, obj, symbol, regExp } from '@test/objects';
+import { string, num, bigInt, bool, date, infiniteFn, object, symbol, regExp } from '@test/objects';
 
 import {
     isArray, isArrayOfType, isBigInt, isBoolean, isDefined, isEmpty,
@@ -24,7 +24,7 @@ describe('types', () => {
             { key: 'empty string', value: "", expected: false },
             { key: 'boolean', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'bigint', value: bigInt(), expected: false },
@@ -34,7 +34,7 @@ describe('types', () => {
             { key: 'string[]', value: [ string(), string() ], expected: true },
             { key: 'boolean[]', value: [ bool(), bool() ], expected: true },
             { key: 'number[]', value: [ num(), num() ], expected: true },
-            { key: 'object[]', value: [ obj(), obj() ], expected: true },
+            { key: 'object[]', value: [ object(), object() ], expected: true },
 
         ].forEach(({ key, value, expected }) => {
             it(`isArray - [${ key }] - returns ${ expected }`, () => {
@@ -63,7 +63,7 @@ describe('types', () => {
             { key: '"true"', type: 'boolean', value: [ "true" ], expected: false },
             { key: 'boolean', type: 'boolean', value: [ bool() ], expected: true },
             { key: 'number', type: 'number', value: [ num() ], expected: true },
-            { key: 'object', type: 'object', value: [ obj() ], expected: true },
+            { key: 'object', type: 'object', value: [ object() ], expected: true },
             { key: 'empty object', type: 'object', value: [ {} ], expected: true },
             { key: 'void', type: 'function', value: [ () => { } ], expected: true },
             { key: 'never', type: 'function', value: [ infiniteFn ], expected: true },
@@ -101,7 +101,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
@@ -144,7 +144,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: true },
             { key: 'false', value: bool(), expected: true },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'bigint', value: bigInt(), expected: false },
@@ -154,7 +154,7 @@ describe('types', () => {
             { key: 'string[]', value: [ string(), string() ], expected: false },
             { key: 'boolean[]', value: [ bool(), bool() ], expected: false },
             { key: 'number[]', value: [ num(), num() ], expected: false },
-            { key: 'object[]', value: [ obj(), obj() ], expected: false },
+            { key: 'object[]', value: [ object(), object() ], expected: false },
 
         ].forEach(({ key, value, expected }) => {
             it(`isArray - [${ key }] - returns ${ expected }`, () => {
@@ -184,7 +184,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: true },
             { key: 'false', value: bool(), expected: true },
             { key: 'number', value: num(), expected: true },
-            { key: 'object', value: obj(), expected: true },
+            { key: 'object', value: object(), expected: true },
             { key: 'void', value: () => { }, expected: true },
             { key: 'never', value: infiniteFn, expected: true },
             { key: 'bigint', value: bigInt(), expected: true },
@@ -194,7 +194,7 @@ describe('types', () => {
             { key: 'string[]', value: [ string(), string() ], expected: true },
             { key: 'boolean[]', value: [ bool(), bool() ], expected: true },
             { key: 'number[]', value: [ num(), num() ], expected: true },
-            { key: 'object[]', value: [ obj(), obj() ], expected: true },
+            { key: 'object[]', value: [ object(), object() ], expected: true },
 
         ].forEach(({ key, value, expected }) => {
             it(`isDefined - [${ key }] - returns ${ expected }`, () => {
@@ -216,7 +216,7 @@ describe('types', () => {
         [
             { key: 'string', value: string(), expected: false },
             { key: 'empty string', value: "", expected: true },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: true },
             {
                 key: 'Map', value: new Map([ [ string(), [ string(), string() ] ], [ string(), [ num(), string() ] ] ]), expected: false
@@ -254,7 +254,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
             { key: 'void', value: () => { }, expected: true },
             { key: 'never', value: infiniteFn, expected: true },
@@ -297,7 +297,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
@@ -340,7 +340,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
@@ -383,7 +383,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
@@ -426,7 +426,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: true },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
@@ -469,7 +469,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: true },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
@@ -513,7 +513,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: true },
+            { key: 'object', value: object(), expected: true },
             { key: 'empty object', value: {}, expected: true },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
@@ -558,7 +558,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
@@ -603,7 +603,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
@@ -827,7 +827,7 @@ describe('types', () => {
             { key: 'true', value: bool(), expected: false },
             { key: 'false', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
-            { key: 'object', value: obj(), expected: false },
+            { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
             { key: 'void', value: () => { }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
