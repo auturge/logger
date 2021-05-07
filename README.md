@@ -185,7 +185,7 @@ Distributed under the MIT license. See [`LICENSE`][license] for more information
 [license-url]: http://badges.mit-license.org
 [npm-image]: https://img.shields.io/npm/v/@auturge/logger.svg
 [npm-url]: https://www.npmjs.com/package/@auturge/logger
-[travis-image]: https://travis-ci.org/auturge/logger.svg?branch=master
-[travis-url]: https://travis-ci.org/auturge/logger
+[travis-image]: https://travis-ci.com/auturge/logger.svg?branch=master
+[travis-url]: https://travis-ci.com/github/auturge/logger
 [coveralls-image]: https://coveralls.io/repos/github/auturge/logger/badge.svg?branch=master
 [coveralls-url]: https://coveralls.io/github/auturge/logger?branch=master
