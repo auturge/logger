@@ -1,0 +1,234 @@
+import { assert } from 'chai';
+import { AnyRandom } from '@auturge/testing';
+
+import { ConsoleWriter } from '@src/logging/writers/ConsoleWriter';
+import { IPatternWriterConfig } from '@src/logging/IWriter';
+import { stub, unwrap } from '@test/helpers';
+import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
+import { LogLevel, LOG_LEVELS } from '@src/logging/LogLevel';
+import { LOG_STATUSES } from '@src/logging/LogStatus';
+import { object } from '@test/objects';
+import Sinon = require('sinon');
+import sinon = require('sinon');
+import { nullWriterFn } from '@src/logging/writers/WriterFn';
+
+describe('ConsoleWriter', () => {
+
+    var writer, formatter;
+    var formatEntry, getWriterFn, formatMessage, formatData;
+    var pattern;
+
+    const entry: IStatusEntry = {
+        level: AnyRandom.oneOf(LOG_LEVELS),
+        message: AnyRandom.string(20, 30),
+        timestamp: new Date(),
+        source: AnyRandom.string(5, 8),
+        data: {
+            status: AnyRandom.oneOf(LOG_STATUSES),
+            prettyPrint: AnyRandom.bool(),
+            obj: object()
+        }
+    };
+
+    function setupTestSuite() {
+        pattern = "%{l} %{m}"
+        writer = new ConsoleWriter(pattern);
+        formatter = writer.formatter;
+    }
+    function setupWrite() {
+        setupTestSuite();
+        formatEntry = stub(writer, 'formatEntry').callsFake((entry) => { });
+        getWriterFn = stub(writer, 'getWriterFunction').callsFake((level) => { });
+    }
+    function setupFormat() {
+        setupTestSuite();
+        formatMessage = stub(formatter, 'formatMessage').callsFake((entry) => { });
+        formatData = stub(formatter, 'formatData').callsFake((entry) => { });
+    }
+
+    function tearDownSuite() { }
+    function tearDownWrite() {
+        unwrap(formatEntry);
+        unwrap(getWriterFn);
+    }
+    function tearDownFormat() {
+        unwrap(formatMessage);
+        unwrap(formatData);
+    }
+
+    describe('ctor', () => {
+
+        beforeEach(setupTestSuite);
+        afterEach(tearDownSuite);
+
+        it(`ctor - with pattern - sets values appropriately`, () => {
+
+            writer = new ConsoleWriter(pattern);
+
+            assert.equal(writer?.formatter?.pattern, pattern);
+        });
+
+        it(`ctor - without pattern - sets values appropriately`, () => {
+            const expected: string = "%{l} %{m}";
+
+            writer = new ConsoleWriter();
+
+            assert.equal(writer?.formatter?.pattern, expected);
+        });
+    });
+
+    describe('reconfigure', () => {
+
+        beforeEach(setupTestSuite);
+        afterEach(tearDownSuite);
+
+        [
+            { key: 'null', value: null },
+            { key: 'undefined', value: undefined },
+        ].forEach(({ key, value }) => {
+            it(`reconfigure - throws when 'config' parameter is ${ key }`, () => {
+                const config = <any>value;
+
+                assert.throws(() => {
+                    writer.reconfigure(config);
+                });
+            });
+        });
+
+        it(`reconfigure - sets values appropriately`, () => {
+            const newPattern = AnyRandom.string(5, 8);
+            const config: IPatternWriterConfig = {
+                pattern: newPattern
+            }
+
+            writer.reconfigure(config);
+
+            assert.equal(writer?.formatter?.pattern, newPattern);
+        });
+    });
+
+    describe('write', () => {
+        const entry: IStatusEntry = {
+            level: AnyRandom.oneOf(LOG_LEVELS),
+            message: AnyRandom.string(20, 30),
+            timestamp: new Date(),
+            source: AnyRandom.string(5, 8),
+            data: {
+                status: AnyRandom.oneOf(LOG_STATUSES),
+                prettyPrint: AnyRandom.bool(),
+                obj: object()
+            }
+        };
+
+        beforeEach(setupWrite);
+        afterEach(tearDownWrite);
+
+        [
+            { key: 'null', value: null },
+            { key: 'undefined', value: undefined },
+        ].forEach(({ key, value }) => {
+            it(`write - throws when 'entry' parameter is ${ key }`, () => {
+                const entry = <any>value;
+
+                assert.throws(() => {
+                    writer.write(entry);
+                });
+            });
+        });
+
+        it(`write - with data - formats the entry and passes it to the writer function`, () => {
+            const partial = Object.assign({}, entry);
+            delete partial.data;
+            var message = AnyRandom.string(5, 8);
+            var writerFn = sinon.spy();
+            getWriterFn.returns(writerFn);
+            formatEntry.returns([ message, undefined ]);
+
+            writer.write(entry);
+
+            Sinon.assert.calledOnceWithExactly(formatEntry, entry);
+            Sinon.assert.calledOnceWithExactly(getWriterFn, entry.level);
+            Sinon.assert.calledOnceWithExactly(writerFn, message);
+        });
+
+        it(`write - with data - formats the entry and passes it to the writer function`, () => {
+            var message = AnyRandom.string(5, 8);
+            var data = AnyRandom.string(5, 8);
+            var writerFn = sinon.spy();
+            getWriterFn.returns(writerFn);
+            formatEntry.returns([ message, data ]);
+
+            writer.write(entry);
+
+            Sinon.assert.calledOnceWithExactly(formatEntry, entry);
+            Sinon.assert.calledOnceWithExactly(getWriterFn, entry.level);
+            Sinon.assert.callOrder(
+                writerFn.withArgs(message),
+                writerFn.withArgs(data)
+            )
+        });
+    });
+
+    describe('formatEntry', () => {
+        beforeEach(setupFormat);
+        afterEach(tearDownFormat);
+
+        it(`formatEntry - gets the message and data from the formatter`, () => {
+            var message = AnyRandom.string(5, 8);
+            var data = AnyRandom.string(5, 8);
+            formatMessage.returns(message);
+            formatData.returns(data);
+
+            const [ mresult, dresult ] = writer.formatEntry(entry);
+
+            Sinon.assert.calledOnceWithExactly(formatMessage, entry);
+            Sinon.assert.calledOnceWithExactly(formatData, entry);
+            assert.equal(mresult, message);
+            assert.equal(dresult, data);
+        });
+    });
+
+    describe('getWriterFunction', () => {
+        beforeEach(setupTestSuite);
+        afterEach(tearDownSuite);
+
+        [
+            { level: LogLevel.FATAL, name: 'error', expected: console.error },
+            { level: LogLevel.ERROR, name: 'error', expected: console.error },
+            { level: LogLevel.WARN, name: 'warn', expected: console.warn },
+            { level: LogLevel.INFO, name: 'info', expected: console.info },
+            { level: LogLevel.DEBUG, name: 'info', expected: console.info },
+            { level: LogLevel.TRACE, name: 'info', expected: console.info },
+            { level: LogLevel.ALL, name: 'info', expected: console.info },
+        ]
+            .forEach(({ level, name, expected }) => {
+
+                it(`getWriterFunction - given the loglevel ${ level }, returns the method console.${ name }`, () => {
+
+                    var result = writer.getWriterFunction(level);
+
+                    assert.equal(result, expected);
+                });
+
+            });
+
+        it(`getWriterFunction - given the loglevel OFF, returns the nullWriter`, () => {
+
+            var result = writer.getWriterFunction(LogLevel.OFF);
+
+            assert.equal(result, nullWriterFn);
+        });
+
+        it(`getWriterFunction - given some rando loglevel, throws`, () => {
+            var level = new LogLevel(1, 'bugger');
+
+            assert.throws(() => {
+                writer.getWriterFunction(level);
+            }, `Unrecognized log level [${ level.toString() }].`);
+        });
+    });
+
+
+
+
+});
