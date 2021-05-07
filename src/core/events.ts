@@ -31,6 +31,10 @@ export interface IEmitter<TEventArgs extends EventArgsMap = void> {
 export class Emitter<TEventArgs extends EventArgsMap = void> implements IEmitter<TEventArgs> {
     private _handlers: EventHandler<TEventArgs>[] = [];
 
+    public get handlers(): EventHandler<TEventArgs>[] {
+        return this._handlers;
+    }
+
     public get subscribers(): EventHandler<TEventArgs>[] {
         return this._handlers;
     }
