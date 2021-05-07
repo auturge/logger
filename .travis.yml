@@ -1,0 +1,16 @@
+version: ~> 1.0
+dist: trusty
+os:
+    - linux
+addons:
+    chrome: stable # have Travis install Chrome stable.
+cache:
+    directories:
+        - node_modules
+
+language: node_js
+node_js:
+    - 12.8.1
+
+after_success:
+    - npm run ~test:report
