@@ -89,7 +89,7 @@ export class StatusLog implements IStatusLog {
     }
 
     private buildAndWrite(level: LogLevel, status: LogStatus, message: string, obj: any, prettyPrint?: boolean): void {
-        if (!this._enabled) return;
+        if (!this.enabled) return;
         const entry = this.buildEntry(level, status, message, obj, prettyPrint);
         this.output(entry);
     }
@@ -118,11 +118,9 @@ export class StatusLog implements IStatusLog {
     }
 
     private output(entry: IStatusEntry): void {
-        if (!this._enabled) return;
+        if (!this.enabled) return;
         this.channels.forEach((channel: IChannel<IStatusEntry>) => {
-            if (channel.isEnabledFor(entry.level)) {
-                channel.log(entry);
-            }
+            channel.log(entry);
         });
     }
 }
