@@ -4,12 +4,10 @@
   A set of helpful functions for developer convenience.
 </p>
 
-[![License][license-image]][license-url]
+[![License][license-image]][license-url]<!-- [![NPM Version][npm-image]][npm-url]-->[![Build Status][travis-image]][travis-url]<!-- [![Coverage Status][coveralls-image]][coveralls-url] -->
+
 [![Work In Progress][WIP-badge]][auturge-github-homepage]
 
-<!-- [![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Coverage Status][coveralls-image]][coveralls-url] -->
 
 -   [auturge/logger](#auturgelogger)
     -   [Installation](#installation)
