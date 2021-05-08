@@ -65,7 +65,7 @@ describe('TerminalWriter', () => {
 
             writer = new TerminalWriter(pattern);
 
-            assert.equal(writer?.formatter?.pattern, pattern);
+            assert.equal(writer.formatter.pattern, pattern);
         });
 
         it(`ctor - without pattern - sets values appropriately`, () => {
@@ -73,7 +73,7 @@ describe('TerminalWriter', () => {
 
             writer = new TerminalWriter();
 
-            assert.equal(writer?.formatter?.pattern, expected);
+            assert.equal(writer.formatter.pattern, expected);
         });
     });
 
@@ -103,7 +103,7 @@ describe('TerminalWriter', () => {
 
             writer.reconfigure(config);
 
-            assert.equal(writer?.formatter?.pattern, newPattern);
+            assert.equal(writer.formatter.pattern, newPattern);
         });
     });
 
@@ -227,8 +227,4 @@ describe('TerminalWriter', () => {
             }, `Unrecognized log level [${ level.toString() }].`);
         });
     });
-
-
-
-
 });
