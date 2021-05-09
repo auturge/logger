@@ -14,7 +14,7 @@ export enum DateFormat {
     DEFAULT = "yyyy-MM-dd HH:mm:ss.SSS xxx",
     ISO = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
     UTC = "EEE',' dd MMM yyyy HH:mm:ss z",
-    LONG = "yyyy-MM-dd HH:mm:ss zzz",
+    LONG = "yyyy-MM-dd HH:mm:ss XXXX",
 }
 
 class DateFormatOptions implements IDateFormatOptions {
