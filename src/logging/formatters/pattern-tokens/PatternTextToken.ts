@@ -5,6 +5,7 @@ import { ILogEntry } from "@src/logging/ILogEntry";
 
 export class PatternTextToken extends TokenDefinition {
 
+    protected tokens: string[] = [];
     private static _instance = new PatternTextToken();
 
     /** Returns the text from the pattern */

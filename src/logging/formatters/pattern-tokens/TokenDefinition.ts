@@ -1,4 +1,3 @@
-import { removeAll } from "@src/functions/removeAll";
 import { ILogEntry } from "@src/logging/ILogEntry";
 import { ITokenMatch, TokenMatch } from "./ITokenMatch";
 
@@ -6,6 +5,8 @@ export abstract class TokenDefinition {
 
     private static readonly TOKEN_OPENER: string = '%{';
     private static readonly TOKEN_CLOSER: string = '}';
+
+    protected abstract tokens: string[];
 
     /** Returns the text that should replace the specified token.
      * @param match The token to get the text for.
@@ -16,39 +17,45 @@ export abstract class TokenDefinition {
     /** Finds all matches of this token within the pattern.
      * @param pattern The pattern to search.
      */
-    abstract getMatches(pattern: string): TokenMatch[];
+    public getMatches(pattern: string): TokenMatch[] {
+        return this.collectMatches(pattern);
+    }
 
-    protected collectMatches(pattern: string, ...tokens: string[]): TokenMatch[] {
+    protected collectMatches(pattern: string): TokenMatch[] {
         var matches: TokenMatch[] = [];
         var toCheck = pattern.slice(0);
-        tokens.forEach(tokenText => {
+        this.tokens.forEach(tokenText => {
             var tokenMatches = this.getTokenMatches(toCheck, tokenText);
             matches = matches.concat(tokenMatches);
         });
         return matches;
     }
 
-    private removeMatches(pattern: string, matches: TokenMatch[]): string {
-        matches.forEach(match => {
-            pattern = removeAll(pattern, match.matched);
-        })
-        return pattern;
-    }
-
     private getTokenMatches(pattern: string, tokenText: string): TokenMatch[] {
 
         // A TOKEN is a portion of the pattern that starts with %{ and ends with the first subsequent }
         // This format allows us to include arguments with the token, not just its name
+
+        // console.log('getTokenMatches:pattern', pattern);
+        // console.log('getTokenMatches:tokens', this.tokens);
+
         var toCheck = pattern.slice(0);
         const matches: TokenMatch[] = [];
         var removedTokensLength: number = 0;
         var startIndex: number;
         while ((startIndex = toCheck.indexOf(TokenDefinition.TOKEN_OPENER)) > -1) {
             const nextToken = this.getNextToken(toCheck);
+
+            // console.log('getTokenMatches:nextToken', nextToken);
+
             if (this.matchesName(nextToken, tokenText)) {
+
+                // console.log('getTokenMatches:matched', nextToken);
+
                 const match = this.buildTokenMatch(nextToken, startIndex + removedTokensLength);
                 matches.push(match);
             }
+
             removedTokensLength += nextToken.length;
             toCheck = toCheck.replace(nextToken, '');
         }
@@ -58,12 +65,19 @@ export abstract class TokenDefinition {
     private getNextToken(pattern: string): string {
         var startIndex: number;
         if ((startIndex = pattern.indexOf(TokenDefinition.TOKEN_OPENER)) > -1) {
-            const endIndex = pattern.indexOf(TokenDefinition.TOKEN_CLOSER);
-            if (endIndex == -1)
+
+            // find the next starter
+            const toCheck = pattern.slice(startIndex + 1);
+            const nextStart = toCheck.indexOf(TokenDefinition.TOKEN_OPENER);
+            const endIndex = toCheck.indexOf(TokenDefinition.TOKEN_CLOSER);
+
+            const lastTokenIsUnclosed = endIndex == -1;
+            const thisTokenIsClosedAfterNext = nextStart != -1 && endIndex > nextStart;
+
+            if (lastTokenIsUnclosed || thisTokenIsClosedAfterNext)
                 throw new Error(`Unclosed token: [${ pattern.slice(startIndex) }]`);
 
-            const length = endIndex - startIndex + 1;
-
+            const length = endIndex + 2;
             const match = pattern.substr(startIndex, length);
             return match;
         }
@@ -80,7 +94,7 @@ export abstract class TokenDefinition {
         var index: number;
 
         var trimmedName = ((index = lTrimmed.indexOf('|')) != -1)
-            ? lTrimmed.slice(0, index - 1).trim()
+            ? lTrimmed.slice(0, index).trim()
             : trimmedName = lTrimmed.slice(0, -1).trim();
 
         return trimmedName == name;

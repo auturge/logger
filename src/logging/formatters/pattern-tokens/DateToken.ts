@@ -5,6 +5,8 @@ import { DateFormat, formatDate } from "@src/functions/formatDate";
 
 export class DateToken extends TokenDefinition {
 
+    protected tokens: string[] = [ 'date', 'd' ];
+
     /** Gets and formats the timestamp using
      * - the format specified in the first argument, and
      * - the IANA timezone string specified in the second argument.
@@ -22,11 +24,5 @@ export class DateToken extends TokenDefinition {
             return formatDate(entry.timestamp, match.arguments[ 0 ]);
         }
         return formatDate(entry.timestamp, DateFormat.DEFAULT);
-    }
-
-    getMatches(pattern: string): TokenMatch[] {
-        // search for '%{d}', '%{date}'
-        var matches = this.collectMatches(pattern, 'date', 'd');
-        return matches;
     }
 }
