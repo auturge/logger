@@ -103,9 +103,9 @@ We need to enable logging to many possible targets, for example:
 | Example Target	| Description |
 |:---|:---|
 |CONSOLE	| The browser console |
-|TERMINAL	| The terminal (non-browser) |
 <!-- |DATABASE	| Log entries into a database | -->
 <!-- |FILE	    | Log into a file (non-browser only) | -->
+|TERMINAL	| The terminal (non-browser) |
 
 <br/>
 
@@ -130,9 +130,10 @@ We need to enable logging to many possible targets, for example:
 
 | Example Target	| Description |
 |:---|:---|
-|CONSOLE	| The console (browser or non-browser) |
-|DATABASE	| Log entries into a database |
-|FILE	    | Log into a file (non-browser only) |
+|CONSOLE	| The browser console |
+<!-- |DATABASE	| Log entries into a database | -->
+<!-- |FILE	    | Log into a file (non-browser only) | -->
+|TERMINAL	| The terminal (non-browser) |
 
 <br/>
 
