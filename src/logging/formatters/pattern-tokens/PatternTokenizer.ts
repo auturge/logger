@@ -1,25 +1,22 @@
-import { removeAll } from "@src/functions/removeAll";
 import { ITokenMatch, TokenMatch } from "./ITokenMatch";
 import { KNOWN_TOKENS, TEXT_TOKEN } from "./TOKENS";
 
 export class PatternTokenizer {
-
-    public constructor() { }
 
     public tokenize(pattern: string): TokenMatch[] {
         if (!(pattern && pattern.length))
             return [];
 
         // get the tokens that we recognize
-        var knownTokens = this.getKnownTokens(pattern);
+        const knownTokens = this.getKnownTokens(pattern);
 
         // freak out for unrecognized tokens (errors)
         this.throwForUnparsedTokens(pattern, knownTokens);
 
         // Get the rest (text)
-        var textTokens = this.getTextTokens(pattern, knownTokens);
+        const textTokens = this.getTextTokens(pattern, knownTokens);
 
-        var tokens = knownTokens.concat(textTokens);
+        let tokens = knownTokens.concat(textTokens);
 
         // ensure they're sorted by startIndex
         tokens = tokens.sort((a, b) => a.startIndex - b.startIndex);
@@ -30,9 +27,9 @@ export class PatternTokenizer {
         if (!(pattern && pattern.length))
             return [];
 
-        var result: TokenMatch[] = [];
+        let result: TokenMatch[] = [];
         KNOWN_TOKENS.forEach(token => {
-            var toCheck = pattern.slice(0);
+            const toCheck = pattern.slice(0);
             result = result.concat(token.getMatches(toCheck));
         });
 
@@ -47,7 +44,7 @@ export class PatternTokenizer {
         if (knownTokens == null)
             knownTokens = [];
 
-        var rebuilt = pattern.slice(0);
+        let rebuilt = pattern.slice(0);
 
         // remove the known tokens from the pattern
         knownTokens.forEach(token => {

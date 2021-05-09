@@ -2,10 +2,10 @@ import { isNullUndefinedOrEmpty } from "@src/functions/types";
 import { getTimezoneOffset, utcToZonedTime } from "date-fns-tz";
 
 function shiftTimeZone(date: Date, minutesToSubtract: number): Date {
-    var offsetMS = minutesToSubtract * 60 * 1000;
-    var dateMS = date.getTime();
-    var newMS = dateMS - offsetMS;
-    var newDate = new Date(newMS);
+    const offsetMS = minutesToSubtract * 60 * 1000;
+    const dateMS = date.getTime();
+    const newMS = dateMS - offsetMS;
+    const newDate = new Date(newMS);
     return newDate;
 }
 function pad(value: number): string {
@@ -15,14 +15,14 @@ function pad(value: number): string {
 export const localDate: Date = new Date(2021, 2, 4, 5, 6, 7, 8);
 
 export function getUTCDateFromLocal(localDate: Date): Date {
-    var offsetMin = localDate.getTimezoneOffset(); // in minutes
+    const offsetMin = localDate.getTimezoneOffset(); // in minutes
     return shiftTimeZone(localDate, offsetMin);
 }
 export function getOffsetString(timezone?: string): string {
 
-    var offsetMin: number;
+    let offsetMin: number;
     if (!isNullUndefinedOrEmpty(timezone)) {
-        var offsetMS = getTimezoneOffset(timezone, localDate);
+        const offsetMS = getTimezoneOffset(timezone, localDate);
         offsetMin = -1 * offsetMS / 1000 / 60;
 
     } else {
@@ -30,22 +30,22 @@ export function getOffsetString(timezone?: string): string {
     }
 
     const sign = (offsetMin > 0) ? "-" : "+";
-    var absOffset = Math.abs(offsetMin);
-    var hours = pad(Math.floor(absOffset / 60));
-    var minutes = pad(absOffset % 60);
+    const absOffset = Math.abs(offsetMin);
+    const hours = pad(Math.floor(absOffset / 60));
+    const minutes = pad(absOffset % 60);
     return sign + hours + ":" + minutes;
 }
 export function getZonedTimeString(localDate: Date, timezone: string): string {
-    var zonedTime = utcToZonedTime(localDate, timezone);
-    var year = zonedTime.getFullYear();
-    var month = zonedTime.getMonth();
-    var day = zonedTime.getDay();
-    var hour = zonedTime.getHours();
-    var minutes = zonedTime.getMinutes();
-    var seconds = zonedTime.getSeconds();
-    var ms = zonedTime.getMilliseconds();
+    const zonedTime = utcToZonedTime(localDate, timezone);
+    const year = zonedTime.getFullYear();
+    const month = zonedTime.getMonth();
+    const day = zonedTime.getDay();
+    const hour = zonedTime.getHours();
+    const minutes = zonedTime.getMinutes();
+    const seconds = zonedTime.getSeconds();
+    const ms = zonedTime.getMilliseconds();
 
-    var result = '';
+    let result = '';
     result += year + '-';
     result += (month + 1).toString().padStart(2, '0') + '-';
     result += day.toString().padStart(2, '0') + ' ';

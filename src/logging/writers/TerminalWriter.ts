@@ -11,7 +11,7 @@ export class TerminalWriter implements IWriter {
 
     constructor();
     constructor(pattern: string);
-    constructor(pattern: string = "%{l} %{m}") {
+    constructor(pattern = "%{l} %{m}") {
         this.formatter = new ColorPatternFormatter(pattern);
     }
 

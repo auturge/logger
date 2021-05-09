@@ -3,21 +3,20 @@ import { assert } from 'chai';
 import { AnyRandom } from '@auturge/testing';
 
 import { stub, unwrap } from '@test/helpers';
+import { statusEntry } from '@test/objects/test__objects';
+import { NULL } from '@test/objects/NullWriter';
 
-import { IPatternWriterConfig, IWriter } from '@src/logging/IWriter';
-import { nullWriterFn } from '@src/logging/writers/WriterFn';
-import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 import { Channel } from '@src/logging/Channel';
 import { LogLevel } from '@src/logging';
 
 describe('Channel', () => {
 
-    var channel;
+    let channel;
 
-    const testWriter: IWriter = {
-        reconfigure: (config: IPatternWriterConfig) => { },
-        write: nullWriterFn
-    };
+    // const testWriter: IWriter = {
+    //     reconfigure: () => { /* Do nothing */ },
+    //     write: nullWriterFn
+    // };
 
     describe('ctor', () => {
 
@@ -28,7 +27,7 @@ describe('Channel', () => {
         ].forEach(({ key, value }) => {
             it(`ctor - throws when channel name is ${ key }`, () => {
                 const name = <any>value;
-                const writer = testWriter;
+                const writer = NULL;
 
                 assert.throws(() => {
                     new Channel(name, writer);
@@ -54,7 +53,7 @@ describe('Channel', () => {
     describe('enabled', () => {
 
         beforeEach(() => {
-            channel = new Channel(AnyRandom.string(5, 8), testWriter);
+            channel = new Channel(AnyRandom.string(5, 8), NULL);
         });
 
         [
@@ -82,7 +81,7 @@ describe('Channel', () => {
     describe('level', () => {
 
         beforeEach(() => {
-            channel = new Channel(AnyRandom.string(5, 8), testWriter);
+            channel = new Channel(AnyRandom.string(5, 8), NULL);
         });
 
         [
@@ -114,7 +113,7 @@ describe('Channel', () => {
 
     describe('isEnabledFor', () => {
         beforeEach(() => {
-            channel = new Channel(AnyRandom.string(5, 8), testWriter);
+            channel = new Channel(AnyRandom.string(5, 8), NULL);
         });
 
         [
@@ -221,23 +220,15 @@ describe('Channel', () => {
 
     });
 
-    function getEntry(level: LogLevel = LogLevel.INFO): IStatusEntry {
-        return {
-            level: level,
-            message: AnyRandom.string(20, 32),
-            source: AnyRandom.string(20, 32),
-            timestamp: new Date()
-        }
-    }
 
     describe('log', () => {
-        var isEnabled, write, entry;
+        let write;
 
 
 
         beforeEach(() => {
-            channel = new Channel(AnyRandom.string(5, 8), testWriter);
-            write = stub(channel.writer, 'write').callsFake((entry) => { });
+            channel = new Channel(AnyRandom.string(5, 8), NULL);
+            write = stub(channel.writer, 'write').callsFake(() => { /* Do nothing */ });
         });
 
         afterEach(() => {
@@ -319,7 +310,7 @@ describe('Channel', () => {
         ].forEach(({ level, entryLevel, expected }) => {
 
             it('log - does not write if the channel is disabled', () => {
-                var entry = getEntry(entryLevel);
+                const entry = statusEntry(entryLevel);
                 channel.enabled = false;
 
                 channel.log(entry);
@@ -330,7 +321,7 @@ describe('Channel', () => {
             it(`log - [logger: ${ level }, entry: ${ entryLevel }] - ${ expected ? 'writes the entry' : 'does not write' } when ${ expected ? '' : 'not ' }enabled for the level of the entry`, () => {
                 channel.enabled = true;
                 channel.level = level;
-                var entry = getEntry(entryLevel);
+                const entry = statusEntry(entryLevel);
 
                 channel.log(entry);
 

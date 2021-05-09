@@ -5,7 +5,7 @@ import { PatternTokenizer } from '@src/logging/formatters/pattern-tokens/Pattern
 
 describe('PatternTokenizer', () => {
 
-    var tokenizer;
+    let tokenizer;
 
     function tokenMatches(expected: TokenMatch, actual: ITokenMatch) {
         assert.equal(actual.tokenType, expected.tokenType, 'wrong token type');
@@ -16,11 +16,13 @@ describe('PatternTokenizer', () => {
         return true;
     }
 
+    function setupTestSuite() {
+        tokenizer = new PatternTokenizer();
+    }
+
     describe('tokenize', () => {
 
-        beforeEach(() => {
-            tokenizer = new PatternTokenizer();
-        });
+        beforeEach(setupTestSuite);
 
         [
             { key: 'null', value: null },
@@ -28,9 +30,9 @@ describe('PatternTokenizer', () => {
             { key: 'an empty string', value: "" }
         ].forEach(({ key, value }) => {
             it(`tokenize - returns an empty array when input is ${ key }`, () => {
-                var pattern = value;
+                const pattern = value;
 
-                var tokens = tokenizer.tokenize(pattern);
+                const tokens = tokenizer.tokenize(pattern);
 
                 assert.deepEqual(tokens, []);
             });
@@ -46,7 +48,7 @@ describe('PatternTokenizer', () => {
         ].forEach(({ pattern, type }) => {
             it(`tokenize - [${ type }:${ pattern }] - gets tokens for trivial pattern`, () => {
 
-                var tokens = tokenizer.tokenize(pattern);
+                const tokens = tokenizer.tokenize(pattern);
 
                 assert.equal(tokens.length, 1);
                 assert.equal(tokens[ 0 ].tokenType, type);
@@ -56,7 +58,7 @@ describe('PatternTokenizer', () => {
         it(`tokenize - ["[%{d} %{l}] %{m}\\n"] - gets tokens for non trivial pattern`, () => {
             const pattern = "[%{d} %{l}] %{m}\\n";
 
-            var tokens = tokenizer.tokenize(pattern);
+            const tokens = tokenizer.tokenize(pattern);
 
             assert.equal(tokens.length, 7);
             tokenMatches(tokens[ 0 ], {
@@ -120,9 +122,7 @@ describe('PatternTokenizer', () => {
 
     describe('getKnownTokens', () => {
 
-        beforeEach(() => {
-            tokenizer = new PatternTokenizer();
-        });
+        beforeEach(setupTestSuite);
 
         [
             { key: 'null', value: null },
@@ -130,9 +130,9 @@ describe('PatternTokenizer', () => {
             { key: 'an empty string', value: "" }
         ].forEach(({ key, value }) => {
             it(`getKnownTokens - returns an empty array when input is ${ key }`, () => {
-                var pattern = value;
+                const pattern = value;
 
-                var tokens = tokenizer[ 'getKnownTokens' ](pattern);
+                const tokens = tokenizer[ 'getKnownTokens' ](pattern);
 
                 assert.deepEqual(tokens, []);
             });
@@ -148,7 +148,7 @@ describe('PatternTokenizer', () => {
         ].forEach(({ pattern, type }) => {
             it(`getKnownTokens - [${ type }:${ pattern }] - gets tokens for trivial pattern`, () => {
 
-                var tokens = tokenizer[ 'getKnownTokens' ](pattern);
+                const tokens = tokenizer[ 'getKnownTokens' ](pattern);
 
                 assert.equal(tokens.length, 1);
                 assert.equal(tokens[ 0 ].tokenType, type);
@@ -158,7 +158,7 @@ describe('PatternTokenizer', () => {
         it(`getKnownTokens - ["[%{d} %{l}] %{m}\\n"] - gets known tokens for non trivial pattern`, () => {
             const pattern = "[%{d} %{l}] %{m}\\n";
 
-            var tokens = tokenizer[ 'getKnownTokens' ](pattern);
+            const tokens = tokenizer[ 'getKnownTokens' ](pattern);
 
             assert.equal(tokens.length, 3);
             assert.isTrue(tokenMatches(tokens[ 0 ], {
@@ -190,9 +190,7 @@ describe('PatternTokenizer', () => {
 
     describe('getTextTokens', () => {
 
-        beforeEach(() => {
-            tokenizer = new PatternTokenizer();
-        });
+        beforeEach(setupTestSuite);
 
         [
             { key: 'null', value: null },
@@ -200,9 +198,9 @@ describe('PatternTokenizer', () => {
             { key: 'an empty string', value: "" }
         ].forEach(({ key, value }) => {
             it(`getTextTokens - returns an empty array when input is ${ key }`, () => {
-                var pattern = value;
+                const pattern = value;
 
-                var tokens = tokenizer[ 'getTextTokens' ](pattern);
+                const tokens = tokenizer[ 'getTextTokens' ](pattern);
 
                 assert.deepEqual(tokens, []);
             });
@@ -232,7 +230,7 @@ describe('PatternTokenizer', () => {
                 }
             ];
 
-            var tokens = tokenizer[ 'getTextTokens' ](pattern, knownTokens);
+            const tokens = tokenizer[ 'getTextTokens' ](pattern, knownTokens);
 
             assert.equal(tokens.length, 4);
             assert.isTrue(tokenMatches(tokens[ 0 ], {
@@ -272,9 +270,7 @@ describe('PatternTokenizer', () => {
 
     describe('throwForUnparsedTokens', () => {
 
-        beforeEach(() => {
-            tokenizer = new PatternTokenizer();
-        });
+        beforeEach(setupTestSuite);
 
         [
             { key: 'null', value: null },

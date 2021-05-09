@@ -14,9 +14,9 @@ import { TerminalWriter } from '@src/logging/writers/TerminalWriter';
 
 describe('TerminalWriter', () => {
 
-    var writer, formatter;
-    var formatEntry, getWriterFn, formatMessage, formatData;
-    var pattern;
+    let writer, formatter;
+    let formatEntry, getWriterFn, formatMessage, formatData;
+    let pattern;
 
     const entry: IStatusEntry = {
         level: AnyRandom.oneOf(LOG_LEVELS),
@@ -37,16 +37,15 @@ describe('TerminalWriter', () => {
     }
     function setupWrite() {
         setupTestSuite();
-        formatEntry = stub(writer, 'formatEntry').callsFake((entry) => { });
-        getWriterFn = stub(writer, 'getWriterFunction').callsFake((level) => { });
+        formatEntry = stub(writer, 'formatEntry').callsFake(() => { /* Do nothing */ });
+        getWriterFn = stub(writer, 'getWriterFunction').callsFake(() => { /* Do nothing */ });
     }
     function setupFormat() {
         setupTestSuite();
-        formatMessage = stub(formatter, 'formatMessage').callsFake((entry) => { });
-        formatData = stub(formatter, 'formatData').callsFake((entry) => { });
+        formatMessage = stub(formatter, 'formatMessage').callsFake(() => { /* Do nothing */ });
+        formatData = stub(formatter, 'formatData').callsFake(() => { /* Do nothing */ });
     }
 
-    function tearDownSuite() { }
     function tearDownWrite() {
         unwrap(formatEntry);
         unwrap(getWriterFn);
@@ -59,7 +58,6 @@ describe('TerminalWriter', () => {
     describe('ctor', () => {
 
         beforeEach(setupTestSuite);
-        afterEach(tearDownSuite);
 
         it(`ctor - with pattern - sets values appropriately`, () => {
 
@@ -69,7 +67,7 @@ describe('TerminalWriter', () => {
         });
 
         it(`ctor - without pattern - sets values appropriately`, () => {
-            const expected: string = "%{l} %{m}";
+            const expected = "%{l} %{m}";
 
             writer = new TerminalWriter();
 
@@ -80,7 +78,6 @@ describe('TerminalWriter', () => {
     describe('reconfigure', () => {
 
         beforeEach(setupTestSuite);
-        afterEach(tearDownSuite);
 
         [
             { key: 'null', value: null },
@@ -139,8 +136,8 @@ describe('TerminalWriter', () => {
         it(`write - with data - formats the entry and passes it to the writer function`, () => {
             const partial = Object.assign({}, entry);
             delete partial.data;
-            var message = AnyRandom.string(5, 8);
-            var writerFn = sinon.spy();
+            const message = AnyRandom.string(5, 8);
+            const writerFn = sinon.spy();
             getWriterFn.returns(writerFn);
             formatEntry.returns([ message, undefined ]);
 
@@ -152,9 +149,9 @@ describe('TerminalWriter', () => {
         });
 
         it(`write - with data - formats the entry and passes it to the writer function`, () => {
-            var message = AnyRandom.string(5, 8);
-            var data = AnyRandom.string(5, 8);
-            var writerFn = sinon.spy();
+            const message = AnyRandom.string(5, 8);
+            const data = AnyRandom.string(5, 8);
+            const writerFn = sinon.spy();
             getWriterFn.returns(writerFn);
             formatEntry.returns([ message, data ]);
 
@@ -174,8 +171,8 @@ describe('TerminalWriter', () => {
         afterEach(tearDownFormat);
 
         it(`formatEntry - gets the message and data from the formatter`, () => {
-            var message = AnyRandom.string(5, 8);
-            var data = AnyRandom.string(5, 8);
+            const message = AnyRandom.string(5, 8);
+            const data = AnyRandom.string(5, 8);
             formatMessage.returns(message);
             formatData.returns(data);
 
@@ -190,7 +187,6 @@ describe('TerminalWriter', () => {
 
     describe('getWriterFunction', () => {
         beforeEach(setupTestSuite);
-        afterEach(tearDownSuite);
 
         [
             { level: LogLevel.FATAL, name: 'error', expected: console.error },
@@ -205,7 +201,7 @@ describe('TerminalWriter', () => {
 
                 it(`getWriterFunction - given the loglevel ${ level }, returns the method console.${ name }`, () => {
 
-                    var result = writer.getWriterFunction(level);
+                    const result = writer.getWriterFunction(level);
 
                     assert.equal(result, expected);
                 });
@@ -214,13 +210,13 @@ describe('TerminalWriter', () => {
 
         it(`getWriterFunction - given the loglevel OFF, returns the nullWriter`, () => {
 
-            var result = writer.getWriterFunction(LogLevel.OFF);
+            const result = writer.getWriterFunction(LogLevel.OFF);
 
             assert.equal(result, nullWriterFn);
         });
 
         it(`getWriterFunction - given some rando loglevel, throws`, () => {
-            var level = new LogLevel(1, 'bugger');
+            const level = new LogLevel(1, 'bugger');
 
             assert.throws(() => {
                 writer.getWriterFunction(level);

@@ -6,8 +6,8 @@ import * as WriterFn from '../../../../src/logging/writers/WriterFn';
 describe('nullWriterFn', () => {
 
     it(`nullWriterFn - returns undefined, regardless of arguments`, () => {
-        var args = [ 'chicken', 'noodle', 'soup' ];
-        var result;
+        const args = [ 'chicken', 'noodle', 'soup' ];
+        let result;
 
         assert.doesNotThrow(() => {
             result = WriterFn.nullWriterFn(...args);

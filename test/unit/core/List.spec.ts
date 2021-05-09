@@ -4,16 +4,17 @@ import { List } from '@src/core/List';
 
 describe('List', () => {
 
-    var list;
-    beforeEach(() => {
+    let list;
+
+    function setupTestSuite() {
         list = new List();
-    })
+    }
 
     describe('add', () => {
 
-        it('add - adds an item to the list', () => {
-            var list = new List();
+        beforeEach(setupTestSuite);
 
+        it('add - adds an item to the list', () => {
             list.add(14);
             list.add(42);
 
@@ -24,16 +25,16 @@ describe('List', () => {
     });
 
     describe('replace', () => {
+        beforeEach(setupTestSuite);
 
         it('replace - when the predicate returns true, replaces that item in place, returns the item', () => {
-            var item1 = { foo: 14 };
-            var item2 = { bar: 42 };
-            var item3 = { baz: "dog" };
-            var list = new List();
+            const item1 = { foo: 14 };
+            const item2 = { bar: 42 };
+            const item3 = { baz: "dog" };
             list.push(item1);
             list.push(item2);
 
-            var result = list.replace(item3, it => it == item1);
+            const result = list.replace(item3, it => it == item1);
 
             assert.equal(list.length, 2);
             assert.equal(list[ 0 ], item3);
@@ -42,14 +43,13 @@ describe('List', () => {
         });
 
         it('replace - when the predicate returns false, does nothing, returns undefined', () => {
-            var item1 = { foo: 14 };
-            var item2 = { bar: 42 };
-            var item3 = { baz: "dog" };
-            var list = new List();
+            const item1 = { foo: 14 };
+            const item2 = { bar: 42 };
+            const item3 = { baz: "dog" };
             list.push(item1);
             list.push(item2);
 
-            var result = list.replace(item3, it => it == "mexico");
+            const result = list.replace(item3, it => it == "mexico");
 
             assert.equal(list.length, 2);
             assert.equal(list[ 0 ], item1);
@@ -59,15 +59,15 @@ describe('List', () => {
     });
 
     describe('remove', () => {
+        beforeEach(setupTestSuite);
 
         it('remove - when the predicate returns true, removes that item, returns true', () => {
-            var item1 = { foo: 14 };
-            var item2 = { bar: 42 };
-            var list = new List();
+            const item1 = { foo: 14 };
+            const item2 = { bar: 42 };
             list.push(item1);
             list.push(item2);
 
-            var result = list.remove(it => it == item1);
+            const result = list.remove(it => it == item1);
 
             assert.equal(list.length, 1);
             assert.equal(list[ 0 ], item2);
@@ -75,13 +75,12 @@ describe('List', () => {
         });
 
         it('replace - when the predicate returns false, does nothing, returns false', () => {
-            var item1 = { foo: 14 };
-            var item2 = { bar: 42 };
-            var list = new List();
+            const item1 = { foo: 14 };
+            const item2 = { bar: 42 };
             list.push(item1);
             list.push(item2);
 
-            var result = list.remove(it => it == "mexico");
+            const result = list.remove(it => it == "mexico");
 
             assert.equal(list.length, 2);
             assert.equal(list[ 0 ], item1);

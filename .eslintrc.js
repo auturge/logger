@@ -24,6 +24,9 @@ module.exports = {
             // and I can agree with myself not to use single-letter variables for anything else.
             , { "varsIgnorePattern": "(T)" } // regex to match the whole variable name "T"
         ],
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
     }
 }

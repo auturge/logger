@@ -9,8 +9,7 @@ import { StatusLogBuilder } from '@src/logging/StatusLog/StatusLogBuilder';
 
 describe('LogManager', () => {
 
-    var builder, manager;
-    var logName;
+    let builder, manager, logName;
 
     function getTestLogger(name: string, channels: IChannel<IStatusEntry>[] = []) {
         if (!channels.length) {
@@ -27,13 +26,9 @@ describe('LogManager', () => {
         manager = new LogManagerClass(builder);
     }
 
-    function tearDownSuite() {
-    }
-
     describe('ctor', () => {
 
         beforeEach(setupTestSuite);
-        beforeEach(tearDownSuite);
 
         [
             { key: 'null', value: null },
@@ -59,7 +54,6 @@ describe('LogManager', () => {
 
     describe('disable', () => {
         beforeEach(setupTestSuite);
-        beforeEach(tearDownSuite);
 
         [
             { key: 'null', value: null },
@@ -102,7 +96,6 @@ describe('LogManager', () => {
 
     describe('enable', () => {
         beforeEach(setupTestSuite);
-        beforeEach(tearDownSuite);
 
         [
             { key: 'null', value: null },
@@ -145,7 +138,6 @@ describe('LogManager', () => {
 
     describe('getLog', () => {
         beforeEach(setupTestSuite);
-        beforeEach(tearDownSuite);
 
         [
             { key: 'null', value: null },
@@ -185,7 +177,6 @@ describe('LogManager', () => {
 
     describe('onLogCreated', () => {
         beforeEach(setupTestSuite);
-        beforeEach(tearDownSuite);
 
         [
             { key: 'null', value: null },
@@ -230,7 +221,5 @@ describe('LogManager', () => {
             assert.deepEqual(manager[ '_logs' ],
                 [ alice, carol, bob2 ]);
         });
-
     });
-
 });

@@ -13,10 +13,10 @@ export interface ITokenMatch {
 export class TokenMatch implements ITokenMatch {
     public arguments: string[] = [];
     public endIndex: number = <any>undefined;
-    public matched: string = "";
+    public matched = "";
     public startIndex: number;
     public tokenType: string;
-    public value: string = "";
+    public value = "";
 
 
     constructor(token: TokenDefinition, startIndex: number);

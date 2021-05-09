@@ -12,7 +12,7 @@ import Sinon = require('sinon');
 import { EventHandler } from '@src/core/events';
 import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 
-var builder;
+let builder;
 const name = AnyRandom.string(5, 8, CharacterSet.ALPHA);
 const channels: IChannel[] = [
     channel(LogLevel.INFO),
@@ -23,7 +23,7 @@ const channels: IChannel[] = [
 
 function setupTestSuite() {
     builder = new StatusLogBuilder(name);
-};
+}
 
 describe('StatusLogBuilder', () => {
     describe('ctor', () => {
@@ -43,7 +43,7 @@ describe('StatusLogBuilder', () => {
         });
 
         it(`ctor - stores the log name properly`, () => {
-            var result = new StatusLogBuilder(name);
+            const result = new StatusLogBuilder(name);
 
             assert.equal(result[ '_logName' ], name);
         });
@@ -112,9 +112,9 @@ describe('LogBuilder', () => {
 
 
         it(`andGetLogger - validates the config, and returns a new logger`, () => {
-            var expected = new StatusLog(name, channels);
-            var validate = stub(builder, 'validate').callsFake(() => { });
-            var createLogger = stub(builder, 'createLogger').callsFake(() => { return expected; });
+            const expected = new StatusLog(name, channels);
+            const validate = stub(builder, 'validate').callsFake(() => { /* Do nothing */ });
+            const createLogger = stub(builder, 'createLogger').callsFake(() => { return expected; });
 
             const result = builder.andGetLogger();
 
@@ -163,7 +163,7 @@ describe('LogBuilder', () => {
         beforeEach(setupTestSuite);
 
         it('newLog - no args - creates a new log with the default name', () => {
-            var newBuilder = builder.newLog();
+            const newBuilder = builder.newLog();
 
             assert.equal(newBuilder[ '_logName' ], LogBuilder.DEFAULT_NAME);
         });
@@ -172,7 +172,7 @@ describe('LogBuilder', () => {
         it('newLog - with name - creates a new log with the given name', () => {
             const name = AnyRandom.string(12, 18);
 
-            var newBuilder = builder.newLog(name);
+            const newBuilder = builder.newLog(name);
 
             assert.equal(newBuilder[ '_logName' ], name);
         });
@@ -247,7 +247,7 @@ describe('LogBuilder', () => {
 
             const result = builder.newChannel(name, writer, level);
 
-            var last = result.channels[ result.channels.length - 1 ];
+            const last = result.channels[ result.channels.length - 1 ];
             assert.equal(last.name, name);
             assert.deepEqual(last.writer, writer);
             assert.deepEqual(last.level, level);
@@ -258,8 +258,8 @@ describe('LogBuilder', () => {
         beforeEach(setupTestSuite);
 
         it(`logCreated - emits on command`, () => {
-            var triggered = false;
-            const thing: EventHandler<ILog<IStatusLog, IStatusEntry>> = (args) => { triggered = true; }
+            let triggered = false;
+            const thing: EventHandler<ILog<IStatusLog, IStatusEntry>> = () => { triggered = true; }
             builder.logCreated.subscribe(thing);
 
             builder.logCreated.emit(builder);

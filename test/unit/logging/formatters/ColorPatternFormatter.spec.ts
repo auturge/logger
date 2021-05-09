@@ -11,7 +11,7 @@ import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 
 describe('ColorPatternFormatter', () => {
 
-    var formatter;
+    let formatter;
     const message = AnyRandom.string(5, 8, CharacterSet.ALPHA);
 
     describe('formatMessage', () => {
@@ -218,7 +218,7 @@ describe('ColorPatternFormatter', () => {
             { key: LogStatus.FAILURE, color: 'red', expected: red(message) }
         ].forEach(({ key, color, expected }) => {
             it(`colorData - returns ${ color } when status is ${ key }`, () => {
-                var entry: IStatusEntry = {
+                const entry: IStatusEntry = {
                     data: {
                         status: key
                     },
@@ -228,7 +228,7 @@ describe('ColorPatternFormatter', () => {
                     level: LogLevel.TRACE
                 }
 
-                var result = formatter[ 'colorMessage' ](message, entry);
+                const result = formatter[ 'colorMessage' ](message, entry);
 
                 assert.equal(result, expected);
             });
@@ -243,7 +243,7 @@ describe('ColorPatternFormatter', () => {
             { level: LogLevel.TRACE, color: 'uncolored', expected: message },
         ].forEach(({ level, color, expected }) => {
             it(`colorData - returns ${ color } when level is ${ level } and status is INFO`, () => {
-                var entry: IStatusEntry = {
+                const entry: IStatusEntry = {
                     data: {
                         status: LogStatus.INFO
                     },
@@ -253,20 +253,20 @@ describe('ColorPatternFormatter', () => {
                     level: level
                 }
 
-                var result = formatter[ 'colorMessage' ](message, entry);
+                const result = formatter[ 'colorMessage' ](message, entry);
 
                 assert.equal(result, expected);
             });
 
             it(`colorData - returns ${ color } when level is ${ level } and includes no data`, () => {
-                var entry: IStatusEntry = {
+                const entry: IStatusEntry = {
                     message: 'ignored',
                     timestamp: new Date(),
                     source: 'ignored',
                     level: level
                 }
 
-                var result = formatter[ 'colorMessage' ](message, entry);
+                const result = formatter[ 'colorMessage' ](message, entry);
 
                 assert.equal(result, expected);
             });

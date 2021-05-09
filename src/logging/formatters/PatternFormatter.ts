@@ -1,4 +1,4 @@
-import { throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
+import { throwIfNullOrUndefined } from "@src/functions/guards";
 import { ILogEntry } from "@src/logging/ILogEntry";
 import { getTokenDefinition, ITokenMatch, PatternTokenizer } from "./pattern-tokens";
 import { IEntryFormatter } from "./IEntryFormatter";
@@ -8,7 +8,7 @@ export class PatternFormatter implements IEntryFormatter {
 
     constructor();
     constructor(pattern: string);
-    constructor(pattern: string = "%{m}") {
+    constructor(pattern = "%{m}") {
         this.pattern = pattern;
     }
 
@@ -41,10 +41,10 @@ export class PatternFormatter implements IEntryFormatter {
         // ensure the tokens are sorted.
         tokens = tokens.sort((a, b) => a.startIndex - b.startIndex);
 
-        var result = "";
+        let result = "";
         tokens.forEach(token => {
             const definition = getTokenDefinition(token);
-            var tokenValue = definition.getValue(token, logEntry);
+            const tokenValue = definition.getValue(token, logEntry);
             result += tokenValue;
         });
 

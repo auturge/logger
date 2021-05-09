@@ -8,7 +8,7 @@ import { DateFormat, formatDate } from '@src/functions/formatDate';
 
 describe('PatternFormatter', () => {
 
-    var formatter;
+    let formatter;
 
     describe('formatMessage', () => {
 
@@ -37,9 +37,9 @@ describe('PatternFormatter', () => {
             { key: 'an empty string', value: "" }
         ].forEach(({ key, value }) => {
             it(`formatMessage - returns an empty string when pattern is ${ key }`, () => {
-                var pattern = value;
+                const pattern = value;
                 formatter.pattern = pattern;
-                var entry: ILogEntry = {
+                const entry: ILogEntry = {
                     message: 'bob was here!',
                     level: LogLevel.TRACE,
                     data: { status: LogStatus.INFO },
@@ -47,7 +47,7 @@ describe('PatternFormatter', () => {
                     timestamp: new Date()
                 }
 
-                var result = formatter.formatMessage(entry);
+                const result = formatter.formatMessage(entry);
 
                 assert.equal(result, "");
             });
@@ -66,7 +66,7 @@ describe('PatternFormatter', () => {
             const expectedDate = formatDate(entry.timestamp, DateFormat.DEFAULT);
             const expected = `[${ expectedDate } ${ entry.level.toString() }] ${ entry.message }\\n`;
 
-            var result = formatter.formatMessage(entry);
+            const result = formatter.formatMessage(entry);
 
             assert.equal(result, expected);
         });

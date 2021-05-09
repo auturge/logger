@@ -10,7 +10,7 @@ export class ColorPatternFormatter extends PatternFormatter {
 
     constructor();
     constructor(pattern: string);
-    constructor(pattern: string = "%{m}") {
+    constructor(pattern = "%{m}") {
         super(pattern);
     }
 

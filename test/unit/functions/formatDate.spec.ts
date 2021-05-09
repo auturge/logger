@@ -7,10 +7,10 @@ describe('formatDate', () => {
     it(`formats a local Date using the default format 'yyyy-MM-dd HH:mm:ss.SSS xxx'`, () => {
         // need to calculate the offset string,
         // since you might not live in my timezone :)
-        var offsetString = getOffsetString();
-        var expected = "2021-03-04 05:06:07.008 " + offsetString;
+        const offsetString = getOffsetString();
+        const expected = "2021-03-04 05:06:07.008 " + offsetString;
 
-        var result = formatDate(localDate);
+        const result = formatDate(localDate);
 
         assert.equal(result, expected);
     });
@@ -18,9 +18,9 @@ describe('formatDate', () => {
     it('formats a local Date to ISO-8601 (UTC)', () => {
         // the date created above was created in the LOCAL timezone,
         // and ISO-8601 (with the 'Z') recalculates it in UTC.
-        var expectedDate = getUTCDateFromLocal(localDate);
+        const expectedDate = getUTCDateFromLocal(localDate);
 
-        var result = formatDate(localDate, DateFormat.ISO);
+        const result = formatDate(localDate, DateFormat.ISO);
 
         assert.equal(result, expectedDate.toISOString());
     });
@@ -44,9 +44,9 @@ describe('formatDate', () => {
 
         it(`formats a local Date to the '${ timezone }' time zone`, () => {
             // the date created above was created in the LOCAL timezone,
-            var expected = getZonedTimeString(localDate, timezone);
+            const expected = getZonedTimeString(localDate, timezone);
 
-            var result = formatDate(localDate, DateFormat.DEFAULT, timezone);
+            const result = formatDate(localDate, DateFormat.DEFAULT, timezone);
 
             assert.equal(result, expected);
         });

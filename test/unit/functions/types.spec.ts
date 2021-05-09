@@ -11,7 +11,7 @@ describe('types', () => {
     describe('isArray', () => {
 
         it(`isArray - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isArray(value);
             assert.equal(result, false);
         });
@@ -25,7 +25,7 @@ describe('types', () => {
             { key: 'boolean', value: bool(), expected: false },
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'bigint', value: bigInt(), expected: false },
             {
@@ -48,7 +48,7 @@ describe('types', () => {
     describe('isArrayOfType', () => {
 
         it(`isArrayOfType - [undeclared, undefined] - returns false`, () => {
-            var value;
+            let value;
             const result = isArrayOfType(value, 'undefined');
             assert.equal(result, false);
         });
@@ -65,7 +65,7 @@ describe('types', () => {
             { key: 'number', type: 'number', value: [ num() ], expected: true },
             { key: 'object', type: 'object', value: [ object() ], expected: true },
             { key: 'empty object', type: 'object', value: [ {} ], expected: true },
-            { key: 'void', type: 'function', value: [ () => { } ], expected: true },
+            { key: 'void', type: 'function', value: [ () => { /* Do nothing */ } ], expected: true },
             { key: 'never', type: 'function', value: [ infiniteFn ], expected: true },
             { key: 'RegExp', type: 'object', value: [ regExp() ], expected: true },
             { key: 'Date', type: 'object', value: [ date() ], expected: true },
@@ -85,7 +85,7 @@ describe('types', () => {
     describe('isBigInt', () => {
 
         it(`isBigInt - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isBigInt(value);
             assert.equal(result, false);
         });
@@ -103,7 +103,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'typeguard', value: isArray, expected: false },
             { key: 'bigint', value: bigInt(), expected: true },
@@ -128,7 +128,7 @@ describe('types', () => {
     describe('isBoolean', () => {
 
         it(`isBoolean - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isBoolean(value);
             assert.equal(result, false);
         });
@@ -145,7 +145,7 @@ describe('types', () => {
             { key: 'false', value: bool(), expected: true },
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'bigint', value: bigInt(), expected: false },
             {
@@ -168,7 +168,7 @@ describe('types', () => {
     describe('isDefined', () => {
 
         it(`isDefined - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isDefined(value);
             assert.equal(result, false);
         });
@@ -185,7 +185,7 @@ describe('types', () => {
             { key: 'false', value: bool(), expected: true },
             { key: 'number', value: num(), expected: true },
             { key: 'object', value: object(), expected: true },
-            { key: 'void', value: () => { }, expected: true },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: true },
             { key: 'never', value: infiniteFn, expected: true },
             { key: 'bigint', value: bigInt(), expected: true },
             {
@@ -208,7 +208,7 @@ describe('types', () => {
     describe('isEmpty', () => {
 
         it(`isEmpty - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isEmpty(value);
             assert.equal(result, false);
         });
@@ -238,7 +238,7 @@ describe('types', () => {
     describe('isFunction', () => {
 
         it(`isFunction - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isFunction(value);
             assert.equal(result, false);
         });
@@ -256,7 +256,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
-            { key: 'void', value: () => { }, expected: true },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: true },
             { key: 'never', value: infiniteFn, expected: true },
             { key: 'typeguard', value: isArray, expected: true },
             { key: 'bigint', value: bigInt(), expected: false },
@@ -281,7 +281,7 @@ describe('types', () => {
     describe('isIterable', () => {
 
         it(`isIterable - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isIterable(value);
             assert.equal(result, false);
         });
@@ -299,7 +299,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'typeguard', value: isArray, expected: false },
             { key: 'bigint', value: bigInt(), expected: false },
@@ -324,7 +324,7 @@ describe('types', () => {
     describe('isNull', () => {
 
         it(`isNull - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isNull(value);
             assert.equal(result, false);
         });
@@ -342,7 +342,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'typeguard', value: isArray, expected: false },
             { key: 'bigint', value: bigInt(), expected: false },
@@ -367,7 +367,7 @@ describe('types', () => {
     describe('isNullOrUndefined', () => {
 
         it(`isIterable - [undeclared] - returns true`, () => {
-            var value;
+            let value;
             const result = isNullOrUndefined(value);
             assert.equal(result, true);
         });
@@ -385,7 +385,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'typeguard', value: isArray, expected: false },
             { key: 'bigint', value: bigInt(), expected: false },
@@ -410,7 +410,7 @@ describe('types', () => {
     describe('isNullUndefinedOrEmpty', () => {
 
         it(`isNullUndefinedOrEmpty - [undeclared] - returns true`, () => {
-            var value;
+            let value;
             const result = isNullUndefinedOrEmpty(value);
             assert.equal(result, true);
         });
@@ -428,7 +428,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: true },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'typeguard', value: isArray, expected: false },
             { key: 'bigint', value: bigInt(), expected: false },
@@ -453,7 +453,7 @@ describe('types', () => {
     describe('isNumber', () => {
 
         it(`isNumber - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isNumber(value);
             assert.equal(result, false);
         });
@@ -471,7 +471,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: true },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'symbol', value: symbol(), expected: false },
             { key: 'typeguard', value: isArray, expected: false },
@@ -497,7 +497,7 @@ describe('types', () => {
     describe('isObject', () => {
 
         it(`isObject - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isObject(value);
             assert.equal(result, false);
         });
@@ -515,7 +515,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: true },
             { key: 'empty object', value: {}, expected: true },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'RegExp', value: regExp(), expected: false },
             { key: 'Date', value: date(), expected: false },
@@ -542,7 +542,7 @@ describe('types', () => {
     describe('isString', () => {
 
         it(`isString - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isString(value);
             assert.equal(result, false);
         });
@@ -560,7 +560,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'RegExp', value: regExp(), expected: false },
             { key: 'Date', value: date(), expected: false },
@@ -587,7 +587,7 @@ describe('types', () => {
     describe('isSymbol', () => {
 
         it(`isSymbol - [undeclared] - returns false`, () => {
-            var value;
+            let value;
             const result = isSymbol(value);
             assert.equal(result, false);
         });
@@ -605,7 +605,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'RegExp', value: regExp(), expected: false },
             { key: 'Date', value: date(), expected: false },
@@ -632,7 +632,7 @@ describe('types', () => {
     describe('isType', () => {
 
         it(`isType - [undeclared, undefined] - returns true`, () => {
-            var value;
+            let value;
             const result = isType(value, 'undefined');
             assert.equal(result, true);
         });
@@ -654,7 +654,7 @@ describe('types', () => {
             { key: 'true', type: 'bigint', value: true, expected: false },
             { key: '"true"', type: 'bigint', value: "true", expected: false },
             { key: 'undefined', type: 'bigint', value: undefined, expected: false },
-            { key: 'void', type: 'bigint', value: () => { }, expected: false },
+            { key: 'void', type: 'bigint', value: () => { /* Do nothing */ }, expected: false },
 
             { key: 'array', type: 'boolean', value: [ string(), num() ], expected: false },
             { key: 'bigint', type: 'boolean', value: bigInt(), expected: false },
@@ -672,7 +672,7 @@ describe('types', () => {
             { key: 'true', type: 'boolean', value: true, expected: true },
             { key: '"true"', type: 'boolean', value: "true", expected: false },
             { key: 'undefined', type: 'boolean', value: undefined, expected: false },
-            { key: 'void', type: 'boolean', value: () => { }, expected: false },
+            { key: 'void', type: 'boolean', value: () => { /* Do nothing */ }, expected: false },
 
             { key: 'array', type: 'function', value: [ string(), num() ], expected: false },
             { key: 'bigint', type: 'function', value: bigInt(), expected: false },
@@ -690,7 +690,7 @@ describe('types', () => {
             { key: 'true', type: 'function', value: true, expected: false },
             { key: '"true"', type: 'function', value: "true", expected: false },
             { key: 'undefined', type: 'function', value: undefined, expected: false },
-            { key: 'void', type: 'function', value: () => { }, expected: true },
+            { key: 'void', type: 'function', value: () => { /* Do nothing */ }, expected: true },
 
             { key: 'array', type: 'number', value: [ string(), num() ], expected: false },
             { key: 'bigint', type: 'number', value: bigInt(), expected: false },
@@ -708,7 +708,7 @@ describe('types', () => {
             { key: 'true', type: 'number', value: true, expected: false },
             { key: '"true"', type: 'number', value: "true", expected: false },
             { key: 'undefined', type: 'number', value: undefined, expected: false },
-            { key: 'void', type: 'number', value: () => { }, expected: false },
+            { key: 'void', type: 'number', value: () => { /* Do nothing */ }, expected: false },
 
             { key: 'array', type: 'object', value: [ string(), num() ], expected: true },
             { key: 'bigint', type: 'object', value: bigInt(), expected: false },
@@ -726,7 +726,7 @@ describe('types', () => {
             { key: 'true', type: 'object', value: true, expected: false },
             { key: '"true"', type: 'object', value: "true", expected: false },
             { key: 'undefined', type: 'object', value: undefined, expected: false },
-            { key: 'void', type: 'object', value: () => { }, expected: false },
+            { key: 'void', type: 'object', value: () => { /* Do nothing */ }, expected: false },
 
             { key: 'array', type: 'string', value: [ string(), num() ], expected: false },
             { key: 'bigint', type: 'string', value: bigInt(), expected: false },
@@ -744,7 +744,7 @@ describe('types', () => {
             { key: 'true', type: 'string', value: true, expected: false },
             { key: '"true"', type: 'string', value: "true", expected: true },
             { key: 'undefined', type: 'string', value: undefined, expected: false },
-            { key: 'void', type: 'string', value: () => { }, expected: false },
+            { key: 'void', type: 'string', value: () => { /* Do nothing */ }, expected: false },
 
             { key: 'array', type: 'symbol', value: [ string(), num() ], expected: false },
             { key: 'bigint', type: 'symbol', value: bigInt(), expected: false },
@@ -762,7 +762,7 @@ describe('types', () => {
             { key: 'true', type: 'symbol', value: true, expected: false },
             { key: '"true"', type: 'symbol', value: "true", expected: false },
             { key: 'undefined', type: 'symbol', value: undefined, expected: false },
-            { key: 'void', type: 'symbol', value: () => { }, expected: false },
+            { key: 'void', type: 'symbol', value: () => { /* Do nothing */ }, expected: false },
 
             { key: 'array', type: 'undefined', value: [ string(), num() ], expected: false },
             { key: 'bigint', type: 'undefined', value: bigInt(), expected: false },
@@ -780,7 +780,7 @@ describe('types', () => {
             { key: 'true', type: 'undefined', value: true, expected: false },
             { key: '"true"', type: 'undefined', value: "true", expected: false },
             { key: 'undefined', type: 'undefined', value: undefined, expected: true },
-            { key: 'void', type: 'undefined', value: () => { }, expected: false },
+            { key: 'void', type: 'undefined', value: () => { /* Do nothing */ }, expected: false },
 
             { key: 'array', type: 'none of the above', value: [ string(), num() ], expected: false },
             { key: 'bigint', type: 'none of the above', value: bigInt(), expected: false },
@@ -798,7 +798,7 @@ describe('types', () => {
             { key: 'true', type: 'none of the above', value: true, expected: false },
             { key: '"true"', type: 'none of the above', value: "true", expected: false },
             { key: 'undefined', type: 'none of the above', value: undefined, expected: false },
-            { key: 'void', type: 'none of the above', value: () => { }, expected: false },
+            { key: 'void', type: 'none of the above', value: () => { /* Do nothing */ }, expected: false },
 
         ].forEach(({ key, type, value, expected }) => {
             it(`isType - [${ key }, ${ type }] - returns ${ expected }`, () => {
@@ -812,7 +812,7 @@ describe('types', () => {
     describe('isUndefined', () => {
 
         it(`isUndefined - [undeclared] - returns true`, () => {
-            var value;
+            let value;
             const result = isUndefined(value);
             assert.equal(result, true);
         });
@@ -829,7 +829,7 @@ describe('types', () => {
             { key: 'number', value: num(), expected: false },
             { key: 'object', value: object(), expected: false },
             { key: 'empty object', value: {}, expected: false },
-            { key: 'void', value: () => { }, expected: false },
+            { key: 'void', value: () => { /* Do nothing */ }, expected: false },
             { key: 'never', value: infiniteFn, expected: false },
             { key: 'RegExp', value: regExp(), expected: false },
             { key: 'Date', value: date(), expected: false },

@@ -2,7 +2,7 @@ import sinon = require('sinon');
 import { assert } from 'chai';
 import { AnyRandom } from '@auturge/testing';
 import { stub, unwrap } from '@test/helpers';
-import { bool, object, string, TEST_CHANNEL_1, TEST_CHANNEL_2 } from '@test/objects';
+import { bool, object, TEST_CHANNEL_1, TEST_CHANNEL_2 } from '@test/objects';
 
 import { IStatusLog, StatusLog } from '@src/logging/StatusLog/StatusLog';
 import { LogLevel, LOG_LEVELS } from '@src/logging/LogLevel';
@@ -13,9 +13,9 @@ import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 
 describe('StatusLog', () => {
 
-    var log;
-    var buildAndWrite, reconfigured;
-    var level, status, message, obj, prettyPrint, logName, timestamp;
+    let log;
+    let buildAndWrite, reconfigured;
+    let level, status, message, obj, prettyPrint, logName, timestamp;
 
     function clearLevels(log: IStatusLog) {
         log.channels.forEach((channel) => {
@@ -35,14 +35,14 @@ describe('StatusLog', () => {
         log = new StatusLog(logName, [ TEST_CHANNEL_1, TEST_CHANNEL_2 ]);
 
         log[ '_dateStamper' ] = () => timestamp;
-        reconfigured = stub(log.reconfigured, 'emit').callsFake((arg) => { });
+        reconfigured = stub(log.reconfigured, 'emit').callsFake(() => { /* Do nothing */ });
     }
 
     function setupBuildAndWrite() {
         setupTestSuite();
 
         buildAndWrite = stub(log, 'buildAndWrite')
-            .callsFake((level, status, msg, obj, pretty) => { });
+            .callsFake(() => { /* Do nothing */ });
     }
 
     function tearDownSuite() {
@@ -145,7 +145,7 @@ describe('StatusLog', () => {
         });
 
         it(`enabled - does nothing if the value is not different`, () => {
-            var value = bool();
+            const value = bool();
             log[ '_enabled' ] = value;
 
             log.enabled = value;
@@ -393,11 +393,11 @@ describe('StatusLog', () => {
 
     describe(`buildAndWrite`, () => {
 
-        var buildEntry, output;
+        let buildEntry, output;
         beforeEach(() => {
             setupTestSuite();
-            buildEntry = stub(log, 'buildEntry').callsFake((level, status, msg, obj, pretty) => { });
-            output = stub(log, 'output').callsFake((entry) => { });
+            buildEntry = stub(log, 'buildEntry').callsFake(() => { /* Do nothing */ });
+            output = stub(log, 'output').callsFake(() => { /* Do nothing */ });
         });
         afterEach(() => {
             tearDownSuite();
@@ -537,7 +537,7 @@ describe('StatusLog', () => {
 
     describe(`output`, () => {
 
-        var channel1, channel2;
+        let channel1, channel2;
         const entry: IStatusEntry = {
             level: level,
             source: logName,
@@ -550,8 +550,8 @@ describe('StatusLog', () => {
 
         beforeEach(() => {
             setupTestSuite();
-            channel1 = stub(log.channels[ 0 ], 'log').callsFake((entry) => { });
-            channel2 = stub(log.channels[ 1 ], 'log').callsFake((entry) => { });
+            channel1 = stub(log.channels[ 0 ], 'log').callsFake(() => { /* Do nothing */ });
+            channel2 = stub(log.channels[ 1 ], 'log').callsFake(() => { /* Do nothing */ });
 
         });
         afterEach(() => {

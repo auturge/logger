@@ -34,7 +34,7 @@ export interface IStatusLog extends ILog<IStatusLog, IStatusEntry> {
 export class StatusLog implements IStatusLog {
 
     private _dateStamper = () => { return new Date(); };
-    private _enabled: boolean = true;
+    private _enabled = true;
 
     public readonly channels: IChannel[];
     public readonly name: string;

@@ -12,7 +12,7 @@ export class LogLevelToken extends TokenDefinition {
         // so let's just go with the maximum known length, 5.
 
         //...unless we allow the token to SET the max level...
-        var maxLength = 5;
+        const maxLength = 5;
         return entry.level.toString().padEnd(maxLength);
     }
 }

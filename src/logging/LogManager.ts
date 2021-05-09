@@ -23,26 +23,26 @@ export class LogManagerClass<TEntry extends ILogEntry, TLog extends ILog<TLog, T
 
     public disable(logName: string): ILog<TLog, TEntry> {
         throwIfNullOrEmpty(logName, 'logName');
-        var log = this.getLog(logName);
+        const log = this.getLog(logName);
 
         if (log == null)
             throw new Error(`No log exists with the name ${ logName }.`)
 
         log.enabled = false;
         return log;
-    };
+    }
 
     /** Enables all channels on the log. */
     public enable(logName: string): ILog<TLog, TEntry> {
         throwIfNullOrEmpty(logName, 'logName');
-        var log = this.getLog(logName);
+        const log = this.getLog(logName);
 
         if (log == null)
             throw new Error(`No log exists with the name ${ logName }.`)
 
         log.enabled = true;
         return log;
-    };
+    }
 
     public getLog(logName: string): ILog<TLog, TEntry> | null {
         throwIfNullOrEmpty(logName, 'logName');
@@ -53,7 +53,7 @@ export class LogManagerClass<TEntry extends ILogEntry, TLog extends ILog<TLog, T
 
         const log = this._logs[ index ];
         return log;
-    };
+    }
 
     private onLogCreated(log: TLog): void {
         throwIfNullOrUndefined(log, 'log');
@@ -70,5 +70,5 @@ export class LogManagerClass<TEntry extends ILogEntry, TLog extends ILog<TLog, T
         }
         this._logNames.push(log.name);
         this._logs.push(log);
-    };
+    }
 }

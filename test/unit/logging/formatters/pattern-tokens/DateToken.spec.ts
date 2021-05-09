@@ -12,7 +12,7 @@ import { DateFormat, formatDate } from '@src/functions/formatDate';
 
 describe('DateToken', () => {
 
-    var token;
+    let token;
 
     function setupTestSuite() {
         token = new DateToken();
@@ -96,7 +96,7 @@ describe('DateToken', () => {
                 value: "",
                 arguments: []
             };
-            var expected = formatDate(localDate, DateFormat.DEFAULT);
+            const expected = formatDate(localDate, DateFormat.DEFAULT);
 
             const result = token.getValue(match, entry);
 
@@ -126,7 +126,7 @@ describe('DateToken', () => {
                     value: "",
                     arguments: [ format ]
                 };
-                var expected = formatDate(localDate, format);
+                const expected = formatDate(localDate, format);
 
                 const result = token.getValue(match, entry);
 
@@ -157,7 +157,7 @@ describe('DateToken', () => {
                     value: "",
                     arguments: [ format, tz ]
                 };
-                var expected = formatDate(localDate, format, tz);
+                const expected = formatDate(localDate, format, tz);
 
                 const result = token.getValue(match, entry);
 

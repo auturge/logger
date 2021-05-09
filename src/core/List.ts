@@ -34,25 +34,18 @@ declare global {
          * @returns `true` if the element was found and removed; otherwise, `false`.
          */
         remove(predicate: Predicate<T>): boolean;
-
-        // /**
-        //  * Gets an object from the `List<T>`.
-        //  * @param {Predicate<T>} predicate The predicate that defines the conditions of the element to return.
-        //  * @returns The first matching element, or `null` if no matches were found.
-        //  */
-        // get(predicate: Predicate<T>): T;
     }
 }
 
 export function List<T>(...items: T[]): void;
-export function List<T>(this: List<T>, ...items: T[]) {
+export function List<T>(this: List<T>, ...items: T[]): void {
     Array.apply(this, items);
-};
+}
 
 List.prototype = (function (parent, child) {
     function protoCreator<T>(this: List<T>) {
         this.constructor = child.prototype.constructor;
-    };
+    }
     protoCreator.prototype = parent.prototype;
     return new protoCreator();
 })(Array, List);
@@ -68,9 +61,9 @@ Object.defineProperty(List.prototype, 'add', {
 
 Object.defineProperty(List.prototype, 'replace', {
     value: function <T>(item: T, predicate: Predicate<T>) {
-        var existing = this.find(predicate);
+        const existing = this.find(predicate);
         if (existing) {
-            var index = this.indexOf(existing);
+            const index = this.indexOf(existing);
             this[ index ] = item;
             return item;
         } else {
@@ -85,10 +78,10 @@ Object.defineProperty(List.prototype, 'remove', {
     value: function <T>(predicate: (it: T) => boolean) {
         throwIfNullOrUndefined(predicate, 'predicate');
 
-        var existing = this.find(predicate);
+        const existing = this.find(predicate);
         if (!existing) { return false; }
 
-        var index = this.indexOf(existing);
+        const index = this.indexOf(existing);
         this.splice(index, 1);
         return true;
     },

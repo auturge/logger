@@ -14,11 +14,11 @@ describe('events', () => {
         describe('emit', () => {
 
             it('emit - [void] - iterates over the list of event handlers, and executes each one', () => {
-                var handler1 = sinon.spy();
-                var handler2 = sinon.spy();
-                var handler3 = sinon.spy();
-                var handlers = [ handler1, handler2, handler3 ];
-                var emitter = new Emitter();
+                const handler1 = sinon.spy();
+                const handler2 = sinon.spy();
+                const handler3 = sinon.spy();
+                const handlers = [ handler1, handler2, handler3 ];
+                const emitter = new Emitter();
                 emitter[ '_handlers' ] = handlers;
 
                 emitter.emit();
@@ -29,11 +29,11 @@ describe('events', () => {
             });
 
             it('emit - [typed] - iterates over the list of event handlers, and executes each one', () => {
-                var handler1 = sinon.spy();
-                var handler2 = sinon.spy();
-                var handler3 = sinon.spy();
-                var handlers = [ handler1, handler2, handler3 ];
-                var emitter = new Emitter<TestEventArgs>();
+                const handler1 = sinon.spy();
+                const handler2 = sinon.spy();
+                const handler3 = sinon.spy();
+                const handlers = [ handler1, handler2, handler3 ];
+                const emitter = new Emitter<TestEventArgs>();
                 emitter[ '_handlers' ] = handlers;
                 const args: TestEventArgs = { foo: 'bar' };
 
@@ -48,12 +48,12 @@ describe('events', () => {
         describe('subscribers', () => {
 
             it('subscribers - returns the list of event handlers', () => {
-                var handler: EventHandler = (e) => { };
-                var handlers = [ handler ];
-                var emitter = new Emitter();
+                const handler: EventHandler = () => { /* Do nothing */ };
+                const handlers = [ handler ];
+                const emitter = new Emitter();
                 emitter[ '_handlers' ] = handlers;
 
-                var result = emitter.subscribers;
+                const result = emitter.subscribers;
 
                 assert.equal(result, handlers);
             });
@@ -63,12 +63,12 @@ describe('events', () => {
         describe('subscribe', () => {
 
             it('subscribe - adds an event handler', () => {
-                var handler1: EventHandler = (e) => { };
-                var handler2: EventHandler = (e) => { };
-                var handler3: EventHandler = (e) => { };
-                var handlers = [ handler1, handler2 ];
-                var expected = [ handler1, handler2, handler3 ];
-                var emitter = new Emitter();
+                const handler1: EventHandler = () => { /* Do nothing */ };
+                const handler2: EventHandler = () => { /* Do nothing */ };
+                const handler3: EventHandler = () => { /* Do nothing */ };
+                const handlers = [ handler1, handler2 ];
+                const expected = [ handler1, handler2, handler3 ];
+                const emitter = new Emitter();
                 emitter[ '_handlers' ] = handlers;
 
                 emitter.subscribe(handler3);
@@ -80,12 +80,12 @@ describe('events', () => {
         describe('unsubscribe', () => {
 
             it('unsubscribe - removes an event handler', () => {
-                var handler1: EventHandler = (e) => { };
-                var handler2: EventHandler = (e) => { };
-                var handler3: EventHandler = (e) => { };
-                var expected = [ handler1, handler3 ];
-                var handlers = [ handler1, handler2, handler3 ];
-                var emitter = new Emitter();
+                const handler1: EventHandler = () => { /* Do nothing */ };
+                const handler2: EventHandler = () => { /* Do nothing */ };
+                const handler3: EventHandler = () => { /* Do nothing */ };
+                const expected = [ handler1, handler3 ];
+                const handlers = [ handler1, handler2, handler3 ];
+                const emitter = new Emitter();
                 emitter[ '_handlers' ] = handlers;
 
                 emitter.unsubscribe(handler2);
@@ -97,12 +97,12 @@ describe('events', () => {
         describe('clear', () => {
 
             it('clear - removes all event handlers', () => {
-                var handler1: EventHandler = (e) => { };
-                var handler2: EventHandler = (e) => { };
-                var handler3: EventHandler = (e) => { };
-                var handlers = [ handler1, handler2, handler3 ];
-                var expected = [];
-                var emitter = new Emitter();
+                const handler1: EventHandler = () => { /* Do nothing */ };
+                const handler2: EventHandler = () => { /* Do nothing */ };
+                const handler3: EventHandler = () => { /* Do nothing */ };
+                const handlers = [ handler1, handler2, handler3 ];
+                const expected = [];
+                const emitter = new Emitter();
                 emitter[ '_handlers' ] = handlers;
 
                 emitter.clear();

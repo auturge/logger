@@ -8,7 +8,7 @@ import { IStatusEntry } from "./StatusLog/IStatusEntry";
 
 export class Channel implements IChannel<IStatusEntry> {
 
-    private _enabled: boolean = true;
+    private _enabled = true;
     private _level: LogLevel = LogLevel.INFO;
 
     public readonly name: string;

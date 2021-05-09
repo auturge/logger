@@ -1,8 +1,15 @@
-const hasOwnProperty = Object.prototype.hasOwnProperty;
+/* eslint-disable
+    @typescript-eslint/ban-types,
+    @typescript-eslint/explicit-module-boundary-types,
+    @typescript-eslint/no-namespace
+*/
+
+export const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 type Bottom<T> = T extends string ? Empty.String
     : T extends any[] ? Empty.Array
     : T extends object ? Empty.Object
+    // : T extends Record<string, unknown> ? Empty.Object
     : never;
 
 export namespace Empty {
@@ -35,9 +42,11 @@ export function isEmpty<T extends string | any[] | object>(value: T | Empty): va
         return value.length === 0;
 
     if (isIterable(value)) {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         for (const _ of value) {
             return false;
         }
+        /* eslint-enable @typescript-eslint/no-unused-vars */
         return true;
     }
 

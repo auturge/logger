@@ -24,7 +24,9 @@ export function other<T>(array: T[], badValue: T): T {
         throw ("Array must have more than one option.");
 
     do {
+        /* eslint-disable no-var */
         var item = AnyRandom.oneOf(array);
+        /* eslint-enable no-var */
     } while (item == badValue);
 
     return item;
@@ -80,7 +82,7 @@ export function randoMinMax(MIN_VALUE: number, MAX_VALUE: number): number[];
  * @param MAX_VALUE
  * @param Swap
  */
-export function randoMinMax(MIN_VALUE: number, MAX_VALUE: number, swap: boolean = false): number[] {
+export function randoMinMax(MIN_VALUE: number, MAX_VALUE: number, swap = false): number[] {
     const values = [ getNumberBetween(MIN_VALUE, MAX_VALUE), getNumberBetween(MIN_VALUE, MAX_VALUE) ];
     const minValue = Math.min(...values);
     const maxValue = Math.max(...values);
@@ -93,11 +95,7 @@ export function randoMinMax(MIN_VALUE: number, MAX_VALUE: number, swap: boolean 
  * @param MAX_VALUE
  * @param Swap
  */
-export function randoIntMinMax(
-    MIN_VALUE: number,
-    MAX_VALUE: number,
-    swap: boolean = false
-): number[] {
+export function randoIntMinMax(MIN_VALUE: number, MAX_VALUE: number, swap = false): number[] {
     const values = [
         getIntegerBetween(MIN_VALUE, MAX_VALUE),
         getIntegerBetween(MIN_VALUE, MAX_VALUE),

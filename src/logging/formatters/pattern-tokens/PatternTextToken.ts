@@ -2,6 +2,7 @@ import { TokenDefinition } from "./TokenDefinition";
 import { ITokenMatch, TokenMatch } from "./ITokenMatch";
 import { ILogEntry } from "@src/logging/ILogEntry";
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 export class PatternTextToken extends TokenDefinition {
 
@@ -28,7 +29,7 @@ export class PatternTextToken extends TokenDefinition {
 
         if (!(tokens && tokens.length)) {
             // everything is the same :(
-            var match = new TokenMatch(new PatternTextToken(), 0);
+            const match = new TokenMatch(new PatternTextToken(), 0);
             match.endIndex = pattern.length - 1;
             match.matched = pattern;
             match.value = match.matched;
@@ -39,12 +40,12 @@ export class PatternTextToken extends TokenDefinition {
         tokens = tokens.sort((a, b) => a.startIndex - b.startIndex);
 
         // there's at least one token, so let's scan through the string
-        var result: TokenMatch[] = [];
+        const result: TokenMatch[] = [];
 
         // is there text BEFORE the first token?
-        var token = tokens[ 0 ];
+        let token = tokens[ 0 ];
         if (token.startIndex > 0) {
-            var match = new TokenMatch(this._instance, 0, token.startIndex - 1);
+            const match = new TokenMatch(this._instance, 0, token.startIndex - 1);
             match.matched = pattern.substr(0, match.length);
             match.value = match.matched;
             result.push(match);
@@ -52,13 +53,13 @@ export class PatternTextToken extends TokenDefinition {
 
         // is there text between tokens?
         if (tokens.length > 1) {
-            for (var index = 0; index < tokens.length - 1; index++) {
+            for (let index = 0; index < tokens.length - 1; index++) {
                 token = tokens[ index ];
-                var nextToken = tokens[ index + 1 ];
+                const nextToken = tokens[ index + 1 ];
 
                 const distance = nextToken.startIndex - token.endIndex;
                 if (distance > 1) {
-                    var match = new TokenMatch(this._instance, token.endIndex + 1, nextToken.startIndex - 1);
+                    const match = new TokenMatch(this._instance, token.endIndex + 1, nextToken.startIndex - 1);
                     match.matched = pattern.substr(match.startIndex, match.length);
                     match.value = match.matched;
                     result.push(match);
@@ -70,7 +71,7 @@ export class PatternTextToken extends TokenDefinition {
         token = tokens[ tokens.length - 1 ];
 
         if (pattern.length > token.endIndex + 1) {
-            var match = new TokenMatch(this._instance, token.endIndex + 1, pattern.length - 1);
+            const match = new TokenMatch(this._instance, token.endIndex + 1, pattern.length - 1);
             match.matched = pattern.substr(match.startIndex, match.length);
             match.value = match.matched;
             result.push(match);

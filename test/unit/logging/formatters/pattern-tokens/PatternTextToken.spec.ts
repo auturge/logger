@@ -7,7 +7,7 @@ import { ITokenMatch } from '@src/logging/formatters/pattern-tokens/ITokenMatch'
 
 describe('PatternTextToken', () => {
 
-    var token;
+    let token;
 
     describe('getMatches', () => {
 

@@ -22,10 +22,10 @@ export abstract class TokenDefinition {
     }
 
     protected collectMatches(pattern: string): TokenMatch[] {
-        var matches: TokenMatch[] = [];
-        var toCheck = pattern.slice(0);
+        let matches: TokenMatch[] = [];
+        const toCheck = pattern.slice(0);
         this.tokens.forEach(tokenText => {
-            var tokenMatches = this.getTokenMatches(toCheck, tokenText);
+            const tokenMatches = this.getTokenMatches(toCheck, tokenText);
             matches = matches.concat(tokenMatches);
         });
         return matches;
@@ -39,10 +39,10 @@ export abstract class TokenDefinition {
         // console.log('getTokenMatches:pattern', pattern);
         // console.log('getTokenMatches:tokens', this.tokens);
 
-        var toCheck = pattern.slice(0);
+        let toCheck = pattern.slice(0);
         const matches: TokenMatch[] = [];
-        var removedTokensLength: number = 0;
-        var startIndex: number;
+        let removedTokensLength = 0;
+        let startIndex = -1;
         while ((startIndex = toCheck.indexOf(TokenDefinition.TOKEN_OPENER)) > -1) {
             const nextToken = this.getNextToken(toCheck);
 
@@ -63,7 +63,7 @@ export abstract class TokenDefinition {
     }
 
     private getNextToken(pattern: string): string {
-        var startIndex: number;
+        let startIndex = -1;
         if ((startIndex = pattern.indexOf(TokenDefinition.TOKEN_OPENER)) > -1) {
 
             // find the next starter
@@ -91,11 +91,11 @@ export abstract class TokenDefinition {
         const lTrimmed = toCheck.trimStart();
 
         // find the first PIPE
-        var index: number;
+        let index: number;
 
-        var trimmedName = ((index = lTrimmed.indexOf('|')) != -1)
+        const trimmedName = ((index = lTrimmed.indexOf('|')) != -1)
             ? lTrimmed.slice(0, index).trim()
-            : trimmedName = lTrimmed.slice(0, -1).trim();
+            : lTrimmed.slice(0, -1).trim();
 
         return trimmedName == name;
     }
@@ -116,7 +116,7 @@ export abstract class TokenDefinition {
 
         // remove the final }
         if (args && args.length) {
-            var index = args.length - 1;
+            const index = args.length - 1;
             args[ index ] = args[ index ].slice(0, -1);
             args[ index ] = args[ index ].trim();
         }

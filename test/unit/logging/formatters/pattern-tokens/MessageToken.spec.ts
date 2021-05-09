@@ -9,7 +9,7 @@ import { LOG_LEVELS } from '@src/logging/LogLevel';
 
 describe('MessageToken', () => {
 
-    var token;
+    let token;
 
     function setupTestSuite() {
         token = new MessageToken();

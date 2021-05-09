@@ -59,7 +59,7 @@ export function formatDate(timestamp: Date, formatString?: string, timezone?: st
 
 function getOptions(formatString?: string, timezone?: string): IDateFormatOptions {
 
-    var options: IDateFormatOptions = Object.assign({}, DateFormatOptions.DEFAULT);
+    const options: IDateFormatOptions = Object.assign({}, DateFormatOptions.DEFAULT);
 
     if (!isNullUndefinedOrEmpty(formatString)) {
         options.format = formatString.trim();

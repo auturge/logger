@@ -18,15 +18,19 @@ export function bool(): boolean {
 export function num(): number {
     return AnyRandom.number(-100, 100, Scale.EXPONENTIAL);
 }
-export function object(): object {
-    var result = {};
+
+/* eslint-disable @typescript-eslint/ban-types */
+export function object(): Object {
+    const result = {};
     result[ AnyRandom.string(5, 8, CharacterSet.ALPHA) ] = AnyRandom.string(5, 8, CharacterSet.ALPHANUMERIC);
     result[ AnyRandom.string(5, 8, CharacterSet.ALPHA) ] = AnyRandom.int(-100, 100);
     return result;
 }
+/* eslint-enable @typescript-eslint/ban-types */
+
 export function bigInt(): bigint {
-    var int = AnyRandom.int(-100, 100);
-    var bigInt = BigInt(int);
+    const int = AnyRandom.int(-100, 100);
+    const bigInt = BigInt(int);
     return bigInt;
 }
 export function infiniteFn(): never {
@@ -48,27 +52,37 @@ export function undeclared(): any {
 
 const dataObject = { foo: AnyRandom.string(5, 8) };
 
-export function data(status: LogStatus, prettyPrint: boolean = false): IStatusData {
-    var data: IStatusData = { status: status, obj: dataObject }
+export function data(status: LogStatus, prettyPrint = false): IStatusData {
+    const data: IStatusData = { status: status, obj: dataObject }
     if (prettyPrint)
         data.prettyPrint = true;
     return data;
-};
+}
 
 export function formatted(data) { return JSON.stringify(data.obj); }
 export function pretty(data) { return JSON.stringify(data.obj, null, 2); }
 
 export function channel(level?: LogLevel): IChannel {
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     level = level || LogLevel.TRACE;
     const TEST_CHANNEL: IChannel = {
         enabled: true,
         isEnabledFor(level) { return true; },
         level: level,
-        log(entry: IStatusEntry) { },
+        log(entry: IStatusEntry) { /* Do nothing */ },
         name: 'test',
         reconfigured: new Emitter(),
         writer: NULL
     };
 
     return TEST_CHANNEL;
+}
+
+export function statusEntry(level: LogLevel = LogLevel.INFO): IStatusEntry {
+    return {
+        level: level,
+        message: AnyRandom.string(20, 32),
+        source: AnyRandom.string(20, 32),
+        timestamp: new Date()
+    }
 }

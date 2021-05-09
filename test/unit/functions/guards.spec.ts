@@ -11,7 +11,7 @@ describe('guards', () => {
     describe('throwIfNull', () => {
 
         it(`throwIfNull - [undeclared] - does not throw`, () => {
-            var value;
+            let value;
             assert.doesNotThrow(() => {
                 throwIfNull(value, 'undeclared');
             });
@@ -37,7 +37,7 @@ describe('guards', () => {
             { key: 'true', value: true },
             { key: '"true"', value: "true" },
             { key: 'undefined', value: undefined },
-            { key: 'void', value: () => { } },
+            { key: 'void', value: () => { /* Do nothing */ } },
         ].forEach(({ key, value }) => {
             it(`throwIfNull - [${ key }] - does not throw`, () => {
 
@@ -48,7 +48,7 @@ describe('guards', () => {
         });
 
         it(`throwIfNull - [null] - throws`, () => {
-            var value = null;
+            const value = null;
             assert.throws(() => {
                 throwIfNull(value, 'null');
             });
@@ -58,14 +58,14 @@ describe('guards', () => {
     describe('throwIfUndefined', () => {
 
         it(`throwIfUndefined - [undeclared] - throws`, () => {
-            var value;
+            let value;
             assert.throws(() => {
                 throwIfUndefined(value, 'undeclared');
             });
         });
 
         it(`throwIfUndefined - [undefined] - throws`, () => {
-            var value = undefined;
+            const value = undefined;
             assert.throws(() => {
                 throwIfUndefined(value, 'undefined');
             });
@@ -91,7 +91,7 @@ describe('guards', () => {
             { key: 'true', value: true },
             { key: '"true"', value: "true" },
             //{ key: 'undefined', value: undefined },
-            { key: 'void', value: () => { } },
+            { key: 'void', value: () => { /* Do nothing */ } },
         ].forEach(({ key, value }) => {
             it(`throwIfUndefined - [${ key }] - does not throw`, () => {
 
@@ -105,7 +105,7 @@ describe('guards', () => {
     describe('throwIfEmpty', () => {
 
         it(`throwIfEmpty - [undeclared] - does not throw`, () => {
-            var value;
+            let value;
             assert.doesNotThrow(() => {
                 throwIfEmpty(value, 'undeclared');
             });
@@ -131,7 +131,7 @@ describe('guards', () => {
             // { key: 'true', value: true },
             // { key: '"true"', value: "true" },
             // { key: 'undefined', value: undefined },
-            // { key: 'void', value: () => { } },
+            // { key: 'void', value: () => { /* Do nothing */ } },
         ].forEach(({ key, value }) => {
             it(`throwIfEmpty - [${ key }] - throws`, () => {
                 assert.throws(() => {
@@ -160,7 +160,7 @@ describe('guards', () => {
             { key: 'true', value: true },
             { key: '"true"', value: "true" },
             { key: 'undefined', value: undefined },
-            { key: 'void', value: () => { } },
+            { key: 'void', value: () => { /* Do nothing */ } },
         ].forEach(({ key, value }) => {
             it(`throwIfEmpty - [${ key }] - does not throw`, () => {
 
@@ -174,7 +174,7 @@ describe('guards', () => {
     describe('throwIfNullOrUndefined', () => {
 
         it(`throwIfNullOrUndefined - [undeclared] - throws`, () => {
-            var value;
+            let value;
             assert.throws(() => {
                 throwIfNullOrUndefined(value, 'undeclared');
             });
@@ -200,7 +200,7 @@ describe('guards', () => {
             // { key: 'true', value: true },
             // { key: '"true"', value: "true" },
             { key: 'undefined', value: undefined },
-            // { key: 'void', value: () => { } },
+            // { key: 'void', value: () => { /* Do nothing */ } },
         ].forEach(({ key, value }) => {
             it(`throwIfNullOrUndefined - [${ key }] - throws`, () => {
                 assert.throws(() => {
@@ -229,7 +229,7 @@ describe('guards', () => {
             { key: 'true', value: true },
             { key: '"true"', value: "true" },
             // { key: 'undefined', value: undefined },
-            { key: 'void', value: () => { } },
+            { key: 'void', value: () => { /* Do nothing */ } },
         ].forEach(({ key, value }) => {
             it(`throwIfNullOrUndefined - [${ key }] - does not throw`, () => {
 
@@ -245,7 +245,7 @@ describe('guards', () => {
     describe('throwIfNullOrEmpty', () => {
 
         it(`throwIfNullOrEmpty - [undeclared] - throws`, () => {
-            var value;
+            let value;
             assert.throws(() => {
                 throwIfNullOrEmpty(value, 'undeclared');
             });
@@ -271,7 +271,7 @@ describe('guards', () => {
             // { key: 'true', value: true },
             // { key: '"true"', value: "true" },
             { key: 'undefined', value: undefined },
-            // { key: 'void', value: () => { } },
+            // { key: 'void', value: () => { /* Do nothing */ } },
         ].forEach(({ key, value }) => {
             it(`throwIfNullOrEmpty - [${ key }] - throws`, () => {
                 assert.throws(() => {
@@ -300,7 +300,7 @@ describe('guards', () => {
             { key: 'true', value: true },
             { key: '"true"', value: "true" },
             // { key: 'undefined', value: undefined },
-            { key: 'void', value: () => { } },
+            { key: 'void', value: () => { /* Do nothing */ } },
         ].forEach(({ key, value }) => {
             it(`throwIfNullOrEmpty - [${ key }] - does not throw`, () => {
 
@@ -318,7 +318,7 @@ describe('guards', () => {
 
         const amt = 42;
         it(`throwIfNullOrLessThan - [undeclared] - throws`, () => {
-            var value;
+            let value;
             assert.throws(() => {
                 throwIfNullOrLessThan(value, 'undeclared', amt);
             });
@@ -360,7 +360,7 @@ describe('guards', () => {
 
         const amt = 42;
         it(`throwIfNullOrLTE - [undeclared] - throws`, () => {
-            var value;
+            let value;
             assert.throws(() => {
                 throwIfNullOrLTE(value, 'undeclared', amt);
             });
@@ -400,7 +400,7 @@ describe('guards', () => {
 
         const amt = 42;
         it(`throwIfEqualTo - [undeclared] - does not throw`, () => {
-            var value;
+            let value;
             assert.doesNotThrow(() => {
                 throwIfEqualTo(value, 'undeclared', amt);
             });
@@ -446,7 +446,7 @@ describe('guards', () => {
 
         const amt = 42;
         it(`throwIfNullOrGTE - [undeclared] - throws`, () => {
-            var value;
+            let value;
             assert.throws(() => {
                 throwIfNullOrGTE(value, 'undeclared', amt);
             });
@@ -486,7 +486,7 @@ describe('guards', () => {
 
         const amt = 42;
         it(`throwIfNullOrGreaterThan - [undeclared] - throws`, () => {
-            var value;
+            let value;
             assert.throws(() => {
                 throwIfNullOrGreaterThan(value, 'undeclared', amt);
             });

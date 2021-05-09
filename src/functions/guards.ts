@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import { isBoolean, isEmpty, isNull, isNullOrUndefined, isNumber, isString, isSymbol, isUndefined } from "./types";
 
 export function getArgumentNullErrorMessage(name: string): string {
@@ -24,7 +26,7 @@ export function getNullOrLTEErrorMessage(name: string, obj: number, minimum: num
     return `Number ['${ name }'] has a value of ${ obj }, but is expected to be greater than ${ minimum }.`;
 }
 
-export function getValueMustNotEqualErrorMessage<T>(name: string, badValue: T, type: string = ""): string {
+export function getValueMustNotEqualErrorMessage<T>(name: string, badValue: T, type = ""): string {
     const msg = `['${ name }'] must not equal ${ badValue }.`;
     return (type.length) ? `${ type } ${ msg }` : msg;
 }
@@ -37,33 +39,33 @@ export function getNullOrGTEErrorMessage(name: string, obj: number, maximum: num
     return `Number ['${ name }'] has a value of ${ obj }, but is expected to be less than ${ maximum }.`;
 }
 
-export function throwIfNull(object, name: string): void | never {
+export function throwIfNull(object: any, name: string): void | never {
     if (isNull(object)) {
         const message = getArgumentNullErrorMessage(name);
         throw new TypeError(message);
     }
 }
 
-export function throwIfUndefined(object, name: string): void {
+export function throwIfUndefined(object: any, name: string): void {
     if (isUndefined(object)) {
         const message = getArgumentUndefinedErrorMessage(name);
         throw new TypeError(message);
     }
 }
 
-export function throwIfEmpty(object, name: string): void {
+export function throwIfEmpty(object: any, name: string): void {
     if (isEmpty(object)) {
         const message = getArgumentEmptyErrorMessage(name);
         throw new TypeError(message);
     }
 }
 
-export function throwIfNullOrUndefined(object, name: string): void {
+export function throwIfNullOrUndefined(object: any, name: string): void {
     throwIfNull(object, name);
     throwIfUndefined(object, name);
 }
 
-export function throwIfNullOrEmpty(object, name: string): void {
+export function throwIfNullOrEmpty(object: any, name: string): void {
     throwIfNull(object, name);
     throwIfUndefined(object, name);
     throwIfEmpty(object, name);
@@ -98,7 +100,7 @@ export function areNumbersAlmostEqual(num1: number, num2: number): boolean {
 
 type Primitive = string | number | boolean | symbol | undefined | null;
 export function throwIfEqualTo<T extends Primitive>(obj: any, name: string, badValue: T): void {
-    var message = "";
+    let message = "";
     if (isBoolean(badValue) && obj == badValue)
         message = getValueMustNotEqualErrorMessage(name, badValue, "Boolean");
 
