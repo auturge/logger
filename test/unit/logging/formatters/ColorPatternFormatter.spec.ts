@@ -7,13 +7,12 @@ import { LogStatus } from '@src/logging/LogStatus';
 import { LogLevel } from '@src/logging/LogLevel';
 import { ColorPatternFormatter } from '@src/logging/formatters/ColorPatternFormatter';
 import { data, formatted, pretty } from '@test/objects/test__objects';
+import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 
 describe('ColorPatternFormatter', () => {
 
     var formatter;
     const message = AnyRandom.string(5, 8, CharacterSet.ALPHA);
-
-
 
     describe('formatMessage', () => {
 
@@ -69,7 +68,6 @@ describe('ColorPatternFormatter', () => {
         });
 
     });
-
 
     describe('formatData', () => {
 
@@ -204,6 +202,73 @@ describe('ColorPatternFormatter', () => {
 
                     assert.equal(result, undefined);
                 });
+            });
+        });
+    });
+
+    describe('colorData', () => {
+        const message = AnyRandom.string(15, 30);
+        beforeEach(() => {
+            formatter = new ColorPatternFormatter();
+        });
+
+        [
+            { key: LogStatus.MARK, color: 'magenta', expected: magenta(message) },
+            { key: LogStatus.SUCCESS, color: 'green', expected: green(message) },
+            { key: LogStatus.FAILURE, color: 'red', expected: red(message) }
+        ].forEach(({ key, color, expected }) => {
+            it(`colorData - returns ${ color } when status is ${ key }`, () => {
+                var entry: IStatusEntry = {
+                    data: {
+                        status: key
+                    },
+                    message: 'ignored',
+                    timestamp: new Date(),
+                    source: 'ignored',
+                    level: LogLevel.TRACE
+                }
+
+                var result = formatter[ 'colorMessage' ](message, entry);
+
+                assert.equal(result, expected);
+            });
+        });
+
+        [
+            { level: LogLevel.FATAL, color: 'red', expected: red(message) },
+            { level: LogLevel.ERROR, color: 'red', expected: red(message) },
+            { level: LogLevel.WARN, color: 'yellow', expected: yellow(message) },
+            { level: LogLevel.DEBUG, color: 'cyan', expected: cyan(message) },
+            { level: LogLevel.INFO, color: 'uncolored', expected: message },
+            { level: LogLevel.TRACE, color: 'uncolored', expected: message },
+        ].forEach(({ level, color, expected }) => {
+            it(`colorData - returns ${ color } when level is ${ level } and status is INFO`, () => {
+                var entry: IStatusEntry = {
+                    data: {
+                        status: LogStatus.INFO
+                    },
+                    message: 'ignored',
+                    timestamp: new Date(),
+                    source: 'ignored',
+                    level: level
+                }
+
+                var result = formatter[ 'colorMessage' ](message, entry);
+
+                assert.equal(result, expected);
+            });
+
+            it(`colorData - returns ${ color } when level is ${ level } and includes no data`, () => {
+                var entry: IStatusEntry = {
+                    message: 'ignored',
+                    timestamp: new Date(),
+                    source: 'ignored',
+                    level: level
+                }
+
+                var result = formatter[ 'colorMessage' ](message, entry);
+
+                assert.equal(result, expected);
             });
         });
     });
