@@ -162,5 +162,22 @@ describe('PatternTextToken', () => {
 
             assert.deepEqual(result, match.value);
         });
+
+        it(`getValue - throws when there are arguments`, () => {
+
+            const entry = {};
+            const match: ITokenMatch = {
+                startIndex: 18,
+                endIndex: 25,
+                tokenType: 'PatternTextToken',
+                matched: ' - sugar',
+                value: ' - sugar',
+                arguments: [ 'foo' ]
+            };
+
+            assert.throws(() => {
+                token.getValue(match, entry);
+            }, `Token [${ match.tokenType }] does not support arguments.`);
+        });
     });
 })
