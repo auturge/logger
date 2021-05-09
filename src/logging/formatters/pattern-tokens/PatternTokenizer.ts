@@ -44,18 +44,17 @@ export class PatternTokenizer {
         if (!(pattern && pattern.length))
             return;
 
-        if (!(knownTokens && knownTokens.length))
+        if (knownTokens == null)
             knownTokens = [];
 
-        var rebuilt = pattern;
+        var rebuilt = pattern.slice(0);
 
         // remove the known tokens from the pattern
         knownTokens.forEach(token => {
-            rebuilt = rebuilt.replace(token.value, "");
+            rebuilt = rebuilt.replace(token.matched, "");
         });
 
         // if the rebuilt string contains an un-escaped percent sign, then throw
-        rebuilt = removeAll(rebuilt, "%{");
         if (rebuilt.indexOf("%{") != -1) {
             throw new Error(`Unexpected token in pattern: [${ pattern }].`);
         }

@@ -269,4 +269,103 @@ describe('PatternTokenizer', () => {
             }));
         });
     });
+
+    describe('throwForUnparsedTokens', () => {
+
+        beforeEach(() => {
+            tokenizer = new PatternTokenizer();
+        });
+
+        [
+            { key: 'null', value: null },
+            { key: 'undefined', value: undefined },
+            { key: 'an empty string', value: "" }
+        ].forEach(({ key, value }) => {
+            it(`throwForUnparsedTokens - returns when the pattern is ${ key }`, () => {
+                // in this example, we're going to pretend that the %{m} token has not been parsed
+                const pattern = value;
+                const knownTokens = [];
+
+                assert.doesNotThrow(() => {
+                    tokenizer[ 'throwForUnparsedTokens' ](pattern, knownTokens);
+                });
+            });
+        });
+
+        [
+            { key: 'null', value: null },
+            { key: 'undefined', value: undefined }
+        ].forEach(({ key, value }) => {
+            it(`throwForUnparsedTokens - handles when 'knownTokens' argument is ${ key }`, () => {
+                // in this example, we're going to pretend that the %{m} token has not been parsed
+                const pattern = "chicken!";
+                const knownTokens = value;
+
+                assert.doesNotThrow(() => {
+                    tokenizer[ 'throwForUnparsedTokens' ](pattern, knownTokens);
+                });
+            });
+        });
+
+        it(`throwForUnparsedTokens - ["[%{d} %{l}] %{m}\\n"] - throws when an unparsed token appears in the pattern`, () => {
+            // in this example, we're going to pretend that the %{m} token has not been parsed
+            const pattern = "[%{d} %{l}] %{m}\\n";
+            const knownTokens = [
+                {
+                    tokenType: 'DateToken',
+                    startIndex: 1,
+                    endIndex: 4,
+                    matched: '%{d}',
+                    arguments: []
+                }, {
+                    tokenType: 'LogLevelToken',
+                    startIndex: 6,
+                    endIndex: 9,
+                    matched: '%{l}',
+                    arguments: []
+                }
+                // , {
+                //     tokenType: 'MessageToken',
+                //     startIndex: 12,
+                //     endIndex: 15,
+                //     value: '%{m}',
+                //     arguments: []
+                // }
+            ];
+
+            assert.throws(() => {
+                tokenizer[ 'throwForUnparsedTokens' ](pattern, knownTokens);
+            }, `Unexpected token in pattern: [${ pattern }].`);
+        });
+
+        it(`throwForUnparsedTokens - ["[%{d} %{l}] %{m}\\n"] - does not throw when all tokens in the pattern are included`, () => {
+            // in this example, all tokens have been parsed
+            const pattern = "[%{d} %{l}] %{m}\\n";
+            const knownTokens = [
+                {
+                    tokenType: 'DateToken',
+                    startIndex: 1,
+                    endIndex: 4,
+                    matched: '%{d}',
+                    arguments: []
+                }, {
+                    tokenType: 'LogLevelToken',
+                    startIndex: 6,
+                    endIndex: 9,
+                    matched: '%{l}',
+                    arguments: []
+                }, {
+                    tokenType: 'MessageToken',
+                    startIndex: 12,
+                    endIndex: 15,
+                    matched: '%{m}',
+                    arguments: []
+                }
+            ];
+
+            assert.doesNotThrow(() => {
+                tokenizer[ 'throwForUnparsedTokens' ](pattern, knownTokens);
+            })
+        });
+    });
 });
