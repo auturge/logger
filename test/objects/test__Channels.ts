@@ -1,7 +1,7 @@
 import { IChannel } from "@src/logging";
 import { LogLevel } from "@src/logging/LogLevel";
 import { IStatusEntry } from "@src/logging/StatusLog/IStatusEntry";
-import { CONSOLE } from "@src/logging/DEFAULTS";
+import { ConsoleWriter } from "@src/logging/writers/ConsoleWriter";
 import { Emitter } from "@src/core/events";
 
 export const TEST_CHANNEL_1: IChannel = {
@@ -11,7 +11,7 @@ export const TEST_CHANNEL_1: IChannel = {
     log(entry: IStatusEntry) { },
     name: 'test',
     reconfigured: new Emitter(),
-    writer: CONSOLE
+    writer: new ConsoleWriter()
 };
 
 export const TEST_CHANNEL_2: IChannel = {
@@ -21,5 +21,5 @@ export const TEST_CHANNEL_2: IChannel = {
     log(entry: IStatusEntry) { },
     name: 'test',
     reconfigured: new Emitter(),
-    writer: CONSOLE
+    writer: new ConsoleWriter()
 };

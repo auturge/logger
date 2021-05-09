@@ -1,8 +1,10 @@
 import Sinon = require("sinon");
 import { assert } from "chai";
-import { IChannel } from "@src/logging/IChannel";
-import { throwIfNullOrEmpty } from "@src/functions/guards";
 import { AnyRandom } from "@auturge/testing";
+
+import { throwIfNullOrEmpty } from "@src/functions/guards";
+
+import { IChannel } from "@src/logging/IChannel";
 import { ILogEntry } from "@src/logging/ILogEntry";
 
 export function stub(owner, method): Sinon.SinonStub {

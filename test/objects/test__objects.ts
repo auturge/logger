@@ -1,6 +1,13 @@
 import { AnyRandom, CharacterSet, Scale } from "@auturge/testing";
+
+import { Emitter } from "@src/core/events";
+
 import { IStatusData } from "@src/logging/StatusLog/IStatusData";
 import { LogStatus } from "@src/logging/LogStatus";
+import { IChannel } from "@src/logging/IChannel";
+import { LogLevel } from "@src/logging/LogLevel";
+import { IStatusEntry } from "@src/logging/StatusLog/IStatusEntry";
+import { NULL } from "./NullWriter";
 
 export function string(): string {
     return AnyRandom.string(5, 8, CharacterSet.ALPHA);
@@ -50,3 +57,18 @@ export function data(status: LogStatus, prettyPrint: boolean = false): IStatusDa
 
 export function formatted(data) { return JSON.stringify(data.obj); }
 export function pretty(data) { return JSON.stringify(data.obj, null, 2); }
+
+export function channel(level?: LogLevel): IChannel {
+    level = level || LogLevel.TRACE;
+    const TEST_CHANNEL: IChannel = {
+        enabled: true,
+        isEnabledFor(level) { return true; },
+        level: level,
+        log(entry: IStatusEntry) { },
+        name: 'test',
+        reconfigured: new Emitter(),
+        writer: NULL
+    };
+
+    return TEST_CHANNEL;
+}

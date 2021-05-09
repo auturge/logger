@@ -20,7 +20,10 @@ export abstract class LogBuilder<
     public logCreated: Emitter<TLog> = new Emitter();
 
     protected _logName: string = '';
+    public get name(): string { return this._logName; };
+
     protected _channels: IChannel[] = [];
+    public get channels(): IChannel[] { return this._channels; };
 
     /** Instantiates a new `LogBuilder` to store the configuration for a logger. */
     protected abstract createBuilder(logName: string): LogBuilder<TEntry, TLog>;
@@ -28,9 +31,24 @@ export abstract class LogBuilder<
     /** Instantiates a new logger based on the configuration stored in this builder. */
     protected abstract createLogger(): TLog;
 
-    public constructor(logName: string) {
+    protected constructor(logName: string) {
         throwIfNullOrEmpty(logName, 'log name');
         this._logName = logName;
+    }
+
+    /** Validates the configuration defined in the builder,
+     * and then creates and returns a new logger. */
+    public andGetLogger(): TLog {
+        this.validate();
+        return this.createLogger();
+    }
+
+    /** Generates or augments a builder for a logger channel that outputs at any level at least as high the specified level. */
+    public atLevel(level: LogLevel): LogBuilder<TEntry, TLog> {
+        this._channels.forEach(channel => {
+            channel.level = level;
+        });
+        return this;
     }
 
     /** Configures the builder to generate a new logger. */
@@ -46,28 +64,12 @@ export abstract class LogBuilder<
     public newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): LogBuilder<TEntry, TLog>;
     public newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): LogBuilder<TEntry, TLog>;
     public newChannel(name: string, writer: IWriter<TEntry>, level?: LogLevel): LogBuilder<TEntry, TLog> {
-        throwIfNullOrUndefined(name, 'name');
+        throwIfNullOrEmpty(name, 'name');
         throwIfNullOrUndefined(writer, 'writer');
         this._channels = this._channels.filter(it => it.name != name);
         const newChannel = new Channel(name, writer, level);
         this._channels.push(newChannel);
         return this;
-    }
-
-    /** Generates or augments a builder for a logger channel that outputs at any level at least as high the specified level. */
-    public atLevel(level: LogLevel): LogBuilder<TEntry, TLog> {
-        this._channels.forEach(channel => {
-            channel.level = level;
-        });
-        return this;
-    }
-
-    /** Validates the configuration defined in the builder,
-     * and then creates and returns a new logger. */
-    public andGetLogger(): TLog {
-        this.validate();
-        var log = this.createLogger();
-        return log;
     }
 
     /** Validates the configuration defined in the builder. */
