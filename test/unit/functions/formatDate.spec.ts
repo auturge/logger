@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { DateFormat, formatDate } from '@src/functions/formatDate';
 import { getLongTimeString, getOffsetString, getUTCDateFromLocal, getZonedTimeString, localDate } from '@test/helpers/dateHelpers';
 
-describe.only('formatDate', () => {
+describe('formatDate', () => {
 
     it(`formats a local Date using the default format 'yyyy-MM-dd HH:mm:ss.SSS xxx'`, () => {
         // need to calculate the offset string,
