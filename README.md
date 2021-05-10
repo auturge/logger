@@ -247,9 +247,9 @@ along with several logging-specific methods:
 #### `fatal` ####
 
 > ```javascript
-> Log.fatal(message: string): void;
-> Log.fatal(message: string, obj: any): void;
-> Log.fatal(message: string, obj: any, prettyPrint: boolean): void;
+> ILog.fatal(message: string): void;
+> ILog.fatal(message: string, obj: any): void;
+> ILog.fatal(message: string, obj: any, prettyPrint: boolean): void;
 > ```
 
 Formats and writes a fatal log message.
@@ -265,9 +265,9 @@ This is the log level that tells the user that the application has encountered a
 #### `error` ####
 
 > ```javascript
-> Log.error(message: string): void;
-> Log.error(message: string, obj: any): void;
-> Log.error(message: string, obj: any, prettyPrint: boolean): void;
+> ILog.error(message: string): void;
+> ILog.error(message: string, obj: any): void;
+> ILog.error(message: string, obj: any, prettyPrint: boolean): void;
 > ```
 
 Formats and writes an error log message.
@@ -283,9 +283,9 @@ This tells the user that the application has hit an issue preventing one or more
 #### `warn` ####
 
 > ```javascript
-> Log.warn(message: string): void;
-> Log.warn(message: string, obj: any): void;
-> Log.warn(message: string, obj: any, prettyPrint: boolean): void;
+> ILog.warn(message: string): void;
+> ILog.warn(message: string, obj: any): void;
+> ILog.warn(message: string, obj: any, prettyPrint: boolean): void;
 > ```
 
 Formats and writes a warning log message.
@@ -301,9 +301,9 @@ This tells the user that something unexpected happened in the application: a pro
 #### `info` ####
 
 > ```javascript
-> Log.info(message: string): void;
-> Log.info(message: string, obj: any): void;
-> Log.info(message: string, obj: any, prettyPrint: boolean): void;
+> ILog.info(message: string): void;
+> ILog.info(message: string, obj: any): void;
+> ILog.info(message: string, obj: any, prettyPrint: boolean): void;
 > ```
 
 Formats and writes an informational log message.
@@ -319,9 +319,9 @@ This is the standard log level indicating that something happened, the applicati
 #### `debug` ####
 
 > ```javascript
-> Log.debug(message: string): void;
-> Log.debug(message: string, obj: any): void;
-> Log.debug(message: string, obj: any, prettyPrint: boolean): void;
+> ILog.debug(message: string): void;
+> ILog.debug(message: string, obj: any): void;
+> ILog.debug(message: string, obj: any, prettyPrint: boolean): void;
 > ```
 
 Formats and writes a debug log message.
@@ -337,9 +337,9 @@ This level is less granular compared to the TRACE level, but it is more than you
 #### `trace` ####
 
 > ```javascript
-> Log.trace(message: string): void;
-> Log.trace(message: string, obj: any): void;
-> Log.trace(message: string, obj: any, prettyPrint: boolean): void;
+> ILog.trace(message: string): void;
+> ILog.trace(message: string, obj: any): void;
+> ILog.trace(message: string, obj: any, prettyPrint: boolean): void;
 > ```
 
 Formats and writes a trace log message.
