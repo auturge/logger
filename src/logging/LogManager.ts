@@ -1,9 +1,13 @@
 import { getNullOrUndefinedErrorMessage, throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
 import { ILog } from "./ILog";
 import { ILogEntry } from "./ILogEntry";
+import { ILogManager } from "./ILogManager";
 import { LogBuilder } from "./LogBuilder";
 
-export class LogManagerClass<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry>> {
+export class LogManagerClass<
+    TEntry extends ILogEntry,
+    TLog extends ILog<TLog, TEntry>>
+    implements ILogManager<TEntry, TLog> {
 
     private _logNames: string[] = [];
     private _logs: TLog[] = [];
@@ -19,8 +23,7 @@ export class LogManagerClass<TEntry extends ILogEntry, TLog extends ILog<TLog, T
     /** A builder for generating new ILog channels. */
     public readonly initialize: LogBuilder<TEntry, TLog>;
 
-    /** Disables all channels on the log. */
-
+    /** Disables the log. */
     public disable(logName: string): ILog<TLog, TEntry> {
         throwIfNullOrEmpty(logName, 'logName');
         const log = this.getLog(logName);
@@ -32,7 +35,7 @@ export class LogManagerClass<TEntry extends ILogEntry, TLog extends ILog<TLog, T
         return log;
     }
 
-    /** Enables all channels on the log. */
+    /** Enables the log. */
     public enable(logName: string): ILog<TLog, TEntry> {
         throwIfNullOrEmpty(logName, 'logName');
         const log = this.getLog(logName);
