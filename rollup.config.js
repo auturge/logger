@@ -9,7 +9,7 @@ import packageJson from "./package.json";
 /** Set to enable properties */
 const outputFolder = "./dist";
 
-const minify = false;
+const minify = true;
 const sourceMaps = true;
 const includeCJS = true; // cjs: CommonJS: for Node
 const includeESM = true; // esm: ES module: for bundlers
@@ -26,7 +26,7 @@ const output = [];
 const outputs = {
     cjs: { format: "cjs", sourcemap: sourceMaps },
     esm: { format: "es", sourcemap: sourceMaps },
-    umd: { format: "umd", sourcemap: sourceMaps, name: 'dev-tools' },
+    umd: { format: "umd", sourcemap: sourceMaps, name: 'logger' },
 };
 try {
     if (includeCJS) {
