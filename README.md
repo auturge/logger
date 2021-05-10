@@ -208,7 +208,7 @@ There are also several class instances:
 
 ### ILog ###
 
-> `ILog<TLog, TEntry>`: A logger.
+> `ILog`: An interface describing the properties and methods used to log messages.
 
 Any `ILog<TLog, TEntry>` exposes the following members:
 
@@ -351,7 +351,7 @@ This level is for the most fine-grained information only used in rare cases wher
 <a href="#top">(go to top)</a>
 
 ----
-----
+
 ## Instances ##
 
 @auturge/logger exposes several 'default' implementations of the provided abstractions:
