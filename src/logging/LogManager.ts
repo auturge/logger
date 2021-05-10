@@ -1,8 +1,8 @@
 import { getNullOrUndefinedErrorMessage, throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
 import { ILog } from "./ILog";
+import { ILogBuilder } from "./ILogBuilder";
 import { ILogEntry } from "./ILogEntry";
 import { ILogManager } from "./ILogManager";
-import { LogBuilder } from "./LogBuilder";
 
 export class LogManagerClass<
     TEntry extends ILogEntry,
@@ -12,7 +12,7 @@ export class LogManagerClass<
     private _logNames: string[] = [];
     private _logs: TLog[] = [];
 
-    constructor(builder: LogBuilder<TEntry, TLog>) {
+    constructor(builder: ILogBuilder<TEntry, TLog>) {
         if (builder == null)
             throw new Error(getNullOrUndefinedErrorMessage('builder'));
 
@@ -21,7 +21,7 @@ export class LogManagerClass<
     }
 
     /** A builder for generating new ILog channels. */
-    public readonly initialize: LogBuilder<TEntry, TLog>;
+    public readonly initialize: ILogBuilder<TEntry, TLog>;
 
     /** Disables the log. */
     public disable(logName: string): ILog<TLog, TEntry> {

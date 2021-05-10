@@ -1,6 +1,6 @@
 import { ILog } from "./ILog";
+import { ILogBuilder } from "./ILogBuilder";
 import { ILogEntry } from "./ILogEntry";
-import { LogBuilder } from "./LogBuilder";
 
 
 export interface ILogManager<
@@ -8,7 +8,7 @@ export interface ILogManager<
     TLog extends ILog<TLog, TEntry>> {
 
     /** A builder for generating new ILog channels. */
-    initialize: LogBuilder<TEntry, TLog>;
+    initialize: ILogBuilder<TEntry, TLog>;
 
     /** Disables the log. */
     disable(logName: string): ILog<TLog, TEntry>;
