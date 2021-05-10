@@ -4,6 +4,7 @@
 
 - extracted ILogBuilder and ILogManager interfaces
 - changed dependencies in ILogManager from concrete to abstractions
+- excluded sourcemaps from dist (to reduce package size)
 
 - FIXME: Figure out why the demo is broken now!!!
 
