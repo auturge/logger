@@ -5,6 +5,7 @@ import { TokenDefinition } from '@src/logging/formatters/pattern-tokens/TokenDef
 import { stub, unwrap } from '@test/helpers';
 
 class TestToken extends TokenDefinition {
+    public readonly name = 'TestToken';
 
     protected tokens: string[] = [ 't', 'test' ];
 

@@ -13,6 +13,10 @@
     - changed dependencies in LogManager from concrete to abstractions
 
 - Removed
+    - removed IChannel, Channel dependency on IStatusEntry
+    - removed ILog dependency on IStatusEntry
+    - removed ILogEntry dependency on IStatusData
+    - removed LogBuilder dependency on IStatusEntry
     - removed sourcemaps from dist (to reduce package size)
 
 ## [1.0.0] - 09-May-2021 ##

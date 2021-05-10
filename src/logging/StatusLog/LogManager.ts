@@ -1,18 +1,21 @@
 import { getNullOrUndefinedErrorMessage, throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
 import { ILog } from "../ILog";
 import { ILogBuilder } from "../ILogBuilder";
-import { ILogEntry } from "../ILogEntry";
+import { ILogEntry, ILogEntryData } from "../ILogEntry";
 import { ILogManager } from "../ILogManager";
 
-export class LogManagerClass<
-    TEntry extends ILogEntry,
-    TLog extends ILog<TLog, TEntry>>
-    implements ILogManager<TEntry, TLog> {
+export class LogManager<
+    TLog extends ILog<TLog, TEntry, TData, TWriterConfig>,
+    TEntry extends ILogEntry<TData>,
+    TData extends ILogEntryData,
+    TWriterConfig
+    >
+    implements ILogManager<TLog, TEntry, TData, TWriterConfig> {
 
     private _logNames: string[] = [];
     private _logs: TLog[] = [];
 
-    constructor(builder: ILogBuilder<TEntry, TLog>) {
+    constructor(builder: ILogBuilder<TLog, TEntry, TData, TWriterConfig>) {
         if (builder == null)
             throw new Error(getNullOrUndefinedErrorMessage('builder'));
 
@@ -21,10 +24,10 @@ export class LogManagerClass<
     }
 
     /** A builder for generating new ILog channels. */
-    public readonly initialize: ILogBuilder<TEntry, TLog>;
+    public readonly initialize: ILogBuilder<TLog, TEntry, TData, TWriterConfig>;
 
     /** Disables the log. */
-    public disable(logName: string): ILog<TLog, TEntry> {
+    public disable(logName: string): TLog {
         throwIfNullOrEmpty(logName, 'logName');
         const log = this.getLog(logName);
 
@@ -36,7 +39,7 @@ export class LogManagerClass<
     }
 
     /** Enables the log. */
-    public enable(logName: string): ILog<TLog, TEntry> {
+    public enable(logName: string): TLog {
         throwIfNullOrEmpty(logName, 'logName');
         const log = this.getLog(logName);
 
@@ -47,7 +50,7 @@ export class LogManagerClass<
         return log;
     }
 
-    public getLog(logName: string): ILog<TLog, TEntry> | null {
+    public getLog(logName: string): TLog | null {
         throwIfNullOrEmpty(logName, 'logName');
 
         const index = this._logNames.indexOf(logName);

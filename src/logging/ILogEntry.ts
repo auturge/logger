@@ -1,4 +1,3 @@
-import { IStatusData } from "./StatusLog/IStatusData";
 import { LogLevel } from "./LogLevel";
 
 export interface ILogEntryData {
@@ -6,7 +5,7 @@ export interface ILogEntryData {
     obj?: any;
 }
 
-export interface ILogEntry<TData extends any = IStatusData> {
+export interface ILogEntry<TData extends ILogEntryData = any> {
 
     /** Any accompanying data that should be included and logged. */
     data?: TData;

@@ -6,13 +6,15 @@ import { StatusLog } from '@src/logging/StatusLog/StatusLog';
 import { IChannel } from '@src/logging/IChannel';
 import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 import { StatusLogBuilder } from '@src/logging/StatusLog/StatusLogBuilder';
-import { LogManagerClass } from '@src/logging/StatusLog/LogManager';
+import { IStatusData } from '@src/logging/StatusLog/IStatusData';
+import { IPatternWriterConfig } from '@src/logging/IWriter';
+import { LogManager } from '@src/logging/StatusLog/LogManager';
 
 describe('LogManager', () => {
 
     let builder, manager, logName;
 
-    function getTestLogger(name: string, channels: IChannel<IStatusEntry>[] = []) {
+    function getTestLogger(name: string, channels: IChannel<IStatusEntry, IStatusData, IPatternWriterConfig>[] = []) {
         if (!channels.length) {
             channels.push(TEST_CHANNEL_1);
         }
@@ -24,7 +26,7 @@ describe('LogManager', () => {
         logName = AnyRandom.string(5, 8);
         builder = new StatusLogBuilder(logName);
 
-        manager = new LogManagerClass(builder);
+        manager = new LogManager(builder);
     }
 
     describe('ctor', () => {
@@ -39,14 +41,14 @@ describe('LogManager', () => {
                 const builder = <any>value;
 
                 assert.throws(() => {
-                    new LogManagerClass(builder);
+                    new LogManager(builder);
                 });
             });
         });
 
         it(`ctor - sets values appropriately`, () => {
 
-            manager = new LogManagerClass(builder);
+            manager = new LogManager(builder);
 
             assert.deepEqual(manager.initialize, builder);
             assert.equal(manager.initialize.logCreated.handlers[ 0 ], manager.onLogCreated);

@@ -5,6 +5,7 @@ import { LogLevel } from "../LogLevel";
 import { IChannel } from "../IChannel";
 import { LogStatus } from "../LogStatus";
 import { ILog } from "../ILog";
+import { IPatternWriterConfig } from "../IWriter";
 
 interface IStatusData extends ILogEntryData {
     status: LogStatus;
@@ -12,7 +13,7 @@ interface IStatusData extends ILogEntryData {
 
 interface IStatusEntry extends ILogEntry<IStatusData> { }
 
-export interface IStatusLog extends ILog<IStatusLog, IStatusEntry> {
+export interface IStatusLog extends ILog<IStatusLog, IStatusEntry, IStatusData, IPatternWriterConfig> {
 
     /** Formats and writes a failure log message. */
     failure(message: string): void;
@@ -36,11 +37,11 @@ export class StatusLog implements IStatusLog {
     private _dateStamper = () => { return new Date(); };
     private _enabled = true;
 
-    public readonly channels: IChannel[];
+    public readonly channels: IChannel<IStatusEntry, IStatusData, IPatternWriterConfig>[];
     public readonly name: string;
     public reconfigured: Emitter<IStatusLog> = new Emitter();
 
-    public constructor(name: string, channels: IChannel[]) {
+    public constructor(name: string, channels: IChannel<IStatusEntry, IStatusData, IPatternWriterConfig>[]) {
         throwIfNullOrEmpty(name, 'name');
         throwIfNullOrEmpty(channels, 'channels');
         this.channels = channels;
@@ -119,7 +120,7 @@ export class StatusLog implements IStatusLog {
 
     private output(entry: IStatusEntry): void {
         if (!this.enabled) return;
-        this.channels.forEach((channel: IChannel<IStatusEntry>) => {
+        this.channels.forEach((channel: IChannel<IStatusEntry, IStatusData, IPatternWriterConfig>) => {
             channel.log(entry);
         });
     }

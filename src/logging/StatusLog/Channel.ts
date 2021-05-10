@@ -1,23 +1,23 @@
-import { LogLevel } from "./LogLevel";
-import { ILogEntry } from "./ILogEntry";
-import { IChannel } from "./IChannel";
-import { IWriter } from "./IWriter";
 import { throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
 import { Emitter } from "@src/core/events";
-import { IStatusEntry } from "./StatusLog/IStatusEntry";
 
-export class Channel implements IChannel<IStatusEntry> {
+import { LogLevel } from "../LogLevel";
+import { ILogEntry } from "../ILogEntry";
+import { IChannel } from "../IChannel";
+import { IWriter } from "../IWriter";
+
+export class Channel<TEntry extends ILogEntry<TData>, TData, TWriterConfig> implements IChannel<TEntry, TData, TWriterConfig> {
 
     private _enabled = true;
     private _level: LogLevel = LogLevel.INFO;
 
     public readonly name: string;
-    public readonly writer: IWriter;
-    public reconfigured: Emitter<IChannel<IStatusEntry>> = new Emitter();
+    public readonly writer: IWriter<TEntry, TData, TWriterConfig>;
+    public reconfigured: Emitter<IChannel<TEntry, TData, TWriterConfig>> = new Emitter();
 
-    public constructor(name: string, writer: IWriter);
-    public constructor(name: string, writer: IWriter, level: LogLevel | undefined);
-    public constructor(name: string, writer: IWriter, level?: LogLevel) {
+    public constructor(name: string, writer: IWriter<TEntry, TData, TWriterConfig>);
+    public constructor(name: string, writer: IWriter<TEntry, TData, TWriterConfig>, level: LogLevel | undefined);
+    public constructor(name: string, writer: IWriter<TEntry, TData, TWriterConfig>, level?: LogLevel) {
         throwIfNullOrEmpty(name, 'name');
         throwIfNullOrUndefined(writer, 'writer');
         this.name = name;
@@ -52,7 +52,7 @@ export class Channel implements IChannel<IStatusEntry> {
             && (level >= this.level);
     }
 
-    public log(entry: ILogEntry): void {
+    public log(entry: TEntry): void {
         if (!this.isEnabledFor(entry.level)) {
             return;
         }

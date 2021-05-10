@@ -6,7 +6,7 @@ import { stub, unwrap } from '@test/helpers';
 import { statusEntry } from '@test/objects/test__objects';
 import { NULL } from '@test/objects/NullWriter';
 
-import { Channel } from '@src/logging/Channel';
+import { Channel } from '@src/logging/StatusLog/Channel';
 import { LogLevel } from '@src/logging';
 
 describe('Channel', () => {

@@ -1,31 +1,13 @@
-import { Emitter } from "@src/core/events";
-import { IChannel } from "./IChannel";
-import { ILogEntry } from "./ILogEntry";
-import { LogLevel } from "./LogLevel";
-import { IStatusEntry } from "./StatusLog/IStatusEntry";
-
-/** An interface describing a multi-channel logging mechanism. */
-export interface ILoggerBase<TLog extends ILog<TLog, TEntry>, TEntry extends ILogEntry = ILogEntry> {
-
-    /** Gets the underlying logging channels. */
-    readonly channels: IChannel<TEntry>[];
-
-    /** The name of this logger. */
-    readonly name: string;
-
-    /** The event which fires when the logger is reconfigured. */
-    reconfigured: Emitter<TLog>;
-
-    /** Gets or sets whether this logger is enabled. */
-    enabled: boolean;
-
-    /** Sets the `LogLevel` for all channels. */
-    setLevel(level: LogLevel): void;
-}
+import { ILogEntry, ILogEntryData } from "./ILogEntry";
+import { ILoggerBase } from "./ILoggerBase";
 
 /** An interface describing the properties and methods used to log messages. */
-export interface ILog<TLog extends ILog<TLog, TEntry>, TEntry extends ILogEntry = IStatusEntry>
-    extends ILoggerBase<TLog, TEntry> {
+export interface ILog<
+    TLog extends ILog<TLog, TEntry, TData, TWriterConfig>,
+    TEntry extends ILogEntry<TData>,
+    TData extends ILogEntryData,
+    TWriterConfig>
+    extends ILoggerBase<TLog, TEntry, TData, TWriterConfig> {
 
     /** Formats and writes a fatal log message.
      *

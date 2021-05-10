@@ -15,6 +15,6 @@ export {
 
 export {
     ILog, IChannel, ILogEntry, ILogEntryWriter, IWriter, ILogEntryData,
-    ILoggerBase, ILogManager, ILogBuilder,
+    ILogManager, ILogBuilder,
     LogLevel, LogStatus
 } from './logging/index';

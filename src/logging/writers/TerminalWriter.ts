@@ -1,11 +1,14 @@
 import { IPatternWriterConfig, IWriter } from "../IWriter";
 import { ColorPatternFormatter } from "../formatters/ColorPatternFormatter";
-import { ILogEntry } from "../ILogEntry";
+import { ILogEntry, ILogEntryData } from "../ILogEntry";
 import { throwIfNullOrUndefined } from "@src/functions/guards";
 import { LogLevel } from "../LogLevel";
 import { WriterFn, nullWriterFn } from "./WriterFn";
 
-export class TerminalWriter implements IWriter {
+export class TerminalWriter<
+    TEntry extends ILogEntry<TData>,
+    TData extends ILogEntryData>
+    implements IWriter<TEntry, TData, IPatternWriterConfig> {
 
     protected formatter: ColorPatternFormatter;
 

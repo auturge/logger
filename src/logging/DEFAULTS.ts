@@ -1,16 +1,18 @@
-import { LogManagerClass } from './StatusLog/LogManager';
-import { IWriter } from "./IWriter";
+import { LogManager as LogManagerClass } from './StatusLog/LogManager';
+import { IPatternWriterConfig, IWriter } from "./IWriter";
 import { LogLevel } from "./LogLevel";
 import { TerminalWriter } from './writers/TerminalWriter';
 import { ConsoleWriter } from './writers/ConsoleWriter';
 import { StatusLogBuilder } from './StatusLog/StatusLogBuilder';
 import { DateFormat } from '@src/functions/formatDate';
+import { IStatusEntry } from './StatusLog/IStatusEntry';
+import { IStatusData } from './StatusLog/IStatusData';
 
 /** Console Writer */
-export const CONSOLE: IWriter = new ConsoleWriter('%{l} %{m}');
+export const CONSOLE: IWriter<IStatusEntry, IStatusData, IPatternWriterConfig> = new ConsoleWriter('%{l} %{m}');
 
 /** Terminal Writer */
-export const TERMINAL: IWriter = new TerminalWriter(` %{ date | ${ DateFormat.DEFAULT } } | %{level} | %{message}`);
+export const TERMINAL: IWriter<IStatusEntry, IStatusData, IPatternWriterConfig> = new TerminalWriter(` %{ date | ${ DateFormat.DEFAULT } } | %{level} | %{message}`);
 
 const logBuilder = new StatusLogBuilder('main');
 
