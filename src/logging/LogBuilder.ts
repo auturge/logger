@@ -9,11 +9,12 @@ import { LogLevel } from "./LogLevel";
 import { IStatusEntry } from "./StatusLog/IStatusEntry";
 import { ILogEntry } from "./ILogEntry";
 import { IStatusLog } from "./StatusLog/StatusLog";
+import { ILogBuilder } from "./ILogBuilder";
 
 export abstract class LogBuilder<
     TEntry extends ILogEntry = IStatusEntry,
-    TLog extends ILog<TLog, TEntry> = IStatusLog
-    > {
+    TLog extends ILog<TLog, TEntry> = IStatusLog>
+    implements ILogBuilder<TEntry, TLog> {
 
     public static DEFAULT_NAME = 'main';
 
@@ -61,7 +62,6 @@ export abstract class LogBuilder<
 
     /** Configures the builder to generate a new logger channel. */
     public newChannel(name: string, writer: IWriter<TEntry>): LogBuilder<TEntry, TLog>;
-    public newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): LogBuilder<TEntry, TLog>;
     public newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): LogBuilder<TEntry, TLog>;
     public newChannel(name: string, writer: IWriter<TEntry>, level?: LogLevel): LogBuilder<TEntry, TLog> {
         throwIfNullOrEmpty(name, 'name');
