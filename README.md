@@ -1,4 +1,4 @@
-# <h1 id="-" align="center">auturge/logger</h1> #
+# <h1 id="top" align="center">auturge/logger</h1> #
 
 <p align="center">
   A set of helpful functions for developer convenience.
@@ -12,7 +12,7 @@
 <br>
 
 >
-> ![Work In Progress][WIP-badge]
+> [![Work In Progress][WIP-badge]](#top)
 >
 > This readme is incomplete.
 >
@@ -20,46 +20,44 @@
 
 <br>
 
-- [auturge/logger](#auturgelogger)
-    - [Installation](#installation)
-    - [Examples](#examples)
-    - [API](#api)
-        - [Abstractions](#abstractions)
-            - [`ILog`](#ilog)
-                - [`fatal`](#fatal)
-                - [`error`](#error)
-                - [`warn`](#warn)
-                - [`info`](#info)
-                - [`debug`](#debug)
-                - [`trace`](#trace)
-            - [`IStatusLog`](#istatuslog)
-            - [`ILogEntry`](#ilogentry)
-            - [`IStatusLogEntry`](#istatuslogentry)
-            - [`IWriter`](#iwriter)
-            - [`ILogManager`](#ilogmanager)
-            - [`LogBuilder`](#logbuilder)
-        - [Instances](#instances)
-            - [`Log`](#log)
-                - [`fatal`](#fatal)
-                - [`error`](#error)
-                - [`warn`](#warn)
-                - [`info`](#info)
-                - [`debug`](#debug)
-                - [`trace`](#trace)
-                - [`success`](#success)
-                - [`failure`](#failure)
-                - [`mark`](#mark)
-            - [`LogManager`](#logmanager)
-                - [`initialize`](#initialize)
-                - [`disable`](#disable)
-                - [`enable`](#enable)
-                - [`getLog`](#getlog)
-            - [`ConsoleLog` and `TerminalLog` (loggers)](#consolelog-and-terminallog-loggers)
-            - [`CONSOLE` and `TERMINAL` (writers)](##console-and-terminal-writers)
-
-    - [Tables](#tables)
-    - [Caveats](#caveats)
-    - [License](#license)
+- [Installation](#installation)
+- [Examples](#examples)
+- [API](#api)
+    - [Abstractions](#abstractions)
+        - [`ILog`](#ilog)
+            - [`fatal`](#fatal)
+            - [`error`](#error)
+            - [`warn`](#warn)
+            - [`info`](#info)
+            - [`debug`](#debug)
+            - [`trace`](#trace)
+        - [`IStatusLog`](#istatuslog)
+        - [`ILogEntry`](#ilogentry)
+        - [`IStatusLogEntry`](#istatuslogentry)
+        - [`IWriter`](#iwriter)
+        - [`ILogManager`](#ilogmanager)
+        - [`LogBuilder`](#logbuilder)
+    - [Instances](#instances)
+        - [`Log`](#log)
+            - [`fatal`](#fatal)
+            - [`error`](#error)
+            - [`warn`](#warn)
+            - [`info`](#info)
+            - [`debug`](#debug)
+            - [`trace`](#trace)
+            - [`success`](#success)
+            - [`failure`](#failure)
+            - [`mark`](#mark)
+        - [`LogManager`](#logmanager)
+            - [`initialize`](#initialize)
+            - [`disable`](#disable)
+            - [`enable`](#enable)
+            - [`getLog`](#getlog)
+        - [`ConsoleLog` and `TerminalLog` (loggers)](#consolelog-and-terminallog-loggers)
+        - [`CONSOLE` and `TERMINAL` (writers)](##console-and-terminal-writers)
+- [Tables](#tables)
+- [Caveats](#caveats)
+- [License](#license)
 
 <br>
 
@@ -73,7 +71,7 @@
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -85,7 +83,7 @@ I felt like reinventing the wheel (_so naughty_), so here's a handy, extensible 
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -144,7 +142,7 @@ logger.trace('Look! An entry that will only appear in the debug log file...');
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -182,7 +180,7 @@ There are also several class instances:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -204,7 +202,7 @@ There are also several class instances:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -242,7 +240,7 @@ along with several logging-specific methods:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -260,7 +258,7 @@ This is the log level that tells the user that the application has encountered a
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -278,7 +276,7 @@ This tells the user that the application has hit an issue preventing one or more
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -296,7 +294,7 @@ This tells the user that something unexpected happened in the application: a pro
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -314,7 +312,7 @@ This is the standard log level indicating that something happened, the applicati
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -332,7 +330,7 @@ This level is less granular compared to the TRACE level, but it is more than you
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -350,7 +348,7 @@ This level is for the most fine-grained information only used in rare cases wher
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 ----
@@ -374,7 +372,7 @@ This level is for the most fine-grained information only used in rare cases wher
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -415,7 +413,7 @@ In addition, `Log` will colorize each log entry.
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -442,7 +440,7 @@ Some examples of `success` messages:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -469,7 +467,7 @@ Some examples of `failure` messages:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -494,7 +492,7 @@ Some examples of `mark` messages:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -511,7 +509,7 @@ Any `ILogManager` exposes the following members:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -543,7 +541,7 @@ consoleLog.mark('Logger configured.');
 
 For more details, see the [ILogBuilder](#ilogbuilder) abstraction.
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -557,7 +555,7 @@ Disables the log with the given name.
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -571,7 +569,7 @@ Enables the log with the given name.
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -586,7 +584,7 @@ Returns `null` if not found.
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -603,7 +601,7 @@ Both `ConsoleLog` and `TerminalLog` are instances of the `IStatusLog` abstractio
 `ConsoleLog` is the default logger for the browser console.
 It has a single channel, called 'console', utilizing a [`ConsoleWriter`](#terminalwriter), and also configured at [`LogLevel.INFO`](#log-levels).
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -620,7 +618,7 @@ Both `ConsoleLog` and `TerminalLog` are instances of the `IStatusLog` abstractio
 `ConsoleLog` is the default logger for the browser console.
 It has a single channel, called 'console', utilizing a [`ConsoleWriter`](#terminalwriter), and also configured at [`LogLevel.INFO`](#log-levels).
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 ----
 
@@ -645,7 +643,7 @@ example timestamp: ```2021-04-25 19:00:43.426 GMT-7 (America/Los Angeles)```
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 <br>
 
@@ -662,7 +660,7 @@ We need to enable logging to many possible targets, for example:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 <br>
 
@@ -679,7 +677,7 @@ We need to enable logging to many possible targets, for example:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 <br>
 
@@ -694,7 +692,7 @@ We need to enable logging to many possible targets, for example:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 <br>
 
@@ -710,7 +708,7 @@ We need to enable logging to many possible targets, for example:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 <br>
 
@@ -722,7 +720,7 @@ We need to enable logging to many possible targets, for example:
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 <br>
 
@@ -734,7 +732,7 @@ Distributed under the MIT license. See [`LICENSE`][license] for more information
 
 <br>
 
-<a href="#-">(go to top)</a>
+<a href="#top">(go to top)</a>
 
 <br>
 
