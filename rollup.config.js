@@ -10,7 +10,7 @@ import packageJson from "./package.json";
 const outputFolder = "./dist";
 
 const minify = true;
-const sourceMaps = true;
+const sourceMaps = false;
 const includeCJS = true; // cjs: CommonJS: for Node
 const includeESM = true; // esm: ES module: for bundlers
 const includeUMD = true; // umd: browser-friendly UMD build
