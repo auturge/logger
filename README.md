@@ -380,7 +380,7 @@ This level is for the most fine-grained information only used in rare cases wher
 
 > Log: A default terminal logger for quick out-of-the-box logging.
 
-Any `ILog` exposes the following methods:
+Any [`ILog`](#ilog) exposes the following methods:
 
 - [`fatal`](#fatal)
 - [`error`](#error)
@@ -596,10 +596,16 @@ Returns `null` if not found.
 
 Both `ConsoleLog` and `TerminalLog` are instances of the `IStatusLog` abstraction.
 
+<br>
+
 `TerminalLog` is the default logger the terminal (e.g., for use in node applications). It has a single channel, called 'terminal', utilizing a [`TerminalWriter`](#terminalwriter), and configured at [`LogLevel.INFO`](#log-levels).
+
+<br>
 
 `ConsoleLog` is the default logger for the browser console.
 It has a single channel, called 'console', utilizing a [`ConsoleWriter`](#terminalwriter), and also configured at [`LogLevel.INFO`](#log-levels).
+
+<br>
 
 <a href="#top">(go to top)</a>
 
@@ -611,12 +617,21 @@ It has a single channel, called 'console', utilizing a [`ConsoleWriter`](#termin
 >
 > TERMINAL: The default terminal writer.
 
-Both `ConsoleLog` and `TerminalLog` are instances of the `IStatusLog` abstraction.
+Both `CONSOLE` and `TERMINAL` are instances of the `IWriter` abstraction.
 
-`TerminalLog` is the default logger the terminal (e.g., for use in node applications). It has a single channel, called 'terminal', utilizing a [`TerminalWriter`](#terminalwriter), and configured at [`LogLevel.INFO`](#log-levels).
+<br>
 
-`ConsoleLog` is the default logger for the browser console.
-It has a single channel, called 'console', utilizing a [`ConsoleWriter`](#terminalwriter), and also configured at [`LogLevel.INFO`](#log-levels).
+#### `TERMINAL` ####
+
+`TERMINAL` is the default writer for the terminal (e.g., for use in node applications).
+
+<br>
+
+#### `CONSOLE` ####
+
+`CONSOLE` is the default writer for the browser console.
+
+<br>
 
 <a href="#top">(go to top)</a>
 
@@ -647,14 +662,14 @@ example timestamp: ```2021-04-25 19:00:43.426 GMT-7 (America/Los Angeles)```
 
 <br>
 
-### Logging Targets ###
+### Logging Writers ###
 
 We need to enable logging to many possible targets, for example:
 
 | Example Target	| Description |
 |:---|:---|
-|CONSOLE	| The browser console |
-|TERMINAL	| The terminal (non-browser) |
+|[`CONSOLE`](#console)	| The browser console |
+|[`TERMINAL`](#terminal)	| The terminal (non-browser) |
 <!-- |DATABASE	| Log entries into a database | -->
 <!-- |FILE	    | Log into a file (non-browser only) | -->
 
