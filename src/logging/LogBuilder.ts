@@ -19,11 +19,11 @@ export abstract class LogBuilder<
 
     public logCreated: Emitter<TLog> = new Emitter();
 
-    protected _logName = '';
-    public get name(): string { return this._logName; }
-
     protected _channels: IChannel[] = [];
     public get channels(): IChannel[] { return this._channels; }
+
+    protected _logName = '';
+    public get name(): string { return this._logName; }
 
     /** Instantiates a new `LogBuilder` to store the configuration for a logger. */
     protected abstract createBuilder(logName: string): LogBuilder<TEntry, TLog>;

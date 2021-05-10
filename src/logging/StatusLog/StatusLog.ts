@@ -20,7 +20,7 @@ export interface IStatusLog extends ILog<IStatusLog, IStatusEntry> {
     failure(message: string, obj: any, prettyPrint: boolean): void;
 
 
-    /** Formats and writes a mark log message. */
+    /** Formats and writes a marking log message. */
     mark(message: string): void;
     mark(message: string, obj: any): void;
     mark(message: string, obj: any, prettyPrint: boolean): void;
