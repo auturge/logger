@@ -14,7 +14,7 @@ export {
 } from './logging/DEFAULTS';
 
 export {
-    ILog, IChannel, ILogEntry, ILogEntryWriter, IWriter, ILogEntryData, ILoggerBase,
-    LogLevel, LogStatus,
-    LogBuilder, LogManagerClass,
+    ILog, IChannel, ILogEntry, ILogEntryWriter, IWriter, ILogEntryData,
+    ILoggerBase, ILogManager, ILogBuilder,
+    LogLevel, LogStatus
 } from './logging/index';

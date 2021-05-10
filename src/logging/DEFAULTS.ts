@@ -1,4 +1,4 @@
-import { LogManagerClass } from './LogManager';
+import { LogManagerClass } from './StatusLog/LogManager';
 import { IWriter } from "./IWriter";
 import { LogLevel } from "./LogLevel";
 import { TerminalWriter } from './writers/TerminalWriter';

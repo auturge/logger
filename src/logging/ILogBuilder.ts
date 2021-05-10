@@ -4,17 +4,15 @@ import { ILog } from "./ILog";
 import { IWriter } from "./IWriter";
 import { LogLevel } from "./LogLevel";
 import { ILogEntry } from "./ILogEntry";
-import { LogBuilder } from "./LogBuilder";
-
 
 export interface ILogBuilder<TEntry extends ILogEntry, TLog extends ILog<TLog, TEntry>> {
     readonly logCreated: Emitter<TLog>;
     readonly channels: IChannel[];
     readonly name: string;
     andGetLogger(): TLog;
-    atLevel(level: LogLevel): LogBuilder<TEntry, TLog>;
-    newLog(): LogBuilder<TEntry, TLog>;
-    newLog(logName: string): LogBuilder<TEntry, TLog>;
-    newChannel(name: string, writer: IWriter<TEntry>): LogBuilder<TEntry, TLog>;
-    newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): LogBuilder<TEntry, TLog>;
+    atLevel(level: LogLevel): ILogBuilder<TEntry, TLog>;
+    newLog(): ILogBuilder<TEntry, TLog>;
+    newLog(logName: string): ILogBuilder<TEntry, TLog>;
+    newChannel(name: string, writer: IWriter<TEntry>): ILogBuilder<TEntry, TLog>;
+    newChannel(name: string, writer: IWriter<TEntry>, level: LogLevel): ILogBuilder<TEntry, TLog>;
 }

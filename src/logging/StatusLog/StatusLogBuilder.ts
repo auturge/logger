@@ -1,6 +1,6 @@
 
 import { IStatusEntry } from "./IStatusEntry";
-import { LogBuilder } from "../LogBuilder";
+import { LogBuilder } from "./LogBuilder";
 import { IStatusLog, StatusLog } from "./StatusLog";
 
 export class StatusLogBuilder extends LogBuilder<IStatusEntry, IStatusLog>{

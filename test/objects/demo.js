@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const logger = require('../../dist/index');
+const logger = require('../../dist/logger');
 const CONSOLE = logger.CONSOLE;
 const LogLevel = logger.LogLevel;
 
@@ -8,9 +8,14 @@ const LogLevel = logger.LogLevel;
 const LogManager = logger.LogManager;
 
 const Log = logger.Log;
-Log.error('wacka wacka');
-Log.mark('performance mark');
+console.log('Log');
+console.log(Log);
 
+Log.error('wacka wacka');
+console.log('^^ wacka wacka');
+
+Log.mark('performance mark');
+console.log('^^ performance mark');
 
 const l2 = LogManager.initialize
     .newChannel('m2', CONSOLE, LogLevel.TRACE)
@@ -22,3 +27,4 @@ const l3 = LogManager.initialize
     .andGetLogger();
 
 l3.info('what what!');
+console.log('^^ what what');

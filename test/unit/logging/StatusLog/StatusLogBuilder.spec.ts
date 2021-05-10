@@ -5,12 +5,14 @@ import { stub, unwrap } from '@test/helpers';
 import { NULL } from '@test/objects/NullWriter';
 
 import { StatusLogBuilder } from '@src/logging/StatusLog/StatusLogBuilder';
-import { IChannel, ILog, LogBuilder, LogLevel } from '@src/logging';
-import { LOG_LEVELS } from '@src/logging/LogLevel';
+import { IChannel } from '@src/logging/IChannel';
+import { LogLevel, LOG_LEVELS } from '@src/logging/LogLevel';
 import { IStatusLog, StatusLog } from '@src/logging/StatusLog/StatusLog';
 import Sinon = require('sinon');
 import { EventHandler } from '@src/core/events';
 import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
+import { LogBuilder } from '@src/logging/StatusLog/LogBuilder';
+import { ILog } from '@src/logging/ILog';
 
 let builder;
 const name = AnyRandom.string(5, 8, CharacterSet.ALPHA);

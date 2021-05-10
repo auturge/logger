@@ -1,8 +1,8 @@
 import { getNullOrUndefinedErrorMessage, throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
-import { ILog } from "./ILog";
-import { ILogBuilder } from "./ILogBuilder";
-import { ILogEntry } from "./ILogEntry";
-import { ILogManager } from "./ILogManager";
+import { ILog } from "../ILog";
+import { ILogBuilder } from "../ILogBuilder";
+import { ILogEntry } from "../ILogEntry";
+import { ILogManager } from "../ILogManager";
 
 export class LogManagerClass<
     TEntry extends ILogEntry,

@@ -3,9 +3,10 @@ import { AnyRandom } from '@auturge/testing';
 import { TEST_CHANNEL_1, TEST_CHANNEL_2 } from '@test/objects';
 
 import { StatusLog } from '@src/logging/StatusLog/StatusLog';
-import { IChannel, LogManagerClass } from '@src/logging';
+import { IChannel } from '@src/logging/IChannel';
 import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 import { StatusLogBuilder } from '@src/logging/StatusLog/StatusLogBuilder';
+import { LogManagerClass } from '@src/logging/StatusLog/LogManager';
 
 describe('LogManager', () => {
 

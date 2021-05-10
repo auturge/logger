@@ -1,15 +1,15 @@
 import { Emitter } from "@src/core/events";
 import { throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
 
-import { IChannel } from "./IChannel";
-import { ILog } from "./ILog";
-import { Channel } from "./Channel";
-import { IWriter } from "./IWriter";
-import { LogLevel } from "./LogLevel";
-import { IStatusEntry } from "./StatusLog/IStatusEntry";
-import { ILogEntry } from "./ILogEntry";
-import { IStatusLog } from "./StatusLog/StatusLog";
-import { ILogBuilder } from "./ILogBuilder";
+import { IChannel } from "../IChannel";
+import { ILog } from "../ILog";
+import { Channel } from "../Channel";
+import { IWriter } from "../IWriter";
+import { LogLevel } from "../LogLevel";
+import { IStatusEntry } from "./IStatusEntry";
+import { ILogEntry } from "../ILogEntry";
+import { IStatusLog } from "./StatusLog";
+import { ILogBuilder } from "../ILogBuilder";
 
 export abstract class LogBuilder<
     TEntry extends ILogEntry = IStatusEntry,
