@@ -36,7 +36,7 @@
         - [`IStatusLogEntry`](#istatuslogentry)
         - [`IWriter`](#iwriter)
         - [`ILogManager`](#ilogmanager)
-        - [`LogBuilder`](#logbuilder)
+        - [`ILogBuilder`](#ilogbuilder)
     - [Instances](#instances)
         - [`Log`](#log)
             - [`fatal`](#fatal)
@@ -53,8 +53,13 @@
             - [`disable`](#disable)
             - [`enable`](#enable)
             - [`getLog`](#getlog)
-        - [`ConsoleLog` and `TerminalLog` (loggers)](#consolelog-and-terminallog-loggers)
-        - [`CONSOLE` and `TERMINAL` (writers)](##console-and-terminal-writers)
+        - [`LogBuilder`](#logbuilder)
+        - [loggers](#loggers)
+            - [`TerminalLog`](#terminallog)
+            - [`ConsoleLog`](#consolelog)
+        - [writers](#writers)
+            - [`TERMINAL`](#terminal)
+            - [`CONSOLE`](#console)
 - [Tables](#tables)
 - [Caveats](#caveats)
 - [License](#license)
@@ -389,7 +394,7 @@ Any [`ILog`](#ilog) exposes the following methods:
 - [`debug`](#debug)
 - [`trace`](#trace)
 
-The `Log` is an `IStatusLog`, a special type of `ILog` which also exposes the following logging methods:
+The `Log` is an [`IStatusLog`](#istatuslog), a special type of [`ILog`](#ilog) which also exposes the following logging methods:
 
 - [`success`](#success)
 - [`failure`](#failure)
@@ -420,9 +425,9 @@ In addition, `Log` will colorize each log entry.
 #### `success` ####
 
 > ```javascript
-> Log.success(message: string): void;
-> Log.success(message: string, obj: any): void;
-> Log.success(message: string, obj: any, prettyPrint: boolean): void;
+> IStatusLog.success(message: string): void;
+> IStatusLog.success(message: string, obj: any): void;
+> IStatusLog.success(message: string, obj: any, prettyPrint: boolean): void;
 > ```
 
 Formats and writes a success log message.
@@ -447,9 +452,9 @@ Some examples of `success` messages:
 #### `failure` ####
 
 > ```javascript
-> Log.failure(message: string): void;
-> Log.failure(message: string, obj: any): void;
-> Log.failure(message: string, obj: any, prettyPrint: boolean): void;
+> IStatusLog.failure(message: string): void;
+> IStatusLog.failure(message: string, obj: any): void;
+> IStatusLog.failure(message: string, obj: any, prettyPrint: boolean): void;
 > ```
 
 Formats and writes a trace log message.
@@ -474,9 +479,9 @@ Some examples of `failure` messages:
 #### `mark` ####
 
 > ```javascript
-> Log.mark(message: string): void;
-> Log.mark(message: string, obj: any): void;
-> Log.mark(message: string, obj: any, prettyPrint: boolean): void;
+> IStatusLog.mark(message: string): void;
+> IStatusLog.mark(message: string, obj: any): void;
+> IStatusLog.mark(message: string, obj: any, prettyPrint: boolean): void;
 > ```
 
 Formats and writes a marking log message.
@@ -588,7 +593,7 @@ Returns `null` if not found.
 
 ----
 
-### `ConsoleLog` and `TerminalLog` (loggers) ###
+### Loggers ###
 
 > ConsoleLog: The default console logger.
 >
@@ -598,9 +603,13 @@ Both `ConsoleLog` and `TerminalLog` are instances of the `IStatusLog` abstractio
 
 <br>
 
+#### `TerminalLog` ###
+
 `TerminalLog` is the default logger the terminal (e.g., for use in node applications). It has a single channel, called 'terminal', utilizing a [`TerminalWriter`](#terminalwriter), and configured at [`LogLevel.INFO`](#log-levels).
 
 <br>
+
+#### `ConsoleLog` ###
 
 `ConsoleLog` is the default logger for the browser console.
 It has a single channel, called 'console', utilizing a [`ConsoleWriter`](#terminalwriter), and also configured at [`LogLevel.INFO`](#log-levels).
@@ -611,7 +620,7 @@ It has a single channel, called 'console', utilizing a [`ConsoleWriter`](#termin
 
 ----
 
-### `CONSOLE` and `TERMINAL` (writers) ###
+### Writers ###
 
 > CONSOLE: The default console writer.
 >
