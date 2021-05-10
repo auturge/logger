@@ -4,6 +4,8 @@
     @typescript-eslint/no-namespace
 */
 
+// TODO: Add public API comments
+
 export const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 type Bottom<T> = T extends string ? Empty.String

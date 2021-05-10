@@ -2,6 +2,8 @@
 
 import { isBoolean, isEmpty, isNull, isNullOrUndefined, isNumber, isString, isSymbol, isUndefined } from "./types";
 
+// TODO: Add public API comments
+
 export function getArgumentNullErrorMessage(name: string): string {
     return `Argument [${ name }] must not be null.`;
 }

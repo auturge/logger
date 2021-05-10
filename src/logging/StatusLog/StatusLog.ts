@@ -1,19 +1,13 @@
-import { Emitter } from "@src/core/events";
 import { throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
-import { ILogEntry, ILogEntryData } from "../ILogEntry";
 import { LogLevel } from "../LogLevel";
 import { IChannel } from "../IChannel";
 import { LogStatus } from "../LogStatus";
 import { ILog } from "../ILog";
-import { IPatternWriterConfig } from "../IWriter";
+import { IStatusEntry } from "./IStatusEntry";
 
-interface IStatusData extends ILogEntryData {
-    status: LogStatus;
-}
+// TODO: Add class description comment
 
-interface IStatusEntry extends ILogEntry<IStatusData> { }
-
-export interface IStatusLog extends ILog<IStatusLog, IStatusEntry, IStatusData, IPatternWriterConfig> {
+export interface IStatusLog extends ILog<IStatusEntry> {
 
     /** Formats and writes a failure log message. */
     failure(message: string): void;
@@ -37,11 +31,10 @@ export class StatusLog implements IStatusLog {
     private _dateStamper = () => { return new Date(); };
     private _enabled = true;
 
-    public readonly channels: IChannel<IStatusEntry, IStatusData, IPatternWriterConfig>[];
+    public readonly channels: IChannel<IStatusEntry>[];
     public readonly name: string;
-    public reconfigured: Emitter<IStatusLog> = new Emitter();
 
-    public constructor(name: string, channels: IChannel<IStatusEntry, IStatusData, IPatternWriterConfig>[]) {
+    public constructor(name: string, channels: IChannel<IStatusEntry>[]) {
         throwIfNullOrEmpty(name, 'name');
         throwIfNullOrEmpty(channels, 'channels');
         this.channels = channels;
@@ -58,7 +51,6 @@ export class StatusLog implements IStatusLog {
             return;
 
         this._enabled = value;
-        this.reconfigured.emit(this);
     }
 
     public fatal(message: string, obj?: any, prettyPrint?: boolean): void {
@@ -95,7 +87,7 @@ export class StatusLog implements IStatusLog {
         this.output(entry);
     }
 
-    private buildEntry(level: LogLevel, status: LogStatus, message: string, obj?: any, prettyPrint?: boolean): ILogEntry<IStatusData> {
+    private buildEntry(level: LogLevel, status: LogStatus, message: string, obj?: any, prettyPrint?: boolean): IStatusEntry {
         throwIfNullOrUndefined(level, 'level');
         throwIfNullOrUndefined(status, 'status');
         throwIfNullOrUndefined(message, 'message');
@@ -120,7 +112,7 @@ export class StatusLog implements IStatusLog {
 
     private output(entry: IStatusEntry): void {
         if (!this.enabled) return;
-        this.channels.forEach((channel: IChannel<IStatusEntry, IStatusData, IPatternWriterConfig>) => {
+        this.channels.forEach((channel: IChannel<IStatusEntry>) => {
             channel.log(entry);
         });
     }

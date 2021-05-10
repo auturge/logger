@@ -6,15 +6,13 @@ import { StatusLog } from '@src/logging/StatusLog/StatusLog';
 import { IChannel } from '@src/logging/IChannel';
 import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 import { StatusLogBuilder } from '@src/logging/StatusLog/StatusLogBuilder';
-import { IStatusData } from '@src/logging/StatusLog/IStatusData';
-import { IPatternWriterConfig } from '@src/logging/IWriter';
-import { LogManager } from '@src/logging/StatusLog/LogManager';
+import { LogManager } from '@src/logging/implementation/LogManager';
 
 describe('LogManager', () => {
 
     let builder, manager, logName;
 
-    function getTestLogger(name: string, channels: IChannel<IStatusEntry, IStatusData, IPatternWriterConfig>[] = []) {
+    function getTestLogger(name: string, channels: IChannel<IStatusEntry>[] = []) {
         if (!channels.length) {
             channels.push(TEST_CHANNEL_1);
         }

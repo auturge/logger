@@ -1,7 +1,11 @@
 import { ITokenMatch, TokenMatch } from "./ITokenMatch";
 import { KNOWN_TOKENS, TEXT_TOKEN } from "./TOKENS";
 
+// TODO: Add class description comment
+
 export class PatternTokenizer {
+
+    // TODO: Add public API comments
 
     public tokenize(pattern: string): TokenMatch[] {
         if (!(pattern && pattern.length))

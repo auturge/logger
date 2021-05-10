@@ -1,13 +1,8 @@
-import { ILogEntry, ILogEntryData } from "./ILogEntry";
+import { ILogEntry } from "./ILogEntry";
 import { ILoggerBase } from "./ILoggerBase";
 
 /** An interface describing the properties and methods used to log messages. */
-export interface ILog<
-    TLog extends ILog<TLog, TEntry, TData, TWriterConfig>,
-    TEntry extends ILogEntry<TData>,
-    TData extends ILogEntryData,
-    TWriterConfig>
-    extends ILoggerBase<TLog, TEntry, TData, TWriterConfig> {
+export interface ILog<TEntry extends ILogEntry = ILogEntry> extends ILoggerBase<TEntry> {
 
     /** Formats and writes a fatal log message.
      *

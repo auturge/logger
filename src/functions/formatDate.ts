@@ -10,6 +10,8 @@ interface IDateFormatOptions {
     timezone: string
 }
 
+// TODO: Add public API comments
+
 export enum DateFormat {
     DEFAULT = "yyyy-MM-dd HH:mm:ss.SSS xxx",
     ISO = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",

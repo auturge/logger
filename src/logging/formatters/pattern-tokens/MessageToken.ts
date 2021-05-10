@@ -2,7 +2,11 @@ import { TokenDefinition } from "./TokenDefinition";
 import { TokenMatch } from "./ITokenMatch";
 import { ILogEntry } from "../../ILogEntry";
 
+// TODO: Add class description comment
+
 export class MessageToken extends TokenDefinition {
+
+    // TODO: Add public API comments
 
     public readonly name: string = 'MessageToken';
 

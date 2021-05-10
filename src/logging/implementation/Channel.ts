@@ -6,18 +6,20 @@ import { ILogEntry } from "../ILogEntry";
 import { IChannel } from "../IChannel";
 import { IWriter } from "../IWriter";
 
-export class Channel<TEntry extends ILogEntry<TData>, TData, TWriterConfig> implements IChannel<TEntry, TData, TWriterConfig> {
+// TODO: Add class description comment
+
+export class Channel<TEntry extends ILogEntry = ILogEntry> implements IChannel<TEntry> {
 
     private _enabled = true;
     private _level: LogLevel = LogLevel.INFO;
 
     public readonly name: string;
-    public readonly writer: IWriter<TEntry, TData, TWriterConfig>;
-    public reconfigured: Emitter<IChannel<TEntry, TData, TWriterConfig>> = new Emitter();
+    public readonly writer: IWriter<TEntry>;
+    public reconfigured: Emitter<IChannel<TEntry>> = new Emitter();
 
-    public constructor(name: string, writer: IWriter<TEntry, TData, TWriterConfig>);
-    public constructor(name: string, writer: IWriter<TEntry, TData, TWriterConfig>, level: LogLevel | undefined);
-    public constructor(name: string, writer: IWriter<TEntry, TData, TWriterConfig>, level?: LogLevel) {
+    public constructor(name: string, writer: IWriter<TEntry>);
+    public constructor(name: string, writer: IWriter<TEntry>, level: LogLevel | undefined);
+    public constructor(name: string, writer: IWriter<TEntry>, level?: LogLevel) {
         throwIfNullOrEmpty(name, 'name');
         throwIfNullOrUndefined(writer, 'writer');
         this.name = name;

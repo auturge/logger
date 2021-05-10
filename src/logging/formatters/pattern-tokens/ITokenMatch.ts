@@ -1,13 +1,19 @@
 import { throwIfNullOrLessThan, throwIfNullOrUndefined } from "@src/functions/guards";
 import { TokenDefinition } from "./TokenDefinition";
 
+// TODO: Add class description comments
+
 export interface ITokenMatch {
+
+    // TODO: Add public API comments
+
     arguments: string[];
     endIndex: number;
     matched: string;
     startIndex: number;
     tokenType: string;
     value: string;
+    readonly length: number;
 }
 
 export class TokenMatch implements ITokenMatch {
@@ -17,7 +23,6 @@ export class TokenMatch implements ITokenMatch {
     public startIndex: number;
     public tokenType: string;
     public value = "";
-
 
     constructor(token: TokenDefinition, startIndex: number);
     constructor(token: TokenDefinition, startIndex: number, endIndex: number);

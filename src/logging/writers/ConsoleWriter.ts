@@ -1,14 +1,14 @@
 import { throwIfNullOrUndefined } from "@src/functions/guards";
 import { LogLevel } from "@src/logging/LogLevel";
-import { ILogEntry, ILogEntryData } from "../ILogEntry";
-import { IPatternWriterConfig, IWriter } from "../IWriter";
+import { ILogEntry } from "../ILogEntry";
+import { IWriter } from "../IWriter";
+import { IPatternWriterConfig } from "./IPatternWriterConfig";
 import { PatternFormatter } from "../formatters/PatternFormatter";
 import { nullWriterFn, WriterFn } from "./WriterFn";
 
-export class ConsoleWriter<
-    TEntry extends ILogEntry<TData>,
-    TData extends ILogEntryData>
-    implements IWriter<TEntry, TData, IPatternWriterConfig> {
+// TODO: Add class description comment
+
+export class ConsoleWriter<TEntry extends ILogEntry = ILogEntry> implements IWriter<TEntry> {
 
     protected formatter: PatternFormatter;
 

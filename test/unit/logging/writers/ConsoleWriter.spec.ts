@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { AnyRandom } from '@auturge/testing';
 
 import { ConsoleWriter } from '@src/logging/writers/ConsoleWriter';
-import { IPatternWriterConfig } from '@src/logging/IWriter';
+import { IPatternWriterConfig } from "@src/logging/writers/IPatternWriterConfig";
 import { stub, unwrap } from '@test/helpers';
 import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 import { LogLevel, LOG_LEVELS } from '@src/logging/LogLevel';

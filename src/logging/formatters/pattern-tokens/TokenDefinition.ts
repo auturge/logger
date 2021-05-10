@@ -1,7 +1,10 @@
 import { ILogEntry } from "@src/logging/ILogEntry";
 import { ITokenMatch, TokenMatch } from "./ITokenMatch";
 
+// TODO: Add class description comment
 export abstract class TokenDefinition {
+
+    // TODO: Add public API comments
 
     private static readonly TOKEN_OPENER: string = '%{';
     private static readonly TOKEN_CLOSER: string = '}';

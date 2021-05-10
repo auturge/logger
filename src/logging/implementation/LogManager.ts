@@ -1,21 +1,16 @@
 import { getNullOrUndefinedErrorMessage, throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
 import { ILog } from "../ILog";
 import { ILogBuilder } from "../ILogBuilder";
-import { ILogEntry, ILogEntryData } from "../ILogEntry";
 import { ILogManager } from "../ILogManager";
 
-export class LogManager<
-    TLog extends ILog<TLog, TEntry, TData, TWriterConfig>,
-    TEntry extends ILogEntry<TData>,
-    TData extends ILogEntryData,
-    TWriterConfig
-    >
-    implements ILogManager<TLog, TEntry, TData, TWriterConfig> {
+// TODO: Add class description comment
+
+export class LogManager<TLog extends ILog = ILog> implements ILogManager<TLog> {
 
     private _logNames: string[] = [];
     private _logs: TLog[] = [];
 
-    constructor(builder: ILogBuilder<TLog, TEntry, TData, TWriterConfig>) {
+    constructor(builder: ILogBuilder<TLog>) {
         if (builder == null)
             throw new Error(getNullOrUndefinedErrorMessage('builder'));
 
@@ -24,7 +19,7 @@ export class LogManager<
     }
 
     /** A builder for generating new ILog channels. */
-    public readonly initialize: ILogBuilder<TLog, TEntry, TData, TWriterConfig>;
+    public readonly initialize: ILogBuilder<TLog>;
 
     /** Disables the log. */
     public disable(logName: string): TLog {

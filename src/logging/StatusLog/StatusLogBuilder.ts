@@ -1,17 +1,15 @@
-
-import { IPatternWriterConfig } from "../IWriter";
-import { IStatusData } from "./IStatusData";
-import { IStatusEntry } from "./IStatusEntry";
-import { LogBuilder } from "./LogBuilder";
+import { LogBuilder } from "../implementation/LogBuilder";
 import { IStatusLog, StatusLog } from "./StatusLog";
 
-export class StatusLogBuilder extends LogBuilder<IStatusLog, IStatusEntry, IStatusData, IPatternWriterConfig>{
+// TODO: Add class description comment
+
+export class StatusLogBuilder extends LogBuilder<IStatusLog> {
 
     public constructor(logName: string) {
         super(logName);
     }
 
-    protected createBuilder(logName: string): LogBuilder<IStatusLog, IStatusEntry, IStatusData, IPatternWriterConfig> {
+    protected createBuilder(logName: string): LogBuilder<IStatusLog> {
         return new StatusLogBuilder(logName);
     }
 

@@ -1,11 +1,7 @@
-import { ILogEntry, ILogEntryData } from "./ILogEntry";
-
-export interface IPatternWriterConfig {
-    pattern: string;
-}
+import { ILogEntry } from "./ILogEntry";
 
 /** An interface describing a log-entry writing implementation. */
-export interface IWriter<TEntry extends ILogEntry<TData>, TData extends ILogEntryData, TConfig> {
+export interface IWriter<TEntry extends ILogEntry = ILogEntry> {
 
     /** Writes a log entry.
      * @param {TEntry} entry The log entry to write
@@ -13,5 +9,5 @@ export interface IWriter<TEntry extends ILogEntry<TData>, TData extends ILogEntr
     write(entry: TEntry): void;
 
     /** Reconfigures the writer. */
-    reconfigure(config: TConfig): void;
+    reconfigure(config: unknown): void;
 }

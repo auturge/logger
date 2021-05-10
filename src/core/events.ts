@@ -28,6 +28,8 @@ export interface IEmitter<TEventArgs extends EventArgsMap = void> {
     clear(): void;
 }
 
+// TODO: Add description comment
+
 export class Emitter<TEventArgs extends EventArgsMap = void> implements IEmitter<TEventArgs> {
     private _handlers: EventHandler<TEventArgs>[] = [];
 

@@ -35,7 +35,6 @@ describe('StatusLog', () => {
         log = new StatusLog(logName, [ TEST_CHANNEL_1, TEST_CHANNEL_2 ]);
 
         log[ '_dateStamper' ] = () => timestamp;
-        reconfigured = stub(log.reconfigured, 'emit').callsFake(() => { /* Do nothing */ });
     }
 
     function setupBuildAndWrite() {
@@ -43,10 +42,6 @@ describe('StatusLog', () => {
 
         buildAndWrite = stub(log, 'buildAndWrite')
             .callsFake(() => { /* Do nothing */ });
-    }
-
-    function tearDownSuite() {
-        unwrap(reconfigured);
     }
 
     function tearDownBuildAndWrite() {
@@ -99,7 +94,6 @@ describe('StatusLog', () => {
     describe('setLevel', () => {
 
         beforeEach(setupTestSuite);
-        afterEach(tearDownSuite);
 
         [
             { level: LogLevel.OFF },
@@ -126,7 +120,6 @@ describe('StatusLog', () => {
 
     describe('enabled', () => {
         beforeEach(setupTestSuite);
-        afterEach(tearDownSuite);
 
         [
             { value: true },
@@ -140,7 +133,7 @@ describe('StatusLog', () => {
 
                 assert.equal(log[ '_enabled' ], value);
                 assert.equal(log.enabled, value);
-                sinon.assert.calledOnceWithExactly(reconfigured, log);
+                // sinon.assert.calledOnceWithExactly(reconfigured, log);
             });
         });
 
@@ -152,7 +145,7 @@ describe('StatusLog', () => {
 
             assert.equal(log[ '_enabled' ], value);
             assert.equal(log.enabled, value);
-            sinon.assert.notCalled(reconfigured);
+            // sinon.assert.notCalled(reconfigured);
         });
     });
 
@@ -400,7 +393,6 @@ describe('StatusLog', () => {
             output = stub(log, 'output').callsFake(() => { /* Do nothing */ });
         });
         afterEach(() => {
-            tearDownSuite();
             unwrap(output);
             unwrap(buildEntry);
         });
@@ -444,7 +436,6 @@ describe('StatusLog', () => {
     describe(`buildEntry`, () => {
 
         beforeEach(setupTestSuite);
-        afterEach(tearDownSuite);
 
         [
             { key: 'null', value: null },
@@ -555,7 +546,6 @@ describe('StatusLog', () => {
 
         });
         afterEach(() => {
-            tearDownSuite();
             unwrap(channel1);
             unwrap(channel2);
         });

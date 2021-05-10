@@ -4,7 +4,10 @@ import { ILogEntry } from "@src/logging/ILogEntry";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+// TODO: Add class description comment
 export class PatternTextToken extends TokenDefinition {
+
+    // TODO: Add public API comments
 
     public readonly name: string = 'PatternTextToken';
     protected tokens: string[] = [];

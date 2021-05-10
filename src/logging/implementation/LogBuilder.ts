@@ -5,30 +5,25 @@ import { IChannel } from "../IChannel";
 import { ILog } from "../ILog";
 import { IWriter } from "../IWriter";
 import { LogLevel } from "../LogLevel";
-import { ILogEntry, ILogEntryData } from "../ILogEntry";
 import { ILogBuilder } from "../ILogBuilder";
 import { Channel } from "./Channel";
 
-export abstract class LogBuilder<
-    TLog extends ILog<TLog, TEntry, TData, TWriterConfig>,
-    TEntry extends ILogEntry<TData>,
-    TData extends ILogEntryData,
-    TWriterConfig>
+// TODO: Add class description comment
 
-    implements ILogBuilder<TLog, TEntry, TData, TWriterConfig> {
+export abstract class LogBuilder<TLog extends ILog = ILog> implements ILogBuilder<TLog> {
 
     public static DEFAULT_NAME = 'main';
 
     public logCreated: Emitter<TLog> = new Emitter();
 
-    protected _channels: IChannel<TEntry, TData, TWriterConfig>[] = [];
-    public get channels(): IChannel<TEntry, TData, TWriterConfig>[] { return this._channels; }
+    protected _channels: IChannel[] = [];
+    public get channels(): IChannel[] { return this._channels; }
 
     protected _logName = '';
     public get name(): string { return this._logName; }
 
     /** Instantiates a new `LogBuilder` to store the configuration for a logger. */
-    protected abstract createBuilder(logName: string): LogBuilder<TLog, TEntry, TData, TWriterConfig>;
+    protected abstract createBuilder(logName: string): LogBuilder<TLog>;
 
     /** Instantiates a new logger based on the configuration stored in this builder. */
     protected abstract createLogger(): TLog;
@@ -46,7 +41,7 @@ export abstract class LogBuilder<
     }
 
     /** Generates or augments a builder for a logger channel that outputs at any level at least as high the specified level. */
-    public atLevel(level: LogLevel): LogBuilder<TLog, TEntry, TData, TWriterConfig> {
+    public atLevel(level: LogLevel): LogBuilder<TLog> {
         this._channels.forEach(channel => {
             channel.level = level;
         });
@@ -54,17 +49,17 @@ export abstract class LogBuilder<
     }
 
     /** Configures the builder to generate a new logger. */
-    public newLog(): LogBuilder<TLog, TEntry, TData, TWriterConfig>;
-    public newLog(logName: string): LogBuilder<TLog, TEntry, TData, TWriterConfig>;
-    public newLog(logName: string = LogBuilder.DEFAULT_NAME): LogBuilder<TLog, TEntry, TData, TWriterConfig> {
+    public newLog(): LogBuilder<TLog>;
+    public newLog(logName: string): LogBuilder<TLog>;
+    public newLog(logName: string = LogBuilder.DEFAULT_NAME): LogBuilder<TLog> {
         throwIfNullOrUndefined(logName, 'logName');
         return this.createBuilder(logName);
     }
 
     /** Configures the builder to generate a new logger channel. */
-    public newChannel(name: string, writer: IWriter<TEntry, TData, TWriterConfig>): LogBuilder<TLog, TEntry, TData, TWriterConfig>;
-    public newChannel(name: string, writer: IWriter<TEntry, TData, TWriterConfig>, level: LogLevel): LogBuilder<TLog, TEntry, TData, TWriterConfig>;
-    public newChannel(name: string, writer: IWriter<TEntry, TData, TWriterConfig>, level?: LogLevel): LogBuilder<TLog, TEntry, TData, TWriterConfig> {
+    public newChannel(name: string, writer: IWriter): LogBuilder<TLog>;
+    public newChannel(name: string, writer: IWriter, level: LogLevel): LogBuilder<TLog>;
+    public newChannel(name: string, writer: IWriter, level?: LogLevel): LogBuilder<TLog> {
         throwIfNullOrEmpty(name, 'name');
         throwIfNullOrUndefined(writer, 'writer');
         this._channels = this._channels.filter(it => it.name != name);

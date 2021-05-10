@@ -2,7 +2,12 @@ import { TokenDefinition } from "./TokenDefinition";
 import { TokenMatch } from "./ITokenMatch";
 import { ILogEntry } from "../../ILogEntry";
 
+// TODO: Add class description comment
+
 export class LogLevelToken extends TokenDefinition {
+
+    // TODO: Add public API comments
+
     public readonly name: string = 'LogLevelToken';
 
     protected tokens: string[] = [ 'level', 'l' ];

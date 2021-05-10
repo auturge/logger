@@ -3,7 +3,11 @@ import { TokenMatch } from "./ITokenMatch";
 import { ILogEntry } from "../../ILogEntry";
 import { DateFormat, formatDate } from "@src/functions/formatDate";
 
+// TODO: Add description comment
+
 export class DateToken extends TokenDefinition {
+
+    // TODO: Add public API comments
 
     public readonly name: string = 'DateToken';
 

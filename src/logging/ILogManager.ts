@@ -1,24 +1,19 @@
 import { ILog } from "./ILog";
 import { ILogBuilder } from "./ILogBuilder";
-import { ILogEntry, ILogEntryData } from "./ILogEntry";
 
+// TODO: Add interface description comment
 
-export interface ILogManager<
-    TLog extends ILog<TLog, TEntry, TData, TWriterConfig>,
-    TEntry extends ILogEntry<TData>,
-    TData extends ILogEntryData,
-    TWriterConfig
-    > {
+export interface ILogManager<TLog extends ILog = ILog> {
 
     /** A builder for generating new ILog channels. */
-    initialize: ILogBuilder<TLog, TEntry, TData, TWriterConfig>;
+    initialize: ILogBuilder<TLog>;
 
     /** Disables the log. */
-    disable(logName: string): ILog<TLog, TEntry, TData, TWriterConfig>;
+    disable(logName: string): TLog;
 
     /** Enables the log. */
-    enable(logName: string): ILog<TLog, TEntry, TData, TWriterConfig>;
+    enable(logName: string): TLog;
 
     /** Gets the log with the given name. Returns `null` if not found. */
-    getLog(logName: string): ILog<TLog, TEntry, TData, TWriterConfig> | null;
+    getLog(logName: string): TLog | null;
 }
