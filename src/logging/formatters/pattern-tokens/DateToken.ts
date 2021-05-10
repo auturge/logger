@@ -5,6 +5,8 @@ import { DateFormat, formatDate } from "@src/functions/formatDate";
 
 export class DateToken extends TokenDefinition {
 
+    public readonly name: string = 'DateToken';
+
     protected tokens: string[] = [ 'date', 'd' ];
 
     /** Gets and formats the timestamp using

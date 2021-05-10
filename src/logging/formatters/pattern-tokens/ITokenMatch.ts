@@ -24,7 +24,7 @@ export class TokenMatch implements ITokenMatch {
     constructor(token: TokenDefinition, startIndex: number, endIndex?: number) {
         throwIfNullOrUndefined(token, 'token');
         throwIfNullOrLessThan(startIndex, 'startIndex', 0);
-        this.tokenType = token.constructor.name;
+        this.tokenType = token.name;
         this.startIndex = startIndex;
 
         if (endIndex == null)

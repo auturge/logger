@@ -8,6 +8,8 @@ export abstract class TokenDefinition {
 
     protected abstract tokens: string[];
 
+    public readonly abstract name: string;
+
     /** Returns the text that should replace the specified token.
      * @param match The token to get the text for.
      * @param entry The log entry.

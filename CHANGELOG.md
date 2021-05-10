@@ -2,11 +2,18 @@
 
 ## [2.0.0] - ??? ##
 
-- extracted ILogBuilder and ILogManager interfaces
-- changed dependencies in ILogManager from concrete to abstractions
-- excluded sourcemaps from dist (to reduce package size)
+- Fixed
+    - The default logger now correctly parses tokens
 
-- FIXME: Figure out why the demo is broken now!!!
+- Added
+    - ILogBuilder interface
+    - ILogManager interface
+
+- Changed
+    - changed dependencies in LogManager from concrete to abstractions
+
+- Removed
+    - removed sourcemaps from dist (to reduce package size)
 
 ## [1.0.0] - 09-May-2021 ##
 

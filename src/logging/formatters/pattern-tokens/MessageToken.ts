@@ -4,6 +4,8 @@ import { ILogEntry } from "../../ILogEntry";
 
 export class MessageToken extends TokenDefinition {
 
+    public readonly name: string = 'MessageToken';
+
     protected tokens: string[] = [ 'message', 'm' ];
 
     /** Returns the entry message */

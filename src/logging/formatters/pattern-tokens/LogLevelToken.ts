@@ -3,6 +3,7 @@ import { TokenMatch } from "./ITokenMatch";
 import { ILogEntry } from "../../ILogEntry";
 
 export class LogLevelToken extends TokenDefinition {
+    public readonly name: string = 'LogLevelToken';
 
     protected tokens: string[] = [ 'level', 'l' ];
 
