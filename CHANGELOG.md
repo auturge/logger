@@ -1,6 +1,6 @@
 # Changelog #
 
-## [1.0.1] - ??? ##
+## [1.0.1] - 10-May-2021 ##
 
 - Fixed
     - The default logger now correctly parses tokens in minified dist
