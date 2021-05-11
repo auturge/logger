@@ -1,16 +1,16 @@
 # Changelog #
 
-## [2.0.0] - ??? ##
+## [1.0.1] - ??? ##
 
 - Fixed
-    - The default logger now correctly parses tokens
+    - The default logger now correctly parses tokens in minified dist
 
 - Added
-    - ILogBuilder interface
-    - ILogManager interface
+    - extracted ILogBuilder and ILogManager interfaces
 
 - Changed
-    - changed dependencies in LogManager from concrete to abstractions
+    - changed dependencies in concrete classes from instances to abstractions
+    - added default types to the generics, in order to dial back the levels of type constraints
 
 - Removed
     - removed IChannel, Channel dependency on IStatusEntry
