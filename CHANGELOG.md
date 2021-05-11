@@ -1,5 +1,10 @@
 # Changelog #
 
+## [1.0.2] - 10-May-2021 ##
+
+- Fixed
+    - Published the wrong code to 1.0.1
+
 ## [1.0.1] - 10-May-2021 ##
 
 - Fixed

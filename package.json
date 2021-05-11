@@ -1,7 +1,7 @@
 {
     "name": "@auturge/logger",
     "description": "A handy multiplexing logger.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": "auturge",
     "license": "MIT",
     "bugs": {
@@ -67,7 +67,7 @@
         "clean": "shx rm -rf dist build test/coverage",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "package": "npm-run-all clean ~mkdir:dist ~copy",
-        "test": "npm-run-all ~test:clean ~test:run",
+        "test": "npm-run-all lint ~test:clean ~test:run",
         "tsc": "tsc -p ./tsconfig.json",
         "tsc:paths": "tsc && tspath -f",
         "~build:dist": "npm-run-all ~rollup ~copy:all",
