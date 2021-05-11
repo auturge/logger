@@ -1,8 +1,16 @@
 # Changelog #
 
-## [1.0.2] - 10-May-2021 ##
+## [1.0.3] - 10-May-2021 ##
 
 - Fixed
+    Published the right code this time! -_-
+
+- Added
+    - DEV: Prepublish script to prevent publishing from the root folder
+
+## [1.0.2] - 10-May-2021 ##
+
+- "Fixed" (*but not really, because 1.0.2 published from the wrong folder as well!)
     - Published the wrong code to 1.0.1
 
 ## [1.0.1] - 10-May-2021 ##
