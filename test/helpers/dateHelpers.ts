@@ -26,18 +26,18 @@ export function getOffsetString(timezone?: string): string {
 }
 
 function getOffsetSign(timezone?: string) {
-    let offsetMin = getOffset(timezone);
+    const offsetMin = getOffset(timezone);
     const sign = (offsetMin > 0) ? "-" : "+";
     return sign;
 }
 function getOffsetHours(timezone?: string) {
-    let offsetMin = getOffset(timezone);
+    const offsetMin = getOffset(timezone);
     const absOffset = Math.abs(offsetMin);
     const hours = pad(Math.floor(absOffset / 60));
     return hours;
 }
 function getOffsetMinutes(timezone?: string) {
-    let offsetMin = getOffset(timezone);
+    const offsetMin = getOffset(timezone);
     const absOffset = Math.abs(offsetMin);
     const minutes = pad(absOffset % 60);
     return minutes;

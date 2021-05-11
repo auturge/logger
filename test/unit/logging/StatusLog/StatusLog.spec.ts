@@ -14,7 +14,7 @@ import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
 describe('StatusLog', () => {
 
     let log;
-    let buildAndWrite, reconfigured;
+    let buildAndWrite;
     let level, status, message, obj, prettyPrint, logName, timestamp;
 
     function clearLevels(log: IStatusLog) {
@@ -133,7 +133,6 @@ describe('StatusLog', () => {
 
                 assert.equal(log[ '_enabled' ], value);
                 assert.equal(log.enabled, value);
-                // sinon.assert.calledOnceWithExactly(reconfigured, log);
             });
         });
 
@@ -145,7 +144,6 @@ describe('StatusLog', () => {
 
             assert.equal(log[ '_enabled' ], value);
             assert.equal(log.enabled, value);
-            // sinon.assert.notCalled(reconfigured);
         });
     });
 
