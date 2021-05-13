@@ -49,7 +49,7 @@ describe('LogManager', () => {
             manager = new LogManager(builder);
 
             assert.deepEqual(manager.initialize, builder);
-            assert.equal(manager.initialize.logCreated.handlers[ 0 ], manager.onLogCreated);
+            assert.equal(manager.initialize.logCreated.subscribers[ 0 ], manager.onLogCreated);
         });
     });
 

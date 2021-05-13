@@ -13,13 +13,13 @@ describe('events', () => {
 
         describe('emit', () => {
 
-            it('emit - [void] - iterates over the list of event handlers, and executes each one', () => {
+            it('emit - [void] - iterates over the list of event subscribers, and executes each one', () => {
                 const handler1 = sinon.spy();
                 const handler2 = sinon.spy();
                 const handler3 = sinon.spy();
-                const handlers = [ handler1, handler2, handler3 ];
+                const subscribers = [ handler1, handler2, handler3 ];
                 const emitter = new Emitter();
-                emitter[ '_handlers' ] = handlers;
+                emitter[ '_subscribers' ] = subscribers;
 
                 emitter.emit();
 
@@ -28,13 +28,13 @@ describe('events', () => {
                 sinon.assert.calledOnceWithExactly(handler3, undefined);
             });
 
-            it('emit - [typed] - iterates over the list of event handlers, and executes each one', () => {
+            it('emit - [typed] - iterates over the list of event subscribers, and executes each one', () => {
                 const handler1 = sinon.spy();
                 const handler2 = sinon.spy();
                 const handler3 = sinon.spy();
-                const handlers = [ handler1, handler2, handler3 ];
+                const subscribers = [ handler1, handler2, handler3 ];
                 const emitter = new Emitter<TestEventArgs>();
-                emitter[ '_handlers' ] = handlers;
+                emitter[ '_subscribers' ] = subscribers;
                 const args: TestEventArgs = { foo: 'bar' };
 
                 emitter.emit(args);
@@ -47,15 +47,15 @@ describe('events', () => {
 
         describe('subscribers', () => {
 
-            it('subscribers - returns the list of event handlers', () => {
+            it('subscribers - returns the list of event subscribers', () => {
                 const handler: EventHandler = () => { /* Do nothing */ };
-                const handlers = [ handler ];
+                const subscribers = [ handler ];
                 const emitter = new Emitter();
-                emitter[ '_handlers' ] = handlers;
+                emitter[ '_subscribers' ] = subscribers;
 
                 const result = emitter.subscribers;
 
-                assert.equal(result, handlers);
+                assert.equal(result, subscribers);
             });
         });
 
@@ -66,14 +66,14 @@ describe('events', () => {
                 const handler1: EventHandler = () => { /* Do nothing */ };
                 const handler2: EventHandler = () => { /* Do nothing */ };
                 const handler3: EventHandler = () => { /* Do nothing */ };
-                const handlers = [ handler1, handler2 ];
+                const subscribers = [ handler1, handler2 ];
                 const expected = [ handler1, handler2, handler3 ];
                 const emitter = new Emitter();
-                emitter[ '_handlers' ] = handlers;
+                emitter[ '_subscribers' ] = subscribers;
 
                 emitter.subscribe(handler3);
 
-                assert.deepEqual(emitter[ '_handlers' ], expected);
+                assert.deepEqual(emitter[ '_subscribers' ], expected);
             });
         });
 
@@ -84,30 +84,30 @@ describe('events', () => {
                 const handler2: EventHandler = () => { /* Do nothing */ };
                 const handler3: EventHandler = () => { /* Do nothing */ };
                 const expected = [ handler1, handler3 ];
-                const handlers = [ handler1, handler2, handler3 ];
+                const subscribers = [ handler1, handler2, handler3 ];
                 const emitter = new Emitter();
-                emitter[ '_handlers' ] = handlers;
+                emitter[ '_subscribers' ] = subscribers;
 
                 emitter.unsubscribe(handler2);
 
-                assert.deepEqual(emitter[ '_handlers' ], expected);
+                assert.deepEqual(emitter[ '_subscribers' ], expected);
             });
         });
 
         describe('clear', () => {
 
-            it('clear - removes all event handlers', () => {
+            it('clear - removes all event subscribers', () => {
                 const handler1: EventHandler = () => { /* Do nothing */ };
                 const handler2: EventHandler = () => { /* Do nothing */ };
                 const handler3: EventHandler = () => { /* Do nothing */ };
-                const handlers = [ handler1, handler2, handler3 ];
+                const subscribers = [ handler1, handler2, handler3 ];
                 const expected = [];
                 const emitter = new Emitter();
-                emitter[ '_handlers' ] = handlers;
+                emitter[ '_subscribers' ] = subscribers;
 
                 emitter.clear();
 
-                assert.deepEqual(emitter[ '_handlers' ], expected);
+                assert.deepEqual(emitter[ '_subscribers' ], expected);
             });
         });
 
