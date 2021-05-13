@@ -26,7 +26,7 @@ export class ColorPatternFormatter extends PatternFormatter {
     }
 
     private colorMessage(message: string, entry: ILogEntry): string {
-        var color = EntryColorizer.getColor(entry);
+        const color = EntryColorizer.getColor(entry);
         return color(message);
     }
 }
