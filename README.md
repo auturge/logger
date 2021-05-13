@@ -22,13 +22,11 @@
 
 - [Installation](#installation)
 - [Examples](#examples)
-- [Usage](#usage)
 - [Tables](#tables)
     - [Date Formatting](#date-formatting)
     - [Logging Writers](#logging-writers)
     - [`LogLevels`](#log-levels)
     - [Entry Statuses](#entry-statuses)
-    - [`ILogEntry` fields](#ilogentry-fields)
 - [Caveats](#caveats)
 - [API](#api)
     - Abstractions
@@ -311,24 +309,6 @@ We need to enable logging to many possible targets, for example:
 
 <a href="#top">(go to top)</a>
 
-<br>
-
-### `ILogEntry` Fields ###
-
-|Log Entry Property	|Importance|
-|:---|:---|
-|data		| Any accompanying data that should be included and logged. |
-|level		| The level at which to log the message. |
-|message	| The message to log. |
-|source		| The source of the log entry. |
-|timestamp	| The date and time of the entry. |
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-<br>
-
 ----
 
 ## Caveats ##
@@ -338,8 +318,6 @@ We need to enable logging to many possible targets, for example:
 <br>
 
 <a href="#top">(go to top)</a>
-
-<br>
 
 ----
 
