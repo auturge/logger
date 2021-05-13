@@ -22,44 +22,27 @@
 
 - [Installation](#installation)
 - [Examples](#examples)
+- [Usage](#usage)
 - [API](#api)
     - [Abstractions](#abstractions)
-        - [`ILog`](#ilog)
-            - [`fatal`](#fatal)
-            - [`error`](#error)
-            - [`warn`](#warn)
-            - [`info`](#info)
-            - [`debug`](#debug)
-            - [`trace`](#trace)
-        - [`IStatusLog`](#istatuslog)
-        - [`ILogEntry`](#ilogentry)
-        - [`IStatusLogEntry`](#istatuslogentry)
-        - [`IWriter`](#iwriter)
-        - [`ILogManager`](#ilogmanager)
-        - [`ILogBuilder`](#ilogbuilder)
+        - [`IChannel`](iChannel)
+        - [`ILog`](ilog)
+        - [`ILogBuilder`](iLogBuilder)
+        - [`ILogEntry`](iLogEntry)
+        - [`ILogManager`](iLogManager)
+        - [`IStatusLog`](iStatusLog)
+        - [`IStatusLogEntry`](iStatusLogEntry)
+        - [`IWriter`](iWriter)
     - [Instances](#instances)
-        - [`Log`](#log)
-            - [`fatal`](#fatal)
-            - [`error`](#error)
-            - [`warn`](#warn)
-            - [`info`](#info)
-            - [`debug`](#debug)
-            - [`trace`](#trace)
-            - [`success`](#success)
-            - [`failure`](#failure)
-            - [`mark`](#mark)
-        - [`LogManager`](#logmanager)
-            - [`initialize`](#initialize)
-            - [`disable`](#disable)
-            - [`enable`](#enable)
-            - [`getLog`](#getlog)
-        - [`LogBuilder`](#logbuilder)
+        - [`Log`](log)
+        - [`LogManager`](logmanager)
+        - [`LogBuilder`](logbuilder)
         - [loggers](#loggers)
-            - [`TerminalLog`](#terminallog)
-            - [`ConsoleLog`](#consolelog)
+            - [`TerminalLog`](terminalLog)
+            - [`ConsoleLog`](consoleLog)
         - [writers](#writers)
-            - [`TERMINAL`](#terminal)
-            - [`CONSOLE`](#console)
+            - [`TERMINAL`](terminal)
+            - [`CONSOLE`](console)
 - [Tables](#tables)
 - [Caveats](#caveats)
 - [License](#license)
@@ -156,6 +139,7 @@ logger.trace('Look! An entry that will only appear in the debug log file...');
 There are several abstraction exposed by @auturge/logger:
 
 - [`ILog`](#i-log)
+- [`IChannel`](#i-channel)
 - [`ILogEntry`](#i-log-entry)
 - [`IWriter`](#i-writer)
 - [`LogManagerClass`](#log-manager-class)
@@ -164,15 +148,6 @@ There are several abstraction exposed by @auturge/logger:
 There are also several class instances:
 
 - [`Log`](#log),
-    - [`fatal`](#fatal)
-    - [`error`](#error)
-    - [`warn`](#warn)
-    - [`info`](#info)
-    - [`debug`](#debug)
-    - [`trace`](#trace)
-    - [`success`](#success)
-    - [`failure`](#failure)
-    - [`mark`](#mark)
 - [`LogManager`](#log-manager),
 - [`ConsoleLog` and `TerminalLog` (loggers)](#loggers),
 - [`CONSOLE` and `TERMINAL` (writers)](#writers)
@@ -193,163 +168,13 @@ There are also several class instances:
 
 @auturge/logger exposes several abstractions, designed to make the library extensible:
 
-- [`ILog`](#ilog)
-    - [`fatal`](#fatal)
-    - [`error`](#error)
-    - [`warn`](#warn)
-    - [`info`](#info)
-    - [`debug`](#debug)
-    - [`trace`](#trace)
-- [`ILogEntry`](#i-log-entry)
-- [`IWriter`](#i-writer)
-- [`LogManagerClass`](#log-manager-class)
-- [`LogBuilder`](#log-builder)
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-### ILog ###
-
-> `ILog`: An interface describing the properties and methods used to log messages.
-
-Any `ILog<TLog, TEntry>` exposes the following members:
-
-- [`channels`](#channels)
-- [`name`](#name)
-- [`reconfigured`](#reconfigured)
-- [`enabled`](#enabled)
-- [`setLevel`](#setlevel)
-
-along with several logging-specific methods:
-
-- [`fatal`](#fatal)
-- [`error`](#error)
-- [`warn`](#warn)
-- [`info`](#info)
-- [`debug`](#debug)
-- [`trace`](#trace)
-
-> Unfortunately Github Flavored Markdown (GFM) does not support custom text colors wtihout using hacky workarounds or placeholder sites, so I won't demo colors here, but instead provide a table:
-
-|Method|Color|
-|:---|:---|
-|fatal|red|
-|error|red|
-|warn|yellow|
-|info|default console color|
-|debug|cyan|
-|trace|default console color|
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `fatal` ####
-
-> ```javascript
-> ILog.fatal(message: string): void;
-> ILog.fatal(message: string, obj: any): void;
-> ILog.fatal(message: string, obj: any, prettyPrint: boolean): void;
-> ```
-
-Formats and writes a fatal log message.
-
-This is the log level that tells the user that the application has encountered an event or entered a state in which one of the crucial business functionalities is no longer working. A FATAL log level may be used when the application is not able to connect to a crucial data store like a database or all the payment systems are not available and users can’t checkout their baskets in your e-commerce.
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `error` ####
-
-> ```javascript
-> ILog.error(message: string): void;
-> ILog.error(message: string, obj: any): void;
-> ILog.error(message: string, obj: any, prettyPrint: boolean): void;
-> ```
-
-Formats and writes an error log message.
-
-This tells the user that the application has hit an issue preventing one or more functionalities from properly functioning. The ERROR level can be used when one of the payment systems is not available, but there is still the option to check out the basket in the e-commerce application or when your social media logging option is not working for some reason.
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `warn` ####
-
-> ```javascript
-> ILog.warn(message: string): void;
-> ILog.warn(message: string, obj: any): void;
-> ILog.warn(message: string, obj: any, prettyPrint: boolean): void;
-> ```
-
-Formats and writes a warning log message.
-
-This tells the user that something unexpected happened in the application: a problem, or a situation that might disturb one of the processes. But that doesn’t mean that the application failed. The WARN level should be used in situations that are unexpected, but the code can continue the work. For example, a parsing error occurred that resulted in a certain document not being processed.
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `info` ####
-
-> ```javascript
-> ILog.info(message: string): void;
-> ILog.info(message: string, obj: any): void;
-> ILog.info(message: string, obj: any, prettyPrint: boolean): void;
-> ```
-
-Formats and writes an informational log message.
-
-This is the standard log level indicating that something happened, the application entered a certain state, etc. For example, a controller of your authorization API may include an INFO log entry with information on which user requested authorization if the authorization was successful or not. The information logged using the INFO log level should be purely informative and not looking into them on a regular basis shouldn’t result in missing any important information.
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `debug` ####
-
-> ```javascript
-> ILog.debug(message: string): void;
-> ILog.debug(message: string, obj: any): void;
-> ILog.debug(message: string, obj: any, prettyPrint: boolean): void;
-> ```
-
-Formats and writes a debug log message.
-
-This level is less granular compared to the TRACE level, but it is more than you will need in everyday use. The DEBUG log level should be used for information that may be needed for diagnosing issues and troubleshooting or when running application in the test environment for the purpose of making sure everything is running correctly
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `trace` ####
-
-> ```javascript
-> ILog.trace(message: string): void;
-> ILog.trace(message: string, obj: any): void;
-> ILog.trace(message: string, obj: any, prettyPrint: boolean): void;
-> ```
-
-Formats and writes a trace log message.
-
-This level is for the most fine-grained information only used in rare cases where you need the full visibility of what is happening in your application and inside the third-party libraries that you use. You can expect the TRACE logging level to be very verbose. You can use it for example to annotate each step in the algorithm or each individual query with parameters in your code.
+- [`ILog`](./docs/iLog.md)
+- [`IStatusLog`](iStatusLog)
+- [`IChannel`](iChannel)
+- [`ILogEntry`](iLogEntry)
+- [`IWriter`](iWriter)
+- [`ILogManager`](iLogManager)
+- [`ILogBuilder`](iLogBuilder)
 
 <br>
 
@@ -361,231 +186,10 @@ This level is for the most fine-grained information only used in rare cases wher
 
 @auturge/logger exposes several 'default' implementations of the provided abstractions:
 
-- [`Log`](#log)
-    - [`fatal`](#fatal)
-    - [`error`](#error)
-    - [`warn`](#warn)
-    - [`info`](#info)
-    - [`debug`](#debug)
-    - [`trace`](#trace)
-    - [`success`](#success)
-    - [`failure`](#failure)
-    - [`mark`](#mark)
-- [`LogManager`](#log-manager)
+- [`Log`](log)
+- [`LogManager`](logManager)
 - [`ConsoleLog` and `TerminalLog` (loggers)](#loggers)
 - [`CONSOLE` and `TERMINAL` (writers)](#writers)
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-### Log ###
-
-> Log: A default terminal logger for quick out-of-the-box logging.
-
-Any [`ILog`](#ilog) exposes the following methods:
-
-- [`fatal`](#fatal)
-- [`error`](#error)
-- [`warn`](#warn)
-- [`info`](#info)
-- [`debug`](#debug)
-- [`trace`](#trace)
-
-The `Log` is an [`IStatusLog`](#istatuslog), a special type of [`ILog`](#ilog) which also exposes the following logging methods:
-
-- [`success`](#success)
-- [`failure`](#failure)
-- [`mark`](#mark)
-
-In addition, `Log` will colorize each log entry.
-
-> Unfortunately Github Flavored Markdown (GFM) does not support custom text colors wtihout using hacky workarounds or placeholder sites, so I won't demo colors here, but instead provide a table:
-
-|Method|Color|
-|:---|:---|
-|fatal|red|
-|error|red|
-|warn|yellow|
-|info|default console color|
-|debug|cyan|
-|trace|default console color|
-|success|green|
-|failure|red|
-|mark|magenta|
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `success` ####
-
-> ```javascript
-> IStatusLog.success(message: string): void;
-> IStatusLog.success(message: string, obj: any): void;
-> IStatusLog.success(message: string, obj: any, prettyPrint: boolean): void;
-> ```
-
-Formats and writes a success log message.
-
-This is for informing the user of some significant operational success.
-
-Some examples of `success` messages:
-
-- 'All done!'
-- 'Successfully logged in!'
-
-> NOTE: `success` entries are logged at the `info` level.
->
-> Setting the level of the logger higher than `info` will filter out any `success` messages.
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `failure` ####
-
-> ```javascript
-> IStatusLog.failure(message: string): void;
-> IStatusLog.failure(message: string, obj: any): void;
-> IStatusLog.failure(message: string, obj: any, prettyPrint: boolean): void;
-> ```
-
-Formats and writes a trace log message.
-
-This is for informing the user of some significant operational failure _that is tied to **user action**_. Failure messages represent **user errors**, not exceptional code failures (for that, use `error` or `fatal`).
-
-Some examples of `failure` messages:
-
-- 'Failed to log in!' (due to an HTTP 401 error, not a 500)
-- 'Passwords must include at least 12 letters (both upper- and lowercase), at least 1 number, and at least 1 symbol.'
-
-> NOTE: `failure` entries are logged at the `info` level.
->
-> Setting the level of the logger higher than `info` will filter out any `failure` messages.
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `mark` ####
-
-> ```javascript
-> IStatusLog.mark(message: string): void;
-> IStatusLog.mark(message: string, obj: any): void;
-> IStatusLog.mark(message: string, obj: any, prettyPrint: boolean): void;
-> ```
-
-Formats and writes a marking log message.
-
-This is best used to describe events that need to stand out in the log.
-
-Some examples of `mark` messages:
-
--
-        `Entering method ${ methodName } at ${ timestamp }`
--
-        `Exiting method ${ methodName } at ${ timestamp }`
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-### LogManager ###
-
-> LogManager: The default StatusLog manager.
-
-Any `ILogManager` exposes the following members:
-
-- [`initialize`](#initialize)
-- [`disable`](#disable)
-- [`enable`](#enable)
-- [`getLog`](#getlog)
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `initialize` ####
-
-> A `LogBuilder` that configures a logger.
-
-`LogManager.initialize` is meant to be a [fluent interface][fluent-interface], and exposes the following members:
-
-- [`andGetLogger`](#andgetlogger)
-- [`atLevel`](#atlevel)
-- [`newLog`](#newlog)
-- [`newChannel`](#newchannel)
-
-<br>
-
-Example:
-
-```javascript
-const consoleLog = LogManager.initialize
-    .newLog('console log')
-    .newChannel('console channel', CONSOLE, LogLevel.INFO)
-    .andGetLogger();
-    
-consoleLog.mark('Logger configured.');
-```
-
-<br>
-
-For more details, see the [ILogBuilder](#ilogbuilder) abstraction.
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `disable` ####
-
-> ```javascript
-> LogManager.disable(logName: string): void;
-> ```
-
-Disables the log with the given name.
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `enable` ####
-
-> ```javascript
-> LogManager.enable(logName: string): void;
-> ```
-
-Enables the log with the given name.
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-#### `getLog` ####
-
-> ```javascript
-> LogManager.getLog(logName: string): ILog | null;
-> ```
-
-Returns the `ILog` instance with the given name.
-Returns `null` if not found.
 
 <br>
 
@@ -599,7 +203,7 @@ Returns `null` if not found.
 >
 > TerminalLog: The default terminal logger.
 
-Both `ConsoleLog` and `TerminalLog` are instances of the `IStatusLog` abstraction.
+Both `ConsoleLog` and `TerminalLog` are instances of the [`IStatusLog`](iStatusLog) abstraction.
 
 <br>
 
@@ -626,7 +230,7 @@ It has a single channel, called 'console', utilizing a [`ConsoleWriter`](#termin
 >
 > TERMINAL: The default terminal writer.
 
-Both `CONSOLE` and `TERMINAL` are instances of the `IWriter` abstraction.
+Both `CONSOLE` and `TERMINAL` are instances of the [`IWriter`](iWriter) abstraction.
 
 <br>
 
@@ -775,4 +379,17 @@ Distributed under the MIT license. See [`LICENSE`][license] for more information
 [tr35]: https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 [date-fns]: https://date-fns.org/
 [date-fns-tz]: https://www.npmjs.com/package/date-fns-tz
-[fluent-interface]: https://martinfowler.com/bliki/FluentInterface.html
+
+[emitter]: docs/emitter.md
+[iChannel]: docs/iChannel.md
+[iEmitter]: docs/iEmitter.md
+[iLog]: docs/iLog.md
+[iLogBuilder]: docs/iLogBuilder.md
+[iLogEntry]: docs/iLogEntry.md
+[iLogManager]: docs/iLogManager.md
+[iStatusLog]: docs/iStatusLog.md
+[iStatusLogEntry]: docs/iStatusLogEntry.md
+[iWriter]: docs/iWriter.md
+[log]: docs/Log.md
+[logLevel]: docs/logLevel.md
+[logStatus]: docs/logStatus.md

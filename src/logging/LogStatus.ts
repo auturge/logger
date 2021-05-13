@@ -1,6 +1,6 @@
 import { throwIfNullOrEmpty } from "@src/functions/guards";
 
-/** Defines the default set of logging status codes. */
+/** Defines the default set of entry status codes. */
 export class LogStatus {
 
     // #region instance members
@@ -10,16 +10,14 @@ export class LogStatus {
 
     /**
      * Constructor
-     * @param {number} level The value for this level.  Higher values represent more severe levels.
      * @param {string} name The name of this level.
      */
     public constructor(name: string);
 
     /**
      * Constructor
-     * @param {number} level The value for this level.  Higher values represent more severe levels.
      * @param {string} name The name of this level.
-     * @param displayName The display name for this level. This may be localized or otherwise different from the name.
+     * @param {string} displayName The display name for this level. This may be localized or otherwise different from the name.
      */
     public constructor(name: string, displayName: string);
     public constructor(name: string, displayName: string = name) {
@@ -37,16 +35,26 @@ export class LogStatus {
 
     // #region static members
 
-    /** A log status used when some process has failed. */
+    /** An entry status used to describe some significant operational failure _that is tied to **user action**_. Failure messages represent **user errors**, not exceptional code failures.
+     *
+     * Examples:
+     *  - 'Failed to log in!' (due to an HTTP 401 error, not a 500)
+     *  - 'Passwords must include at least 12 letters (both upper- and lowercase), at least 1 number, and at least 1 symbol.'
+     */
     public static FAILURE: LogStatus = Object.freeze(new LogStatus("FAILURE"));
 
-    /** A log level used when an event happened, the event is purely informative and can be ignored during normal operations. */
+    /** An entry status used when an event happened, the event is purely informative and can be ignored during normal operations. */
     public static INFO: LogStatus = Object.freeze(new LogStatus("INFO"));
 
-    /** A log level used for events considered to be useful during software debugging when more granular information is needed. */
+    /** An entry status used for marking code-execution conditions, timestamps, or other metrics. */
     public static MARK: LogStatus = Object.freeze(new LogStatus("MARK"));
 
-    /** A log level describing events showing step by step execution of your code that can be ignored during the standard operation, but may be useful during extended debugging sessions. */
+    /** An entry status that describes some significant operational success
+     *
+     * Examples:
+     *  - "successfully logged in!"
+     *  - "all done!"
+     */
     public static SUCCESS: LogStatus = Object.freeze(new LogStatus("SUCCESS"));
 
     // #endregion

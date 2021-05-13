@@ -5,8 +5,13 @@ export class LogLevel {
 
     // #region instance members
 
+    /** A `number` that represents the severity of the `LogLevel`. Higher values represent more severe levels. */
     readonly level: number;
+
+    /** The name of the `LogLevel`. */
     readonly name: string;
+
+    /** The displayName of the `LogLevel`. */
     readonly displayName: string;
 
     /**
