@@ -24,6 +24,11 @@
 - [Examples](#examples)
 - [Usage](#usage)
 - [Tables](#tables)
+    - [Date Formatting](#date-formatting)
+    - [Logging Writers](#logging-writers)
+    - [`LogLevels`](#log-levels)
+    - [Entry Statuses](#entry-statuses)
+    - [`ILogEntry` fields](#ilogentry-fields)
 - [Caveats](#caveats)
 - [API](#api)
     - Abstractions
@@ -304,7 +309,7 @@ We need to enable logging to many possible targets, for example:
 
 <br>
 
-### Log Entry Fields ###
+### `ILogEntry` Fields ###
 
 |Log Entry Property	|Importance|
 |:---|:---|
