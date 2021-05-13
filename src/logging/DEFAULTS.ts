@@ -8,10 +8,10 @@ import { DateFormat } from '@src/functions/formatDate';
 import { IStatusEntry } from './StatusLog/IStatusEntry';
 
 /** Console Writer */
-export const CONSOLE: IWriter<IStatusEntry> = new ConsoleWriter('%{l} %{m}');
+export const CONSOLE: IWriter<IStatusEntry> = new ConsoleWriter('%{l|color} %{m}');
 
 /** Terminal Writer */
-export const TERMINAL: IWriter<IStatusEntry> = new TerminalWriter(` %{ date | ${ DateFormat.DEFAULT } } | %{level} | %{message}`);
+export const TERMINAL: IWriter<IStatusEntry> = new TerminalWriter(` %{ date | ${ DateFormat.DEFAULT } } | %{ level } | %{message}`);
 
 const logBuilder = new StatusLogBuilder('main');
 

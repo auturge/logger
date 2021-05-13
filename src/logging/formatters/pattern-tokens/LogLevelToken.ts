@@ -1,6 +1,7 @@
 import { TokenDefinition } from "./TokenDefinition";
 import { TokenMatch } from "./ITokenMatch";
 import { ILogEntry } from "../../ILogEntry";
+import { EntryColorizer, Style } from "../EntryColorizer";
 
 // TODO: Add class description comment
 
@@ -18,7 +19,50 @@ export class LogLevelToken extends TokenDefinition {
         // so let's just go with the maximum known length, 5.
 
         //...unless we allow the token to SET the max level...
-        const maxLength = 5;
-        return entry.level.toString().padEnd(maxLength);
+        const length = this.getLength(match.arguments);
+        let result = entry.level.toString().padEnd(length);
+        if (result.length > length)
+            result = result.slice(0, length);
+
+        const color = this.getColor(entry, match.arguments);
+        result = color(result);
+
+        return result;
+    }
+
+    private getLength(args: string[]): number {
+        let length = 5;
+        if (!(args && args.length))
+            return length;
+
+        args.forEach(arg => {
+            arg = arg.trim().toLowerCase();
+            if (arg.startsWith('len:')) {
+                const value = arg.slice(4);
+                length = Number.parseInt(value);
+            }
+        })
+        return length;
+    }
+
+    private hasColorArg(args: string[]): boolean {
+        let result = false;
+        if (!(args && args.length))
+            return result;
+
+        args.forEach(arg => {
+            arg = arg.trim().toLowerCase();
+            if (arg == "color")
+                result = true;
+        })
+
+        return result;
+    }
+
+    private getColor(entry: ILogEntry, args: string[]): Style {
+        if (!this.hasColorArg(args))
+            return EntryColorizer.DEFAULT;
+
+        return EntryColorizer.getColor(entry);
     }
 }
