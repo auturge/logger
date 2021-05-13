@@ -1,7 +1,7 @@
 import { TokenDefinition } from "./TokenDefinition";
 import { TokenMatch } from "./ITokenMatch";
 import { ILogEntry } from "../../ILogEntry";
-import { EntryColorizer, Style } from "../EntryColorizer";
+import { EntryColorizer, noStyle } from "../EntryColorizer";
 
 // TODO: Add class description comment
 
@@ -59,9 +59,9 @@ export class LogLevelToken extends TokenDefinition {
         return result;
     }
 
-    private getColor(entry: ILogEntry, args: string[]): Style {
+    private getColor(entry: ILogEntry, args: string[]): (str: string) => string {
         if (!this.hasColorArg(args))
-            return EntryColorizer.DEFAULT;
+            return noStyle;
 
         return EntryColorizer.getColor(entry);
     }

@@ -13,7 +13,6 @@ export interface ITokenMatch {
     startIndex: number;
     tokenType: string;
     value: string;
-    readonly length: number;
 }
 
 export class TokenMatch implements ITokenMatch {

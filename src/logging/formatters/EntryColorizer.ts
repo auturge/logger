@@ -2,11 +2,10 @@ import { ILogEntry } from "../ILogEntry";
 import { red, yellow, green, magenta, cyan, Style } from "colorette";
 import { LogStatus } from "@src/logging/LogStatus";
 import { LogLevel } from "@src/logging/LogLevel";
-export { Style } from "colorette";
+
+export const noStyle: Style = (str: string) => str;
 
 export class EntryColorizer {
-
-    public static readonly DEFAULT: Style = (str: string) => str;
 
     public static getColor(entry: ILogEntry): Style {
         if (entry.data) {
@@ -30,6 +29,6 @@ export class EntryColorizer {
                 return cyan;
         }
 
-        return this.DEFAULT;
+        return noStyle;
     }
 }
