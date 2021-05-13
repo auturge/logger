@@ -72,7 +72,7 @@ The display name of the `LogLevel` (defaults to the same value as `name`).
 
 |Log Level	|Importance|
 |:---|:---|
-|OFF| Nothing will be logged.
+|OFF| Nothing will be logged. |
 |FATAL	|One or more key business functionalities are not working and the whole system doesn’t fulfill the business functionalities.|
 |ERROR	|One or more functionalities are not working, preventing some functionalities from working correctly.|
 |WARN	|Unexpected behavior happened inside the application, but it is continuing its work and the key business features are operating as expected.|

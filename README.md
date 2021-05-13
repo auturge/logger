@@ -40,6 +40,10 @@
         - [`IStatusLog`](docs/iStatusLog.md)
         - [`IStatusLogEntry`](docs/iStatusLogEntry.md)
         - [`IWriter`](docs/iWriter.md)
+    - Enums
+        - [`DateFormat`](docs/dateFormat.md)
+        - [`LogLevel`](docs/logLevel.md)
+        - [`LogStatus`](docs/logStatus.md)
     - Instances
         - [`Log`](docs/log.md)
         - [`LogManager`](docs/LogManager.md)
@@ -50,10 +54,7 @@
         - writers
             - [`TERMINAL`](docs/TerminalWriter.md)
             - [`CONSOLE`](docs/ConsoleWriter.md)
-    - Enums
-        - [`DateFormat`](docs/dateFormat.md)
-        - [`LogLevel`](docs/logLevel.md)
-        - [`LogStatus`](docs/logStatus.md)
+
 - [License](#license)
 
 <br>
@@ -86,7 +87,7 @@ I felt like reinventing the wheel (_so naughty_), so here's a handy, extensible 
 
 ## Examples ##
 
-### Use the default ["Log"](#log) to log a message ###
+### Use the default ["Log"](docs/log.md) to log a message ###
 
 ```ts
 import { Log } from '@auturge/logger';
@@ -266,8 +267,8 @@ We need to enable logging to many possible targets, for example:
 
 | Example Target	| Description |
 |:---|:---|
-|[`CONSOLE`](#console)	| The browser console |
-|[`TERMINAL`](#terminal)	| The terminal (non-browser) |
+|[`CONSOLE`](docs/consoleWriter.md)	| The browser console |
+|[`TERMINAL`](docs/terminalWriter.md)	| The terminal (non-browser) |
 <!-- |DATABASE	| Log entries into a database | -->
 <!-- |FILE	    | Log into a file (non-browser only) | -->
 
@@ -281,12 +282,15 @@ We need to enable logging to many possible targets, for example:
 
 |Log Level	|Importance|
 |:---|:---|
-|Fatal	|One or more key business functionalities are not working and the whole system doesn’t fulfill the business functionalities.|
-|Error	|One or more functionalities are not working, preventing some functionalities from working correctly.|
-|Warn	|Unexpected behavior happened inside the application, but it is continuing its work and the key business features are operating as expected.|
-|Info	|An event happened, the event is purely informative and can be ignored during normal operations.|
-|Debug	|Useful during software debugging when more granular information is needed.|
-|Trace	|Step by step execution of your code that can be ignored during the standard operation, but may be useful during extended debugging sessions.|
+|OFF| Nothing will be logged. |
+|FATAL	|One or more key business functionalities are not working and the whole system doesn’t fulfill the business functionalities.|
+|ERROR	|One or more functionalities are not working, preventing some functionalities from working correctly.|
+|WARN	|Unexpected behavior happened inside the application, but it is continuing its work and the key business features are operating as expected.|
+|INFO	|An event happened, the event is purely informative and can be ignored during normal operations.|
+|DEBUG	|Useful during software debugging when more granular information is needed.|
+|TRACE	|Step by step execution of your code that can be ignored during the standard operation, but may be useful during extended debugging sessions.|
+|ALL	|A level where all messages will be logged, regardless of level. |
+
 
 <br>
 
@@ -298,10 +302,10 @@ We need to enable logging to many possible targets, for example:
 
 | Status	|Importance|
 |:---|:---|
-| failure	| Non-code failure (login failure, etc.) |
-| info		| Informational |
-| mark		| Code-execution condition, timestamp, or metrics. |
-| success	| Successful completion of an operation. |
+| FAILURE	| Describes some significant operational failure _that is tied to **user action**_. Failure messages represent **user errors**, not exceptional code failures.<br>Examples:<br>- 'Failed to log in!' (due to an HTTP 401 error, not a 500)<br>- 'Passwords must include at least 12 letters (both upper- and lowercase), at least 1 number, and at least 1 symbol.' |
+| INFO		| Describes some event, where the event is purely informative and can be ignored during normal operations. |
+| MARK		| Code-execution condition, timestamp, or metrics. |
+| SUCCESS	| Describes some significant operational success.<br>Examples:<br>- 'Successfully logged in!'<br>- 'All done!' |
 
 <br>
 
