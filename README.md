@@ -23,28 +23,32 @@
 - [Installation](#installation)
 - [Examples](#examples)
 - [Usage](#usage)
-- [API](#api)
-    - [Abstractions](#abstractions)
-        - [`IChannel`](docs/iChannel.md)
-        - [`ILog`](docs/ilog.md)
-        - [`ILogBuilder`](iLogBuilder)
-        - [`ILogEntry`](iLogEntry)
-        - [`ILogManager`](iLogManager)
-        - [`IStatusLog`](iStatusLog)
-        - [`IStatusLogEntry`](iStatusLogEntry)
-        - [`IWriter`](iWriter)
-    - [Instances](#instances)
-        - [`Log`](log)
-        - [`LogManager`](logmanager)
-        - [`LogBuilder`](logbuilder)
-        - [loggers](#loggers)
-            - [`TerminalLog`](terminalLog)
-            - [`ConsoleLog`](consoleLog)
-        - [writers](#writers)
-            - [`TERMINAL`](terminal)
-            - [`CONSOLE`](console)
 - [Tables](#tables)
 - [Caveats](#caveats)
+- [API](#api)
+    - Abstractions
+        - [`IChannel`](docs/iChannel.md)
+        - [`ILog`](docs/iLog.md)
+        - [`ILogBuilder`](docs/iLogBuilder.md)
+        - [`ILogEntry`](docs/iLogEntry.md)
+        - [`ILogManager`](docs/iLogManager.md)
+        - [`IStatusLog`](docs/iStatusLog.md)
+        - [`IStatusLogEntry`](docs/iStatusLogEntry.md)
+        - [`IWriter`](docs/iWriter.md)
+    - Instances
+        - [`Log`](docs/log.md)
+        - [`LogManager`](docs/LogManager.md)
+        - [`LogBuilder`](docs/logBuilder.md)
+        - loggers
+            - [`TerminalLog`](docs/TerminalLog.md)
+            - [`ConsoleLog`](docs/ConsoleLog.md)
+        - writers
+            - [`TERMINAL`](docs/TerminalWriter.md)
+            - [`CONSOLE`](docs/ConsoleWriter.md)
+    - Enums
+        - [`DateFormat`](docs/dateFormat.md)
+        - [`LogLevel`](docs/logLevel.md)
+        - [`LogStatus`](docs/logStatus.md)
 - [License](#license)
 
 <br>
@@ -138,65 +142,41 @@ logger.trace('Look! An entry that will only appear in the debug log file...');
 
 There are several abstraction exposed by @auturge/logger:
 
-- [`ILog`](#i-log)
-- [`IChannel`](#i-channel)
-- [`ILogEntry`](#i-log-entry)
-- [`IWriter`](#i-writer)
-- [`LogManagerClass`](#log-manager-class)
-- [`LogBuilder`](#log-builder)
+- [`IChannel`](docs/iChannel.md)
+- [`IEmitter`](docs/iEmitter.md)
+- [`ILog`](docs/iLog.md)
+- [`ILogBuilder`](docs/iLogBuilder.md)
+- [`ILogEntry`](docs/iLogEntry.md)
+- [`ILogManager`](docs/iLogManager.md)
+- [`IStatusLog`](docs/iStatusLog.md)
+- [`IStatusLogEntry`](docs/iStatusLogEntry.md)
+- [`IWriter`](docs/iWriter.md)
 
 There are also several class instances:
 
-- [`Log`](#log),
-- [`LogManager`](#log-manager),
-- [`ConsoleLog` and `TerminalLog` (loggers)](#loggers),
-- [`CONSOLE` and `TERMINAL` (writers)](#writers)
+- [`Emitter`](docs/emitter.md),
+- [`Log`](docs/log.md),
+- [`LogBuilder`](docs/LogBuilder.md),
+- [`LogManager`](docs/LogManager.md),
+- loggers
+    - [`ConsoleLog`](docs/ConsoleLog.md),
+    - [`TerminalLog`](docs/TerminalLog.md),
+- writers
+    - [`CONSOLE`](docs/ConsoleWriter.md)
+    - [`TERMINAL`](docs/TerminalWriter.md)
 
 ...and a number of enums:
 
-- [`DateFormat`](#dateformat)
-- [`LogLevel`](#loglevel)
-- [`LogStatus`](#logstatus)
+- [`DateFormat`](docs/dateFormat.md)
+- [`LogLevel`](docs/logLevel.md)
+- [`LogStatus`](docs/logStatus.md)
 
 <br>
 
 <a href="#top">(go to top)</a>
 
 ----
-
-## Abstractions ##
-
-@auturge/logger exposes several abstractions, designed to make the library extensible:
-
-- [`ILog`](./docs/iLog.md)
-- [`IStatusLog`](iStatusLog)
-- [`IChannel`](iChannel)
-- [`ILogEntry`](iLogEntry)
-- [`IWriter`](iWriter)
-- [`ILogManager`](iLogManager)
-- [`ILogBuilder`](iLogBuilder)
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
-## Instances ##
-
-@auturge/logger exposes several 'default' implementations of the provided abstractions:
-
-- [`Log`](log)
-- [`LogManager`](logManager)
-- [`ConsoleLog` and `TerminalLog` (loggers)](#loggers)
-- [`CONSOLE` and `TERMINAL` (writers)](#writers)
-
-<br>
-
-<a href="#top">(go to top)</a>
-
-----
-
+<!-- 
 ### Loggers ###
 
 > ConsoleLog: The default console logger.
@@ -248,7 +228,7 @@ Both `CONSOLE` and `TERMINAL` are instances of the [`IWriter`](iWriter) abstract
 
 <a href="#top">(go to top)</a>
 
-----
+---- -->
 
 ## Tables ##
 
@@ -379,17 +359,3 @@ Distributed under the MIT license. See [`LICENSE`][license] for more information
 [tr35]: https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 [date-fns]: https://date-fns.org/
 [date-fns-tz]: https://www.npmjs.com/package/date-fns-tz
-
-[emitter]: ./docs/emitter.md
-[iChannel]: ./docs/iChannel.md
-[iEmitter]: ./docs/iEmitter.md
-[iLog]: ./docs/iLog.md
-[iLogBuilder]: ./docs/iLogBuilder.md
-[iLogEntry]: ./docs/iLogEntry.md
-[iLogManager]: ./docs/iLogManager.md
-[iStatusLog]: ./docs/iStatusLog.md
-[iStatusLogEntry]: ./docs/iStatusLogEntry.md
-[iWriter]: ./docs/iWriter.md
-[log]: ./docs/Log.md
-[logLevel]: ./docs/logLevel.md
-[logStatus]: ./docs/logStatus.md
