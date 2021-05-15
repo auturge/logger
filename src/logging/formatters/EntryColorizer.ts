@@ -1,8 +1,10 @@
-import { ILogEntry } from "../ILogEntry";
-import { red, yellow, green, magenta, cyan, Style } from "colorette";
+import { black, blue, cyan, gray, green, magenta, red, white, yellow } from "colorette";
+import { ILogEntry } from "@src/logging/ILogEntry";
 import { LogStatus } from "@src/logging/LogStatus";
 import { LogLevel } from "@src/logging/LogLevel";
+import { isNullUndefinedOrEmpty } from "@src/functions/types";
 
+export type Style = (str: string) => string;
 export const noStyle: Style = (str: string) => str;
 
 export class EntryColorizer {
@@ -30,5 +32,33 @@ export class EntryColorizer {
         }
 
         return noStyle;
+    }
+
+    public static fromString(value: string): Style {
+        if (isNullUndefinedOrEmpty(value))
+            return noStyle;
+
+        switch (value.toLowerCase()) {
+            case 'black':
+                return black;
+            case 'blue':
+                return blue;
+            case 'cyan':
+                return cyan;
+            case 'gray':
+                return gray;
+            case 'green':
+                return green;
+            case 'magenta':
+                return magenta;
+            case 'red':
+                return red;
+            case 'white':
+                return white;
+            case 'yellow':
+                return yellow;
+            default:
+                return noStyle;
+        }
     }
 }

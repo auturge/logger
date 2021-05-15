@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { AnyRandom, CharacterSet } from '@auturge/testing';
 import { data } from '@test/objects/test__objects';
 
-import { cyan, green, magenta, red, yellow } from 'colorette';
+import { black, blue, cyan, gray, green, magenta, red, white, yellow } from 'colorette';
 import { ILogEntry } from '@src/logging/ILogEntry';
 import { LogStatus } from '@src/logging/LogStatus';
 import { LogLevel } from '@src/logging/LogLevel';
@@ -80,6 +80,50 @@ describe('EntryColorizer', () => {
 
                 assert.equal(result, expected);
             });
+        });
+    });
+
+    describe('fromString', () => {
+
+        [
+            { key: 'black', func: black },
+            { key: 'blue', func: blue },
+            { key: 'cyan', func: cyan },
+            { key: 'gray', func: gray },
+            { key: 'green', func: green },
+            { key: 'magenta', func: magenta },
+            { key: 'red', func: red },
+            { key: 'white', func: white },
+            { key: 'yellow', func: yellow },
+        ].forEach(({ key, func }) => {
+            it(`fromString - [${ key }] - returns the expected styling function`, () => {
+                const result = EntryColorizer.fromString(key);
+
+                assert.equal(result, func);
+            });
+        });
+
+        [
+            { key: 'null', value: null },
+            { key: 'undefined', value: undefined },
+            { key: 'empty string', value: "" },
+
+        ].forEach(({ key, value }) => {
+            it(`fromString - returns the 'noStyle' when the 'value' arg is ${ key }`, () => {
+                const arg = <any>value;
+
+                const result = EntryColorizer.fromString(arg);
+
+                assert.equal(result, noStyle);
+            });
+        })
+
+        it(`fromString - returns the 'noStyle' when the 'value' arg is none of the above`, () => {
+            const arg = AnyRandom.string(5, 8, CharacterSet.ALPHA);
+
+            const result = EntryColorizer.fromString(arg);
+
+            assert.equal(result, noStyle);
         });
     });
 });

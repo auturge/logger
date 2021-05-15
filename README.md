@@ -118,7 +118,7 @@ import {
 import { MyFileWriter } from 'whatever-file-you-put-it-in';
 
 // use the included terminal writer
-const TERMINAL: IWriter = new TerminalWriter(` %{ date | ${ DateFormat.DEFAULT } } | %{level} | %{message}`);
+const TERMINAL: IWriter = new TerminalWriter(` %{ date | format:${ DateFormat.DEFAULT }} | %{level} | %{message}`);
 
 // write your own file-writer
 const MY_FILE_WRITER: IWriter = new MyFileWriter('%{date} | %{level} | %{message}');
@@ -238,20 +238,30 @@ Both `CONSOLE` and `TERMINAL` are instances of the [`IWriter`](iWriter) abstract
 
 ### Date Formatting ###
 
-Date formatting is based on [Unicode Technical Standard #35][tr35].
+Date token format: ```{ %date [```&#8203;```| <arguments>] }```
 
-Specifically, it depends on the [date-fns][date-fns] and [date-fns-tz][date-fns-tz] libraries to do most of the date formatting.
+#### Arguments ####
 
-Date token format: ```{ %date [```&#8203;```|<format string>[```&#8203;```| <timezone> ] ] }```
+- `format` (or `f`): The date format to use.
+
+  Date formatting is based on [Unicode Technical Standard #35][tr35].
+
+  Specifically, it depends on the [date-fns][date-fns] and [date-fns-tz][date-fns-tz] libraries to do most of the date formatting.
+
+  > NOTE: The date format string starts immediately after the colon (`:`), and ends at the closing curly-brace (`}`), and will not be trimmed. That is, if you specify the format using the token: `%{date| f: abc123 }` (notice the whitespaces before and after the `abc123`), then the formatting string will include the whitespaces before and after the `abc123`.
+  
+- `timezone` (or `tz`): The IANA string for the timezone to use.
+
+<br>
 
 example timestamp: ```2021-04-25 19:00:43.426 GMT-7 (America/Los Angeles)```
 
 | Date Format | desired result | date token |
 |:---|:---|:---|
 | Default | ```2021-04-25 19:00:43.426 -07:00``` | ```%{ date }``` |
-| "long" format | ```2021-04-26 19:00:43 -0700``` | ```%{ date \| yyyy-MM-dd HH:mm:ss XXXX }``` |
-| ISO-8601 (UTC) | ```2021-04-26T02:00:43.426Z``` | ```%{ date \| yyyy-MM-dd'T'HH:mm:ss.SSS'Z' \| UTC }``` |
-| UTC format |	```Mon, 26 Apr 2021 02:00:43 UTC``` |	```%{ date \| EEE',' dd MMM yyyy HH:mm:ss xxx \| UTC }``` |
+| "long" format | ```2021-04-26 19:00:43 -0700``` | ```%{ date \| f:yyyy-MM-dd HH:mm:ss XXXX }``` |
+| ISO-8601 (UTC) | ```2021-04-26T02:00:43.426Z``` | ```%{ date \| f:yyyy-MM-dd'T'HH:mm:ss.SSS'Z' \| tz:UTC }``` |
+| UTC format |	```Mon, 26 Apr 2021 02:00:43 UTC``` |	```%{ date \| format:EEE',' dd MMM yyyy HH:mm:ss xxx\| timezone: UTC }``` |
 
 <br>
 

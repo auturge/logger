@@ -16,6 +16,7 @@ Log.error('wacka wacka');
 
 console.log(' ');
 console.log(`'TERMINAL' logger:`);
+TERMINAL.reconfigure({ pattern: '[%{s|color:white}]  %{m}' });
 const term = LogManager.initialize
     .newChannel('m2', TERMINAL, LogLevel.TRACE)
     .andGetLogger();

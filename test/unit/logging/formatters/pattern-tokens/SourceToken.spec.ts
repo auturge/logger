@@ -5,17 +5,16 @@ import { stub } from '@test/helpers';
 
 import { ITokenMatch } from '@src/logging/formatters/pattern-tokens/ITokenMatch';
 import { ILogEntry } from '@src/logging/ILogEntry';
-import { LogLevel, LOG_LEVELS } from '@src/logging/LogLevel';
-import { LogLevelToken } from '@src/logging/formatters/pattern-tokens/LogLevelToken';
 import { EntryColorizer, noStyle } from '@src/logging/formatters/EntryColorizer';
 import { doesNotMatter } from '@test/objects/test__objects';
+import { SourceToken } from '@src/logging/formatters/pattern-tokens/SourceToken';
 
-describe('LogLevelToken', () => {
+describe('SourceToken', () => {
 
     let token;
 
     function setupTestSuite() {
-        token = new LogLevelToken();
+        token = new SourceToken();
     }
 
     describe('getMatches', () => {
@@ -23,13 +22,13 @@ describe('LogLevelToken', () => {
 
         beforeEach(setupTestSuite);
 
-        it(`getMatches - [no args] - gets matches for %{l} and %{level}`, () => {
-            const pattern = "%{l} - %{level}"
+        it(`getMatches - [no args] - gets matches for %{s} and %{source}`, () => {
+            const pattern = "%{s} - %{source}"
             const matches: ITokenMatch[] = [
                 {
                     arguments: [],
-                    endIndex: 14,
-                    matched: '%{level}',
+                    endIndex: 15,
+                    matched: '%{source}',
                     value: '',
                     tokenType: token.name,
                     startIndex: 7
@@ -37,7 +36,7 @@ describe('LogLevelToken', () => {
                 {
                     arguments: [],
                     endIndex: 3,
-                    matched: '%{l}',
+                    matched: '%{s}',
                     value: '',
                     tokenType: token.name,
                     startIndex: 0
@@ -49,21 +48,29 @@ describe('LogLevelToken', () => {
             assert.deepEqual(result, matches);
         });
 
-        it(`getMatches - [with args] - gets matches for %{l} and %{level}`, () => {
-            const pattern = `%{l|c} - %{ level | color }`
+        it(`getMatches - [with args] - gets matches for %{l} and %{len} and %{length}`, () => {
+            const pattern = `%{s|l:3} - %{ source | len:5 }:: %{ source | length: 7 }`
             const matches: ITokenMatch[] = [
                 {
-                    arguments: [ { key: 'color' } ],
-                    endIndex: 26,
-                    matched: `%{ level | color }`,
+                    arguments: [ { key: 'len', value: 5 } ],
+                    endIndex: 29,
+                    matched: `%{ source | len:5 }`,
                     value: '',
                     tokenType: token.name,
-                    startIndex: 9
+                    startIndex: 11
                 },
                 {
-                    arguments: [ { key: 'c' } ],
-                    endIndex: 5,
-                    matched: `%{l|c}`,
+                    arguments: [ { key: 'length', value: 7 } ],
+                    endIndex: 55,
+                    matched: `%{ source | length: 7 }`,
+                    value: '',
+                    tokenType: token.name,
+                    startIndex: 33
+                },
+                {
+                    arguments: [ { key: 'l', value: 3 } ],
+                    endIndex: 7,
+                    matched: `%{s|l:3}`,
                     value: '',
                     tokenType: token.name,
                     startIndex: 0
@@ -80,12 +87,12 @@ describe('LogLevelToken', () => {
 
         beforeEach(setupTestSuite);
 
-        it(`getValue - [no args] - returns the proper value (UNCOLORED)`, () => {
+        it(`getValue - [no args] - returns the proper value`, () => {
 
             const entry: ILogEntry = {
-                level: AnyRandom.oneOf(LOG_LEVELS),
+                level: doesNotMatter(),
                 message: doesNotMatter(),
-                source: doesNotMatter(),
+                source: AnyRandom.string(5, 8),
                 timestamp: doesNotMatter()
             };
             const match: ITokenMatch = {
@@ -96,20 +103,20 @@ describe('LogLevelToken', () => {
                 value: doesNotMatter(),
                 arguments: []
             };
-            const expected = entry.level.toString().padEnd(5).slice(0, 5);
+            const expected = entry.source;
 
             const result = token.getValue(match, entry);
 
             assert.equal(result, expected);
         });
 
-        it(`getValue - [color] - returns the proper value, using the given format string`, () => {
-            const length = 5;
+        it(`getValue - [color] - returns the proper value, using the given color`, () => {
+            const colorStr = AnyRandom.string(5, 8);
             const color = noStyle;
-            const getColor = stub(EntryColorizer, 'getColor').returns(color);
+            const getColor = stub(EntryColorizer, 'fromString').returns(color);
             const entry: ILogEntry = {
-                level: AnyRandom.oneOf(LOG_LEVELS),
-                message: AnyRandom.string(),
+                level: doesNotMatter(),
+                message: doesNotMatter(),
                 source: AnyRandom.string(),
                 timestamp: doesNotMatter()
             };
@@ -119,47 +126,22 @@ describe('LogLevelToken', () => {
                 tokenType: doesNotMatter(),
                 matched: doesNotMatter(),
                 value: doesNotMatter(),
-                arguments: [ { key: `color` } ]
+                arguments: [ { key: `color`, value: colorStr } ]
             };
-            const expected = color(entry.level.toString().padEnd(length).slice(0, length));
+            const expected = color(entry.source.toString());
 
             const result = token.getValue(match, entry);
 
             assert.equal(result, expected);
-            sinon.assert.calledOnceWithExactly(getColor, entry);
+            sinon.assert.calledOnceWithExactly(getColor, colorStr);
         });
 
-        it(`getValue - [len, too short] - returns the proper value, using the given format string`, () => {
-            const length = 3;
+        it(`getValue - [len, too short, needs padding] - returns the proper value, using the given format string`, () => {
+            const length = 15;
             const entry: ILogEntry = {
-                level: AnyRandom.oneOf(LOG_LEVELS),
+                level: doesNotMatter(),
                 message: doesNotMatter(),
-                source: doesNotMatter(),
-                timestamp: doesNotMatter(),
-            };
-            const match: ITokenMatch = {
-                startIndex: doesNotMatter(),
-                endIndex: doesNotMatter(),
-                tokenType: doesNotMatter(),
-                matched: doesNotMatter(),
-                value: doesNotMatter(),
-                arguments: [ { key: 'len', value: length } ]
-            };
-            const expected = entry.level.toString().padEnd(length).slice(0, length);
-
-            const result = token.getValue(match, entry);
-
-            assert.equal(result, expected);
-        });
-
-
-        it(`getValue - [len, too long] - returns the proper value, using the given format string`, () => {
-            const TREMENDOUS = new LogLevel(42, "TREMENDOUS");
-            const length = 3;
-            const entry: ILogEntry = {
-                level: TREMENDOUS,
-                message: doesNotMatter(),
-                source: doesNotMatter(),
+                source: AnyRandom.string(3, 5),
                 timestamp: doesNotMatter()
             };
             const match: ITokenMatch = {
@@ -170,7 +152,54 @@ describe('LogLevelToken', () => {
                 value: doesNotMatter(),
                 arguments: [ { key: 'len', value: length } ]
             };
-            const expected = entry.level.toString().padEnd(length).slice(0, length);
+            const expected = entry.source.padEnd(length).slice(0, length);
+
+            const result = token.getValue(match, entry);
+
+            assert.equal(result, expected);
+        });
+
+
+        it(`getValue - [len, too long, needs trimming] - returns the proper value, using the given format string`, () => {
+            const length = 3;
+            const entry: ILogEntry = {
+                level: doesNotMatter(),
+                message: doesNotMatter(),
+                source: AnyRandom.string(length + 5, length + 10),
+                timestamp: doesNotMatter()
+            };
+            const match: ITokenMatch = {
+                startIndex: doesNotMatter(),
+                endIndex: doesNotMatter(),
+                tokenType: doesNotMatter(),
+                matched: doesNotMatter(),
+                value: doesNotMatter(),
+                arguments: [ { key: 'len', value: length } ]
+            };
+            const expected = entry.source.padEnd(length).slice(0, length);
+
+            const result = token.getValue(match, entry);
+
+            assert.equal(result, expected);
+        });
+
+        it(`getValue - [len, juuuuust right] - returns the proper value, using the given format string`, () => {
+            const length = 7;
+            const entry: ILogEntry = {
+                level: doesNotMatter(),
+                message: doesNotMatter(),
+                source: AnyRandom.string(length, length),
+                timestamp: doesNotMatter()
+            };
+            const match: ITokenMatch = {
+                startIndex: doesNotMatter(),
+                endIndex: doesNotMatter(),
+                tokenType: doesNotMatter(),
+                matched: doesNotMatter(),
+                value: doesNotMatter(),
+                arguments: [ { key: 'len', value: length } ]
+            };
+            const expected = entry.source;
 
             const result = token.getValue(match, entry);
 

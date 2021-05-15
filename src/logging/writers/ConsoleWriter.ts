@@ -18,9 +18,10 @@ export class ConsoleWriter<TEntry extends ILogEntry = ILogEntry> implements IWri
         this.formatter = new PatternFormatter(pattern);
     }
 
-    public reconfigure(config: IPatternWriterConfig): void {
+    public reconfigure(config: IPatternWriterConfig): IWriter<TEntry> {
         throwIfNullOrUndefined(config, 'config');
         this.formatter.pattern = config.pattern;
+        return this;
     }
 
     public write(entry: ILogEntry): void {

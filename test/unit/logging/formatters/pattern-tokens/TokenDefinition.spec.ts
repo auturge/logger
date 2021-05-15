@@ -3,6 +3,8 @@ import { assert } from 'chai';
 
 import { TokenDefinition } from '@src/logging/formatters/pattern-tokens/TokenDefinition';
 import { stub, unwrap } from '@test/helpers';
+import { ITokenMatch, KNOWN_TOKENS, TokenMatch } from '@src/logging/formatters/pattern-tokens';
+import { AnyRandom } from '@auturge/testing';
 
 class TestToken extends TokenDefinition {
     public readonly name = 'TestToken';
@@ -53,7 +55,7 @@ describe('TokenDefinition', () => {
             assert.equal(result.length, 2);
             assert.deepEqual(result, [
                 {
-                    arguments: [ '42' ],
+                    arguments: [ { key: '42' } ],
                     endIndex: 22,
                     matched: '%{t|42}',
                     value: '',
@@ -108,4 +110,41 @@ describe('TokenDefinition', () => {
             }, `Unclosed token: [%{bugs %{t|42} robble]`);
         });
     });
-});
+
+    describe('getArguments', () => {
+
+        beforeEach(setupTestSuite);
+
+        function randomMatch(matched: string): ITokenMatch {
+            const start = AnyRandom.int(0, 10);
+            const end = AnyRandom.int(start, 15);
+            return {
+                arguments: [],
+                endIndex: end,
+                matched: matched,
+                value: '',
+                tokenType: AnyRandom.oneOf(KNOWN_TOKENS).name,
+                startIndex: start
+            }
+        }
+
+        [
+            { pattern: '%{test}', args: [] },
+            { pattern: '%{t|42}', args: [ { key: '42' } ] },
+            { pattern: '%{t|color:Red}', args: [ { key: 'color', value: 'Red' } ] },
+            { pattern: '%{t|42|color:Red}', args: [ { key: '42' }, { key: 'color', value: 'Red' } ] },
+            { pattern: '%{t|len:42|color:Red}', args: [ { key: 'len', value: 42 }, { key: 'color', value: 'Red' } ] }
+        ].forEach(({ pattern, args }) => {
+
+            it(`getArguments - given a match of '${ pattern }', returns the proper TokenArguments`, () => {
+                const match = randomMatch(pattern);
+
+                // const pattern = "%{test} %{bugs} %{t|42} robble";
+
+                const result = token[ 'getArguments' ](match);
+
+                assert.deepEqual(result, args);
+            });
+        });
+    });
+})

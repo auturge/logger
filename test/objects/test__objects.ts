@@ -2,11 +2,10 @@ import { AnyRandom, CharacterSet, Scale } from "@auturge/testing";
 
 import { Emitter } from "@src/core/events";
 
-import { IStatusData } from "@src/logging/StatusLog/IStatusData";
 import { LogStatus } from "@src/logging/LogStatus";
 import { IChannel } from "@src/logging/IChannel";
 import { LogLevel } from "@src/logging/LogLevel";
-import { IStatusEntry } from "@src/logging/StatusLog/IStatusEntry";
+import { IStatusData, IStatusEntry } from "@src/logging/StatusLog/IStatusEntry";
 import { NULL } from "./NullWriter";
 
 export function string(): string {
@@ -85,4 +84,8 @@ export function statusEntry(level: LogLevel = LogLevel.INFO): IStatusEntry {
         source: AnyRandom.string(20, 32),
         timestamp: new Date()
     }
+}
+
+export function doesNotMatter<T>(): T {
+    return <any>undefined;
 }

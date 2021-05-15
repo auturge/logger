@@ -1,14 +1,11 @@
 import { assert } from 'chai';
-import { AnyRandom } from '@auturge/testing';
 import { localDate } from '@test/helpers/dateHelpers';
 
 import { ITokenMatch } from '@src/logging/formatters/pattern-tokens/ITokenMatch';
 import { ILogEntry } from '@src/logging/ILogEntry';
-import { LOG_LEVELS } from '@src/logging/LogLevel';
 import { DateToken } from '@src/logging/formatters/pattern-tokens/DateToken';
 import { DateFormat, formatDate } from '@src/functions/formatDate';
-
-
+import { doesNotMatter } from '@test/objects/test__objects';
 
 describe('DateToken', () => {
 
@@ -50,20 +47,22 @@ describe('DateToken', () => {
         });
 
         it(`getMatches - [with args] - gets matches for %{d} and %{date}`, () => {
-            const pattern = `%{ d  | ${ DateFormat.DEFAULT } } - %{date | ${ DateFormat.ISO } | UTC }`
-            const matches: ITokenMatch[] = [
+            const pattern = `%{ d  | f:${ DateFormat.DEFAULT } } - %{date | format: ${ DateFormat.ISO } | tz:UTC }`
+            const matches = [
                 {
-                    arguments: [ ` ${ DateFormat.ISO } `, 'UTC' ],
-                    endIndex: 84,
-                    matched: `%{date | ${ DateFormat.ISO } | UTC }`,
+                    arguments: [
+                        { key: 'format', value: ` ${ DateFormat.ISO } ` },
+                        { key: 'tz', value: 'UTC ' } ],
+                    endIndex: 97,
+                    matched: `%{date | format: ${ DateFormat.ISO } | tz:UTC }`,
                     value: '',
                     tokenType: 'DateToken',
-                    startIndex: 40
+                    startIndex: 42
                 },
                 {
-                    arguments: [ DateFormat.DEFAULT ],
-                    endIndex: 36,
-                    matched: `%{ d  | ${ DateFormat.DEFAULT } }`,
+                    arguments: [ { key: 'f', value: `${ DateFormat.DEFAULT } ` } ],
+                    endIndex: 38,
+                    matched: `%{ d  | f:${ DateFormat.DEFAULT } }`,
                     value: '',
                     tokenType: 'DateToken',
                     startIndex: 0
@@ -83,17 +82,17 @@ describe('DateToken', () => {
         it(`getValue - [no args] - returns the proper value`, () => {
 
             const entry: ILogEntry = {
-                level: AnyRandom.oneOf(LOG_LEVELS),
-                message: AnyRandom.string(),
-                source: AnyRandom.string(),
+                level: doesNotMatter(),
+                message: doesNotMatter(),
+                source: doesNotMatter(),
                 timestamp: localDate
             };
             const match: ITokenMatch = {
-                startIndex: 18,
-                endIndex: 25,
-                tokenType: 'DateToken',
-                matched: '%{d}',
-                value: "",
+                startIndex: doesNotMatter(),
+                endIndex: doesNotMatter(),
+                tokenType: doesNotMatter(),
+                matched: doesNotMatter(),
+                value: doesNotMatter(),
                 arguments: []
             };
             const expected = formatDate(localDate, DateFormat.DEFAULT);
@@ -113,18 +112,18 @@ describe('DateToken', () => {
             it(`getValue - [1 args, ${ key }] - returns the proper value, using the given format string`, () => {
 
                 const entry: ILogEntry = {
-                    level: AnyRandom.oneOf(LOG_LEVELS),
-                    message: AnyRandom.string(),
-                    source: AnyRandom.string(),
+                    level: doesNotMatter(),
+                    message: doesNotMatter(),
+                    source: doesNotMatter(),
                     timestamp: localDate
                 };
                 const match: ITokenMatch = {
-                    startIndex: 18,
-                    endIndex: 25,
-                    tokenType: 'DateToken',
-                    matched: '%{d}',
-                    value: "",
-                    arguments: [ format ]
+                    startIndex: doesNotMatter(),
+                    endIndex: doesNotMatter(),
+                    tokenType: doesNotMatter(),
+                    matched: doesNotMatter(),
+                    value: doesNotMatter(),
+                    arguments: [ { key: 'format', value: format } ]
                 };
                 const expected = formatDate(localDate, format);
 
@@ -144,18 +143,21 @@ describe('DateToken', () => {
             it(`getValue - [2 args, ${ key }, ${ tz }] - returns the proper value, using the given format string`, () => {
 
                 const entry: ILogEntry = {
-                    level: AnyRandom.oneOf(LOG_LEVELS),
-                    message: AnyRandom.string(),
-                    source: AnyRandom.string(),
+                    level: doesNotMatter(),
+                    message: doesNotMatter(),
+                    source: doesNotMatter(),
                     timestamp: localDate
                 };
                 const match: ITokenMatch = {
-                    startIndex: 18,
-                    endIndex: 25,
-                    tokenType: 'DateToken',
-                    matched: '%{d}',
-                    value: "",
-                    arguments: [ format, tz ]
+                    startIndex: doesNotMatter(),
+                    endIndex: doesNotMatter(),
+                    tokenType: doesNotMatter(),
+                    matched: doesNotMatter(),
+                    value: doesNotMatter(),
+                    arguments: [
+                        { key: 'format', value: format },
+                        { key: 'timezone', value: tz }
+                    ]
                 };
                 const expected = formatDate(localDate, format, tz);
 
@@ -163,23 +165,6 @@ describe('DateToken', () => {
 
                 assert.equal(result, expected);
             });
-        });
-
-        it(`getValue - throws when there are more than 2 arguments`, () => {
-
-            const entry = {};
-            const match: ITokenMatch = {
-                startIndex: 18,
-                endIndex: 25,
-                tokenType: 'DateToken',
-                matched: '%{d}',
-                value: '',
-                arguments: [ 'foo', 'bar', 'baz' ]
-            };
-
-            assert.throws(() => {
-                token.getValue(match, entry);
-            }, `Token [${ match.tokenType }] takes up to two arguments, but you provided ${ match.arguments.length }.`);
         });
     });
 })

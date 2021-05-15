@@ -13,6 +13,9 @@ export {
     TERMINAL
 } from './logging/DEFAULTS';
 
+export { TerminalWriter } from './logging/writers/TerminalWriter';
+export { ConsoleWriter } from './logging/writers/ConsoleWriter';
+
 export {
     ILog, IChannel, ILogEntry, ILogEntryWriter, IWriter, ILogEntryData,
     ILogManager, ILogBuilder,

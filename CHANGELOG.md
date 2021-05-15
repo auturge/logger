@@ -1,9 +1,19 @@
 # Changelog #
 
+## [1.0.4] - ??? ##
+
+- Added
+    - Docs!
+    - Export: TerminalWriter and ConsoleWriter
+
+- Changed
+    - IWriter.reconfigure now returns an IWriter
+    - Emitter - changed 'handlers' to 'subscribers'.
+
 ## [1.0.3] - 10-May-2021 ##
 
 - Fixed
-    Published the right code this time! -_-
+    - Published the right code this time! -_-
 
 - Added
     - DEV: Prepublish script to prevent publishing from the root folder

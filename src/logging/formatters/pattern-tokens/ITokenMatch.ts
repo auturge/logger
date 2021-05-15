@@ -1,13 +1,14 @@
 import { throwIfNullOrLessThan, throwIfNullOrUndefined } from "@src/functions/guards";
+import { ITokenArgument } from "./TokenArgument";
 import { TokenDefinition } from "./TokenDefinition";
 
 // TODO: Add class description comments
 
-export interface ITokenMatch {
+export interface ITokenMatch<TArgument extends ITokenArgument = any> {
 
     // TODO: Add public API comments
 
-    arguments: string[];
+    arguments: TArgument[];
     endIndex: number;
     matched: string;
     startIndex: number;
@@ -15,8 +16,9 @@ export interface ITokenMatch {
     value: string;
 }
 
-export class TokenMatch implements ITokenMatch {
-    public arguments: string[] = [];
+export class TokenMatch<TArgument extends ITokenArgument = any>
+    implements ITokenMatch<TArgument> {
+    public arguments: TArgument[] = [];
     public endIndex: number = <any>undefined;
     public matched = "";
     public startIndex: number;
@@ -45,5 +47,14 @@ export class TokenMatch implements ITokenMatch {
     public get length(): number {
         throwIfNullOrLessThan(this.endIndex, 'endIndex', 0);
         return <any>this.endIndex - this.startIndex + 1;
+    }
+
+    public static getArgument(match: ITokenMatch, ...keys: string[]): ITokenArgument | undefined {
+        return match.arguments.find(it => keys.includes(it.key));
+    }
+
+    public static getArgValue<TValue extends string | number | boolean>(match: ITokenMatch, ...keys: string[]): TValue | undefined {
+        const find = match.arguments.find(it => keys.includes(it.key));
+        return find ? find.value : undefined;
     }
 }

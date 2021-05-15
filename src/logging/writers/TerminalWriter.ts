@@ -18,9 +18,10 @@ export class TerminalWriter<TEntry extends ILogEntry = ILogEntry> implements IWr
         this.formatter = new ColorPatternFormatter(pattern);
     }
 
-    public reconfigure(config: IPatternWriterConfig): void {
+    public reconfigure(config: IPatternWriterConfig): IWriter<TEntry> {
         throwIfNullOrUndefined(config, 'config');
         this.formatter.pattern = config.pattern;
+        return this;
     }
 
     public write(entry: ILogEntry): void {

@@ -1,13 +1,15 @@
 import { ILogEntry } from "@src/logging/ILogEntry";
 import { ITokenMatch, TokenMatch } from "./ITokenMatch";
+import { ITokenArgument, TokenArgument } from "./TokenArgument";
+
+const TOKEN_OPENER = '%{';
+const TOKEN_CLOSER = '}';
+const TOKEN_SPLITTER = '|';
 
 // TODO: Add class description comment
 export abstract class TokenDefinition {
 
     // TODO: Add public API comments
-
-    private static readonly TOKEN_OPENER: string = '%{';
-    private static readonly TOKEN_CLOSER: string = '}';
 
     protected abstract tokens: string[];
 
@@ -41,22 +43,14 @@ export abstract class TokenDefinition {
         // A TOKEN is a portion of the pattern that starts with %{ and ends with the first subsequent }
         // This format allows us to include arguments with the token, not just its name
 
-        // console.log('getTokenMatches:pattern', pattern);
-        // console.log('getTokenMatches:tokens', this.tokens);
-
         let toCheck = pattern.slice(0);
         const matches: TokenMatch[] = [];
         let removedTokensLength = 0;
         let startIndex = -1;
-        while ((startIndex = toCheck.indexOf(TokenDefinition.TOKEN_OPENER)) > -1) {
+        while ((startIndex = toCheck.indexOf(TOKEN_OPENER)) > -1) {
             const nextToken = this.getNextToken(toCheck);
 
-            // console.log('getTokenMatches:nextToken', nextToken);
-
             if (this.matchesName(nextToken, tokenText)) {
-
-                // console.log('getTokenMatches:matched', nextToken);
-
                 const match = this.buildTokenMatch(nextToken, startIndex + removedTokensLength);
                 matches.push(match);
             }
@@ -69,12 +63,12 @@ export abstract class TokenDefinition {
 
     private getNextToken(pattern: string): string {
         let startIndex = -1;
-        if ((startIndex = pattern.indexOf(TokenDefinition.TOKEN_OPENER)) > -1) {
+        if ((startIndex = pattern.indexOf(TOKEN_OPENER)) > -1) {
 
             // find the next starter
             const toCheck = pattern.slice(startIndex + 1);
-            const nextStart = toCheck.indexOf(TokenDefinition.TOKEN_OPENER);
-            const endIndex = toCheck.indexOf(TokenDefinition.TOKEN_CLOSER);
+            const nextStart = toCheck.indexOf(TOKEN_OPENER);
+            const endIndex = toCheck.indexOf(TOKEN_CLOSER);
 
             const lastTokenIsUnclosed = endIndex == -1;
             const thisTokenIsClosedAfterNext = nextStart != -1 && endIndex > nextStart;
@@ -90,7 +84,7 @@ export abstract class TokenDefinition {
     }
 
     private matchesName(token: string, name: string): boolean {
-        const toCheck = token.slice(TokenDefinition.TOKEN_OPENER.length);
+        const toCheck = token.slice(TOKEN_OPENER.length);
 
         // identify the whole token name
         const lTrimmed = toCheck.trimStart();
@@ -115,17 +109,18 @@ export abstract class TokenDefinition {
         return match;
     }
 
-    private getArguments(match: TokenMatch): string[] {
+    private getArguments(match: TokenMatch): ITokenArgument[] {
         // ARGUMENTS are anything after a pipe (|) within the token match
-        const args = match.matched.split('|').slice(1);
+        const args = match.matched.split(TOKEN_SPLITTER).slice(1);
+
+        if (!args.length)
+            return [];
 
         // remove the final }
-        if (args && args.length) {
-            const index = args.length - 1;
-            args[ index ] = args[ index ].slice(0, -1);
-            args[ index ] = args[ index ].trim();
-        }
+        const index = args.length - 1;
+        args[ index ] = args[ index ].slice(0, -1);
 
-        return args;
+        const result = args.map(TokenArgument.fromString);
+        return result;
     }
 }

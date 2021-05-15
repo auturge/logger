@@ -1,5 +1,5 @@
 import { TokenDefinition } from "./TokenDefinition";
-import { TokenMatch } from "./ITokenMatch";
+import { ITokenMatch, TokenMatch } from "./ITokenMatch";
 import { ILogEntry } from "../../ILogEntry";
 import { DateFormat, formatDate } from "@src/functions/formatDate";
 
@@ -14,21 +14,29 @@ export class DateToken extends TokenDefinition {
     protected tokens: string[] = [ 'date', 'd' ];
 
     /** Gets and formats the timestamp using
-     * - the format specified in the first argument, and
-     * - the IANA timezone string specified in the second argument.
+     * - the format specified in the 'format' (or 'f') argument, and
+     * - the IANA timezone string specified in the 'timezone' (or 'tz') argument.
      *
-     * If no arguments are supplied, then returns the ISO-8601 date/time stamp (YYYY-MM-DDTHH:mm:ss.sssZ).
+     * If no arguments are supplied, then returns the DEFAULT date/time stamp (yyyy-MM-dd HH:mm:ss.SSS -0700) in the local timezone.
      *
-     * Will throw an error if more than one argument is supplied.
+     * Will throw an error if more than two arguments are supplied.
      */
-    getValue(match: TokenMatch, entry: ILogEntry): string {
-        if (match.arguments.length > 2) {
-            throw new Error(`Token [${ match.tokenType }] takes up to two arguments, but you provided ${ match.arguments.length }.`);
-        } else if (match.arguments.length > 1) {
-            return formatDate(entry.timestamp, match.arguments[ 0 ], match.arguments[ 1 ]);
-        } else if (match.arguments.length > 0) {
-            return formatDate(entry.timestamp, match.arguments[ 0 ]);
-        }
-        return formatDate(entry.timestamp, DateFormat.DEFAULT);
+    getValue(match: ITokenMatch, entry: ILogEntry): string {
+        const format = this.getFormat(match);
+        const tz = this.getTimezone(match);
+
+        return !!(tz)
+            ? formatDate(entry.timestamp, format, tz)
+            : formatDate(entry.timestamp, format);
+    }
+
+    private getFormat(match: ITokenMatch): string {
+        const value = TokenMatch.getArgValue<string>(match, 'format', 'f');
+        return value || DateFormat.DEFAULT;
+    }
+
+    private getTimezone(match: ITokenMatch): string | undefined {
+        const value = TokenMatch.getArgValue<string>(match, 'timezone', 'tz');
+        return value ? value.trim() : undefined;
     }
 }

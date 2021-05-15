@@ -8,8 +8,8 @@ export class NullWriter implements IWriter<IStatusEntry> {
     write(entry: IStatusEntry): void {
         // Do nothing
     }
-    reconfigure(config: IPatternWriterConfig): void {
-        // Do nothing
+    reconfigure(config: IPatternWriterConfig): IWriter<IStatusEntry> {
+        return this;
     }
 }
 

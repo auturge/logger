@@ -9,5 +9,5 @@ export interface IWriter<TEntry extends ILogEntry = ILogEntry> {
     write(entry: TEntry): void;
 
     /** Reconfigures the writer. */
-    reconfigure(config: unknown): void;
+    reconfigure(config: unknown): IWriter<TEntry>;
 }
