@@ -1,14 +1,20 @@
 # Changelog #
 
-## [1.0.4] - ??? ##
+## [2.0.0] - ??? ##
+
+- BREAKING CHANGES
+    - Token arguments with values must now include a `key`.
+        - ex: DateToken `format`
 
 - Added
     - Docs!
     - Export: TerminalWriter and ConsoleWriter
+    - SourceToken
 
 - Changed
     - IWriter.reconfigure now returns an IWriter
     - Emitter - changed 'handlers' to 'subscribers'.
+    - Token arguments are now parsed into objects instead of string.
 
 ## [1.0.3] - 10-May-2021 ##
 
