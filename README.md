@@ -299,7 +299,6 @@ We need to enable logging to many possible targets, for example:
 |TRACE	|Step by step execution of your code that can be ignored during the standard operation, but may be useful during extended debugging sessions.|
 |ALL	|A level where all messages will be logged, regardless of level. |
 
-
 <br>
 
 <a href="#top">(go to top)</a>
