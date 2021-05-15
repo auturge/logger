@@ -3,17 +3,18 @@
 ## [2.0.0] - ??? ##
 
 - BREAKING CHANGES
+    - Emitter - removed 'handlers' (use 'subscribers' instead).
     - Token arguments with values must now include a `key`.
-        - ex: DateToken `format`
+        - ex: DateToken `format` and `timezone`
 
 - Added
     - Docs!
     - Export: TerminalWriter and ConsoleWriter
     - SourceToken
+    - EntryColorizer
 
 - Changed
-    - IWriter.reconfigure now returns an IWriter
-    - Emitter - changed 'handlers' to 'subscribers'.
+    - IWriter.reconfigure now returns an IWriter.
     - Token arguments are now parsed into objects instead of string.
 
 ## [1.0.3] - 10-May-2021 ##
