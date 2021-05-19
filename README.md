@@ -73,7 +73,7 @@ Distributed under the MIT license. See [`LICENSE`][license] for more information
 [discussions]: https://github.com/auturge/logger/discussions/
 [github-url]: https://github.com/auturge/logger
 
-[auturge-github-homepage]: https://github.com/auturge/auturge
+[auturge-github-homepage]: https://github.com/auturge/auturge#top
 [contributing]: https://github.com/auturge/auturge/blob/master/docs/CONTRIBUTING.md#top
 
 [license]: https://github.com/auturge/auturge/blob/master/LICENSE
