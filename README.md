@@ -47,8 +47,8 @@ The logger makes it quick and easy to log messages to the console or terminal wi
 
 ## Support and Examples ##
 
-- The tutorial is available [here](./docs/tutorial#top).
-- API documentation can be found [here](./docs/api#top).
+- The tutorial is available [here](./docs/tutorial.md#top).
+- API documentation can be found [here](./docs/api.md#top).
 - Please post question and comments to the [discussions][discussions] page.
 
 <br>
