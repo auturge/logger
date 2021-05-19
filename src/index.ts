@@ -21,3 +21,5 @@ export {
     ILogManager, ILogBuilder,
     LogLevel, LogStatus
 } from './logging/index';
+
+export { DateFormat } from './functions/formatDate';

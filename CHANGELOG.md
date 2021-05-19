@@ -9,7 +9,7 @@
 
 - Added
     - Docs!
-    - Export: TerminalWriter and ConsoleWriter
+    - Export: TerminalWriter, ConsoleWriter, DateFormat
     - SourceToken
     - EntryColorizer
 
