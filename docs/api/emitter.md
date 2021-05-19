@@ -4,18 +4,18 @@
 
 > `Emitter<TEventArgs>`: An object used to emit event-like messages.
 
-The `Emitter` interface extends the [`IEmitter`](iEmitter) interface, and so exposes the following members:
+The `Emitter` interface extends the [`IEmitter`][iEmitter] interface, and so exposes the following members:
 
-- [`clear`](iEmitter#clear)
-- [`emit`](iEmitter#emit)
-- [`subscribe`](iEmitter#subscribe)
-- [`unsubscribe`](iEmitter#unsubscribe)
+- [`clear`][clear]
+- [`emit`][emit]
+- [`subscribe`][subscribe]
+- [`unsubscribe`][unsubscribe]
 
 In addition, `Emitter` exposes the following additional members:
 
-- [`subscribers`](iEmitter#subscribers)
+- [`subscribers`][subscribers]
 
-See also [`IEmitter`](iEmitter) and [`EventHandler`](event-handler).
+See also [`IEmitter`][iEmitter] and [`EventHandler`][event-handler].
 
 <br>
 
@@ -29,7 +29,7 @@ See also [`IEmitter`](iEmitter) and [`EventHandler`](event-handler).
 > Emitter.subscribers: EventHandler<TEventArgs>[];
 > ```
 
-Returns the list of [`EventHandler`](event-handler)s that are currently registered on this `Emitter`.
+Returns the list of [`EventHandler`][event-handler]s that are currently registered on this `Emitter`.
 
 <br>
 
@@ -37,5 +37,10 @@ Returns the list of [`EventHandler`](event-handler)s that are currently register
 
 ----
 
-[iEmitter]:iEmitter.md
-[event-handler]: EventHandler.md
+[iEmitter]:iEmitter.md#top
+[event-handler]: EventHandler.md#top
+[clear]: iEmitter.md#clear
+[emit]: iEmitter.md#emit
+[subscribe]: iEmitter.md#subscribe
+[unsubscribe]: iEmitter.md#unsubscribe
+[subscribers]: iEmitter.md#subscribers

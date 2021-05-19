@@ -19,7 +19,7 @@ DateFormat.LONG | "yyyy-MM-dd HH:mm:ss XXXX" | ```2021-03-04 05:06:07 -0800```
 
 <br>
 
-> NOTE: specifying the format DOES NOT recalculate the timestamp into the UTC timezone. See [patterns](../patterns#top) for more information.
+> NOTE: specifying the format DOES NOT recalculate the timestamp into the UTC timezone. See [patterns][patterns] for more information.
 
 <br>
 
@@ -27,16 +27,14 @@ Date formatting is based on [Unicode Technical Standard #35][tr35].
 
 Specifically, it depends on the [date-fns][date-fns] and [date-fns-tz][date-fns-tz] libraries to do most of the date formatting.
 
-<!--
-// https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
--->
-
 <br>
 
 <a href="#top">(go to top)</a>
 
-[WIP-badge]: https://img.shields.io/static/v1?label=WIP:&message=Work-in-Progress&color=blueviolet
+----
 
 [tr35]: https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 [date-fns]: https://date-fns.org/
 [date-fns-tz]: https://www.npmjs.com/package/date-fns-tz
+
+[patterns]: ../patterns#top

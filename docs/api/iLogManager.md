@@ -19,14 +19,14 @@ The `ILogManager` interface exposes the following members:
 
 ## `initialize` ##
 
-> An [`ILogBuilder`](iLogBuilder) that configures a logger.
+> An [`ILogBuilder`][iLogBuilder] that configures a logger.
 
 `LogManager.initialize` is meant to be a [fluent interface][fluent-interface], and exposes the following members:
 
-- [`andGetLogger`](iLogBuilder#andgetlogger)
-- [`atLevel`](iLogBuilder#atlevel)
-- [`newLog`](iLogBuilder#newlog)
-- [`newChannel`](iLogBuilder#newchannel)
+- [`andGetLogger`][andGetLogger]
+- [`atLevel`][atLevel]
+- [`newLog`][newLog]
+- [`newChannel`][newChannel]
 
 <br>
 
@@ -43,7 +43,7 @@ consoleLog.mark('Logger configured.');
 
 <br>
 
-For more details, see the [ILogBuilder](ilogbuilder) abstraction.
+For more details, see the [ILogBuilder][iLogBuilder] abstraction.
 
 <a href="#top">(go to top)</a>
 
@@ -94,4 +94,8 @@ Returns `null` if not found.
 
 [fluent-interface]: https://martinfowler.com/bliki/FluentInterface.html
 
-[iLogBuilder]: iLogBuilder.md
+[iLogBuilder]: iLogBuilder.md#top
+[andGetLogger]: iLogBuilder.md#andgetlogger
+[atLevel]: iLogBuilder.md#atlevel
+[newLog]: iLogBuilder.md#newlog
+[newChannel]: iLogBuilder.md#newchannel

@@ -2,6 +2,15 @@
 
 # <h1 align="center">IChannel</h1> #
 
+>
+> [![Work In Progress][WIP-badge]](#top)
+>
+> This documentation is incomplete.
+>
+> I'm working on it, but I also have to sleep sometimes! :sleeping:
+
+<br>
+
 > `IChannel`: An interface describing a single log-writing implementation.
 
 The `IChannel` interface exposes the following members:
@@ -43,3 +52,5 @@ Some examples of `success` messages:
 <a href="#top">(go to top)</a>
 
 ----
+
+[WIP-badge]: https://img.shields.io/static/v1?label=WIP:&message=Work-in-Progress&color=blueviolet

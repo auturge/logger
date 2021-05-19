@@ -2,7 +2,7 @@
 
 # <h1 align="center">ILogBuilder&lt;TLog&gt;</h1> #
 
-> `ILogBuilder<TLog>`: An interface describing a [fluent interface](fluent-interface) for building loggers.
+> `ILogBuilder<TLog>`: An interface describing a [fluent interface][fluent-interface] for building loggers.
 
 The `ILogBuilder` interface exposes the following members:
 
@@ -22,11 +22,11 @@ The `ILogBuilder` interface exposes the following members:
 
 ## `andGetLogger` ##
 
-> ```javascript
+> ```typescript
 > ILogBuilder.andGetLogger(): TLog;
 > ```
 
-Finalizes the configuration, and then creates and returns the corresponding [`ILog`](iLog).
+Finalizes the configuration, and then creates and returns the corresponding [`ILog`][iLog].
 
 <br>
 
@@ -36,11 +36,11 @@ Finalizes the configuration, and then creates and returns the corresponding [`IL
 
 ## `atLevel` ##
 
-> ```javascript
+> ```typescript
 > ILogManager.enable(logName: string): void;
 > ```
 
-Sets the [level](logLevel) of all [channel](iChannel)s.
+Sets the [level][logLevel] of all [channel][iChannel]s.
 
 <br>
 
@@ -50,11 +50,11 @@ Sets the [level](logLevel) of all [channel](iChannel)s.
 
 ## `channels` ##
 
-> ```javascript
+> ```typescript
 > ILogBuilder.channels: IChannel[];
 > ```
 
-Returns the logging [channel](iChannel)s to be created with the logger.
+Returns the logging [channel][iChannel]s to be created with the logger.
 
 <br>
 
@@ -64,11 +64,11 @@ Returns the logging [channel](iChannel)s to be created with the logger.
 
 ## `logCreated` ##
 
-> ```javascript
+> ```typescript
 > ILogBuilder.logCreated: Emitter<TLog>;
 > ```
 
-An [`Emitter<TLog>`](emitter) that fires when a new logger is created.
+An [`Emitter<TLog>`][emitter] that fires when a new logger is created.
 
 <br>
 
@@ -78,7 +78,7 @@ An [`Emitter<TLog>`](emitter) that fires when a new logger is created.
 
 ## `name` ##
 
-> ```javascript
+> ```typescript
 > ILogBuilder.name: string;
 > ```
 
@@ -92,14 +92,14 @@ The name of the logger to be created.
 
 ## `newChannel` ##
 
-> ```javascript
+> ```typescript
 > ILogBuilder.newChannel(name: string, writer: IWriter):  ILogBuilder<TLog>;
 > 
 > ILogBuilder.newChannel(name: string, writer: IWriter, level: LogLevel):  ILogBuilder<TLog>;
 >
 > ```
 
-Configures a new [`IChannel`](iChannel) with the given name, writer, and [`LogLevel`](logLevel).
+Configures a new [`IChannel`][iChannel] with the given name, writer, and [`LogLevel`][logLevel].
 
 The `level` argument defaults to `INFO`.
 
@@ -111,13 +111,13 @@ The `level` argument defaults to `INFO`.
 
 ## `newLog` ##
 
-> ```javascript
+> ```typescript
 > ILogBuilder.newLog(): ILogBuilder<TLog>;
 >
 > ILogBuilder.newLog(logName: string): ILogBuilder<TLog>;
 > ```
 
-Configures a new [`ILog`](iLog) with the given name.
+Configures a new [`ILog`][iLog] with the given name.
 
 The `name` argument defaults to 'main'.
 
@@ -129,7 +129,7 @@ The `name` argument defaults to 'main'.
 
 [fluent-interface]: https://martinfowler.com/bliki/FluentInterface.html
 
-[emitter]: emitter.md
-[iChannel]: iChannel.md
-[iLog]: iLog.md
-[logLevel]: logLevel.md
+[emitter]: emitter.md#top
+[iChannel]: iChannel.md#top
+[iLog]: iLog.md#top
+[logLevel]: logLevel.md#log-levels

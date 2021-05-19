@@ -4,20 +4,20 @@
 
 > Log: A default terminal logger for quick out-of-the-box logging.
 
-Any [`ILog`](#ilog) exposes the following methods:
+Any [`ILog`][ilog] exposes the following methods:
 
-- [`fatal`](iLog#fatal)
-- [`error`](iLog#error)
-- [`warn`](iLog#warn)
-- [`info`](iLog#info)
-- [`debug`](iLog#debug)
-- [`trace`](iLog#trace)
+- [`fatal`][fatal]
+- [`error`][error]
+- [`warn`][warn]
+- [`info`][info]
+- [`debug`][debug]
+- [`trace`][trace]
 
-The `Log` is an [`IStatusLog`](iStatusLog), a special type of [`ILog`](ilog) which also exposes the following logging methods:
+The `Log` is an [`IStatusLog`][iStatusLog], a special type of [`ILog`][ilog] which also exposes the following logging methods:
 
-- [`success`](iStatusLog#success)
-- [`failure`](iStatusLog##failure)
-- [`mark`](iStatusLog##mark)
+- [`success`][success]
+- [`failure`][failure]
+- [`mark`][mark]
 
 In addition, `Log` will colorize each log entry.
 
@@ -41,5 +41,14 @@ In addition, `Log` will colorize each log entry.
 
 ----
 
-[iLog]: iLog.md
-[iStatusLog]: iStatusLog.md
+[iLog]: iLog.md#top
+[iStatusLog]: iStatusLog.md#top
+[fatal]: iLog.md#fatal
+[error]: iLog.md#error
+[warn]: iLog.md#warn
+[info]: iLog.md#info
+[debug]: iLog.md#debug
+[trace]: iLog.md#trace
+[success]: iStatusLog.md#success
+[failure]: iStatusLog.md#failure
+[mark]: iStatusLog.md#mark

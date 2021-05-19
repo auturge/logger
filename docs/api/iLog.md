@@ -43,7 +43,7 @@ along with several logging-specific methods:
 > ILog.channels: IChannel[];
 > ```
 
-Returns the underlying logging [channel](ichannel)s.
+Returns the underlying logging [channel][ichannel]s.
 
 <br>
 
@@ -85,7 +85,7 @@ Gets or sets whether the logger is enabled.
 > ILog.setLevel(level: LogLevel): void;
 > ```
 
-Sets the `LogLevel` for all [channel](ichannel)s on this `ILog`.
+Sets the `LogLevel` for all [channel][ichannel]s on this `ILog`.
 
 <br>
 
@@ -201,4 +201,4 @@ This level is for the most fine-grained information only used in rare cases wher
 
 ----
 
-[ichannel]:iChannel.md
+[ichannel]:iChannel.md#top

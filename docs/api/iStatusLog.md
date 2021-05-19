@@ -4,18 +4,18 @@
 
 > `IStatusLog`: An interface describing the properties and methods used to log status messages.
 
-The `IStatusLog` interface extends the [`ILog`](ilog) interface, and so exposes the following members:
+The `IStatusLog` interface extends the [`ILog`][iLog] interface, and so exposes the following members:
 
-- [`channels`](iLog#channels)
-- [`name`](iLog#name)
-- [`enabled`](iLog#enabled)
-- [`setLevel`](iLog#setlevel)
-- [`fatal`](iLog#fatal)
-- [`error`](iLog#error)
-- [`warn`](iLog#warn)
-- [`info`](iLog#info)
-- [`debug`](iLog#debug)
-- [`trace`](iLog#trace)
+- [`channels`](iLog.md#channels)
+- [`name`](iLog.md#name)
+- [`enabled`](iLog.md#enabled)
+- [`setLevel`](iLog.md#setlevel)
+- [`fatal`](iLog.md#fatal)
+- [`error`](iLog.md#error)
+- [`warn`](iLog.md#warn)
+- [`info`](iLog.md#info)
+- [`debug`](iLog.md#debug)
+- [`trace`](iLog.md#trace)
 
 In addition, `IStatusLog` exposes the following additional members:
 
@@ -108,4 +108,14 @@ Some examples of `success` messages:
 
 ----
 
-[ilog]:iLog.md
+[iLog]:iLog.md#top
+[channels]: iLog.md#channels
+[name]: iLog.md#name
+[enabled]: iLog.md#enabled
+[setLevel]: iLog.md#setlevel
+[fatal]: iLog.md#fatal
+[error]: iLog.md#error
+[warn]: iLog.md#warn
+[info]: iLog.md#info
+[debug]: iLog.md#debug
+[trace]: iLog.md#trace

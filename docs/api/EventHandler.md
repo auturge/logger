@@ -1,6 +1,6 @@
 <div id="top" align="right"><a href="https://github.com/auturge/logger#top">(home)</a></div>
 
-# <h1 align="center">ConsoleLog</h1> #
+# <h1 align="center">EventHandler</h1> #
 
 >
 > [![Work In Progress][WIP-badge]](#top)
@@ -11,14 +11,10 @@
 
 <br>
 
-`ConsoleLog` is the default logger for the browser console.
-It has a single channel, called 'console', utilizing a [`ConsoleWriter`][console-writer], and also configured at [`LogLevel.INFO`][log-levels].
+<!-- `CONSOLE` is the default writer for the browser console. -->
 
 <br>
 
 <a href="#top">(go to top)</a>
 
 [WIP-badge]: https://img.shields.io/static/v1?label=WIP:&message=Work-in-Progress&color=blueviolet
-
-[console-writer]: ConsoleWriter.md#top
-[log-levels]: logLevel.md#log-levels

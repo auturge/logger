@@ -11,7 +11,7 @@ The `IEmitter` interface exposes the following members:
 - [`subscribe`](#subscribe)
 - [`unsubscribe`](#unsubscribe)
 
-See also [`Emitter`](emitter) and [`EventHandler`](event-handler).
+See also [`Emitter`][emitter] and [`EventHandler`][event-handler].
 
 <br>
 
@@ -75,5 +75,5 @@ Removes the given event handler from the list of subscribers.
 
 ----
 
-[emitter]:emitter.md
-[event-handler]: EventHandler.md
+[emitter]:emitter.md#top
+[event-handler]: EventHandler.md#top

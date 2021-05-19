@@ -23,7 +23,7 @@ The logger makes it quick and easy to log messages to the console or terminal wi
 ## Features ##
 
 - **Easy to configure**
-  Use the fluent interface to configure a new logger.
+  Use the [fluent interface][fluent-interface] to configure a new logger.
 - **Log entry message patterns**
   Each log entry can be formatted using customizable patterns.
 - **Extensible**
@@ -75,6 +75,8 @@ Distributed under the MIT license. See [`LICENSE`][license] for more information
 
 [auturge-github-homepage]: https://github.com/auturge/auturge#top
 [contributing]: https://github.com/auturge/auturge/blob/master/docs/CONTRIBUTING.md#top
+
+[fluent-interface]: https://martinfowler.com/bliki/FluentInterface.html
 
 [license]: https://github.com/auturge/auturge/blob/master/LICENSE
 [license-image]: http://img.shields.io/:license-mit-blue.svg?style=flat-square
