@@ -65,7 +65,7 @@ Given a log entry with the following properties
 ```pattern = "%{ l | color } %{m}"```
 >```INFO```&nbsp;&emsp;```Hello, world!```
 
-- NOTE: "INFO" will be written in the [color](./api/loglevel#log-levels) specified for the [`LogLevel`](./api/loglevel#log-levels). In this case, the default color for [`DEBUG`](./api/loglevel#log-levels) is cyan.
+- NOTE: "INFO" will be written in the [color](./api/loglevel.md#log-levels) specified for the [`LogLevel`](./api/loglevel.md#log-levels). In this case, the default color for [`DEBUG`](./api/loglevel.md#log-levels) is cyan.
 
 <br>
 

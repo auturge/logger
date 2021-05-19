@@ -36,7 +36,7 @@ Install it using the follow terminal command:
 
 <br>
 
-### <a id="default-log"></a>Use the default ["Log"](./api/log#top) to log a message ###
+### <a id="default-log"></a>Use the default ["Log"](./api/log.md#top) to log a message ###
 
 ```javascript
 import { Log } from '@auturge/logger';
@@ -44,13 +44,13 @@ import { Log } from '@auturge/logger';
 Log.info('Doing a thing...');
 ```
 
-The default [Log](./api/log#top) has the following properties:
+The default [Log](./api/log.md#top) has the following properties:
 
 - writes to the `TERMINAL` (suitable for use with nodeJs applications)
 - uses the pattern  "%{ date | ${ DateFormat.DEFAULT } } | %{ level } | %{message}", which looks like this:
   > ``` 2020-12-31 21:57:02.333 -0800 | DEBUG | Hello, world! ```
-- default [LogLevel](./api/loglevel#log-levels) is ['INFO'](./api/loglevel#log-levels)
-- each message will be color-coded based on the [LogLevel](./api/loglevel#log-levels)
+- default [LogLevel](./api/loglevel.md#log-levels) is ['INFO'](./api/loglevel.md#log-levels)
+- each message will be color-coded based on the [LogLevel](./api/loglevel.md#log-levels)
 
 <br>
 
@@ -85,7 +85,7 @@ logger.info('Doing a thing...');
 
 ### <a id="multiplexing-logger"></a> Create and configure a multiplexing logger ###
 
-Here we create a multiplexing logger, that is, a logger with multiple output [channel](./api/iChannel#top)s.
+Here we create a multiplexing logger, that is, a logger with multiple output [channel](./api/iChannel.md#top)s.
 
 ```javascript
 import { LogManager, TerminalWriter, LogLevel } from '@auturge/logger';
@@ -124,17 +124,17 @@ The logger is the "public api" for the logging mechanism. It has the following m
 
 |Member|Purpose|
 |---|---|
-[`enabled`](./api/iLog#enabled)|Gets or sets whether the logger is enabled.
-[`setLevel`](./api/iLog#setLevel)|Sets the level of all [`channel`](./api/IChannel#top)s on the logger.
-[`fatal`](./api/iLog#fatal) | Writes a message at the [`FATAL`](./api/loglevel#log-levels) level.
-[`error`](./api/iLog#error) | Writes a message at the [`ERROR`](./api/loglevel#log-levels) level.
-[`warn`](./api/iLog#warn) | Writes a message at the [`WARN`](./api/loglevel#log-levels) level.
-[`info`](./api/iLog#info) | Writes a message at the [`INFO`](./api/loglevel#log-levels) level.
-[`debug`](./api/iLog#debug) | Writes a message at the [`DEBUG`](./api/loglevel#log-levels) level.
-[`trace`](./api/iLog#trace) | Writes a message at the [`TRACE`](./api/loglevel#log-levels) level.
-[`failure`](./api/iStatusLog#entry-statuses) | Writes a message at the [`INFO`](./api/loglevel#log-levels) level, using the color specified for the [`FAILURE`](api/logstatus#entry-statuses) status (default: red).
-[`mark`](./api/iStatusLog#entry-statuses) | Writes a message at the [`INFO`](./api/loglevel#log-levels) level, using the color specified for the [`MARK`](api/logstatus#entry-statuses) status (default: magenta).
-[`success`](./api/iStatusLog#entry-statuses) | Writes a message at the [`INFO`](./api/loglevel#log-levels) level, using the color specified for the [`SUCCESS`](api/logstatus#entry-statuses) status (default: green).
+[`enabled`](./api/iLog.md#enabled)|Gets or sets whether the logger is enabled.
+[`setLevel`](./api/iLog.md#setLevel)|Sets the level of all [`channel`](./api/IChannel.md#top)s on the logger.
+[`fatal`](./api/iLog.md#fatal) | Writes a message at the [`FATAL`](./api/loglevel.md#log-levels) level.
+[`error`](./api/iLog.md#error) | Writes a message at the [`ERROR`](./api/loglevel.md#log-levels) level.
+[`warn`](./api/iLog.md#warn) | Writes a message at the [`WARN`](./api/loglevel.md#log-levels) level.
+[`info`](./api/iLog.md#info) | Writes a message at the [`INFO`](./api/loglevel.md#log-levels) level.
+[`debug`](./api/iLog.md#debug) | Writes a message at the [`DEBUG`](./api/loglevel.md#log-levels) level.
+[`trace`](./api/iLog.md#trace) | Writes a message at the [`TRACE`](./api/loglevel.md#log-levels) level.
+[`failure`](./api/iStatusLog.md#failure) | Writes a message at the [`INFO`](./api/loglevel.md#log-levels) level, using the color specified for the [`FAILURE`](api/logstatus.md#entry-statuses) status (default: red).
+[`mark`](./api/iStatusLog.md#mark) | Writes a message at the [`INFO`](./api/loglevel.md#log-levels) level, using the color specified for the [`MARK`](api/logstatus.md#entry-statuses) status (default: magenta).
+[`success`](./api/iStatusLog.md#success) | Writes a message at the [`INFO`](./api/loglevel.md#log-levels) level, using the color specified for the [`SUCCESS`](api/logstatus.md#entry-statuses) status (default: green).
 
 <br>
 
