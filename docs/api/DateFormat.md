@@ -19,7 +19,7 @@ DateFormat.LONG | "yyyy-MM-dd HH:mm:ss XXXX" | ```2021-03-04 05:06:07 -0800```
 
 <br>
 
-> NOTE: specifying the format DOES NOT recalculate the timestamp into the UTC timezone. See [patterns](../patterns) for more information.
+> NOTE: specifying the format DOES NOT recalculate the timestamp into the UTC timezone. See [patterns](../patterns#top) for more information.
 
 <br>
 
