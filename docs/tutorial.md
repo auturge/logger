@@ -132,9 +132,9 @@ The logger is the "public api" for the logging mechanism. It has the following m
 [`info`](./api/iLog.md#info) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level.
 [`debug`](./api/iLog.md#debug) | Writes a message at the [`DEBUG`](./api/logLevel.md#log-levels) level.
 [`trace`](./api/iLog.md#trace) | Writes a message at the [`TRACE`](./api/logLevel.md#log-levels) level.
-[`failure`](./api/iStatusLog.md#failure) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level, using the color specified for the [`FAILURE`](api/logstatus.md#entry-statuses) status (default: red).
-[`mark`](./api/iStatusLog.md#mark) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level, using the color specified for the [`MARK`](api/logstatus.md#entry-statuses) status (default: magenta).
-[`success`](./api/iStatusLog.md#success) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level, using the color specified for the [`SUCCESS`](api/logstatus.md#entry-statuses) status (default: green).
+[`failure`](./api/iStatusLog.md#failure) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level, using the color specified for the [`FAILURE`](api/logStatus.md#entry-statuses) status (default: red).
+[`mark`](./api/iStatusLog.md#mark) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level, using the color specified for the [`MARK`](api/logStatus.md#entry-statuses) status (default: magenta).
+[`success`](./api/iStatusLog.md#success) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level, using the color specified for the [`SUCCESS`](api/logStatus.md#entry-statuses) status (default: green).
 
 <br>
 
