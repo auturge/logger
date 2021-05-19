@@ -1,4 +1,6 @@
-# <h1 id="top" align="center">Log</h1> #
+<div id="top" align="right"><a href="https://github.com/auturge/logger#readme">(home)</a></div>
+
+# <h1 align="center">Log</h1> #
 
 > Log: A default terminal logger for quick out-of-the-box logging.
 

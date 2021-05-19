@@ -1,4 +1,6 @@
-# <h1 id="top" align="center">IEmitter&lt;TEventArgs&gt;</h1> #
+<div id="top" align="right"><a href="https://github.com/auturge/logger#readme">(home)</a></div>
+
+# <h1 align="center">IEmitter&lt;TEventArgs&gt;</h1> #
 
 > `Emitter<TEventArgs>`: An interface describing an object used to emit event-like messages.
 

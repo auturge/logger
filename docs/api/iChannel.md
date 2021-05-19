@@ -1,4 +1,6 @@
-# <h1 id="top" align="center">IChannel</h1> #
+<div id="top" align="right"><a href="https://github.com/auturge/logger#readme">(home)</a></div>
+
+# <h1 align="center">IChannel</h1> #
 
 > `IChannel`: An interface describing a single log-writing implementation.
 

@@ -1,4 +1,6 @@
-# <h1 id="top" align="center">LogLevel</h1> #
+<div id="top" align="right"><a href="https://github.com/auturge/logger#readme">(home)</a></div>
+
+# <h1 align="center">LogLevel</h1> #
 
 > `LogLevel`: Defines the default set of logging severity levels.
 
@@ -70,16 +72,16 @@ The display name of the `LogLevel` (defaults to the same value as `name`).
 
 ## Log Levels ##
 
-|Log Level	|Importance|
-|:---|:---|
-|OFF| Nothing will be logged. |
-|FATAL	|One or more key business functionalities are not working and the whole system doesn’t fulfill the business functionalities.|
-|ERROR	|One or more functionalities are not working, preventing some functionalities from working correctly.|
-|WARN	|Unexpected behavior happened inside the application, but it is continuing its work and the key business features are operating as expected.|
-|INFO	|An event happened, the event is purely informative and can be ignored during normal operations.|
-|DEBUG	|Useful during software debugging when more granular information is needed.|
-|TRACE	|Step by step execution of your code that can be ignored during the standard operation, but may be useful during extended debugging sessions.|
-|ALL	|A level where all messages will be logged, regardless of level. |
+|Log Level	|Importance| Default Color |
+|:---|:---|:---|
+|OFF| Nothing will be logged. | N/A |
+|FATAL	|One or more key business functionalities are not working and the whole system doesn’t fulfill the business functionalities.| red |
+|ERROR	|One or more functionalities are not working, preventing some functionalities from working correctly.| red |
+|WARN	|Unexpected behavior happened inside the application, but it is continuing its work and the key business features are operating as expected.| yellow |
+|INFO	|An event happened, the event is purely informative and can be ignored during normal operations.| white |
+|DEBUG	|Useful during software debugging when more granular information is needed.| cyan |
+|TRACE	|Step by step execution of your code that can be ignored during the standard operation, but may be useful during extended debugging sessions.| white |
+|ALL	|A level where all messages will be logged, regardless of level. | N/A |
 
 <br>
 
