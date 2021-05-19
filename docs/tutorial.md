@@ -49,8 +49,8 @@ The default [Log](./api/log.md#top) has the following properties:
 - writes to the `TERMINAL` (suitable for use with nodeJs applications)
 - uses the pattern  "%{ date | ${ DateFormat.DEFAULT } } | %{ level } | %{message}", which looks like this:
   > ``` 2020-12-31 21:57:02.333 -0800 | DEBUG | Hello, world! ```
-- default [LogLevel](./api/loglevel.md#log-levels) is ['INFO'](./api/loglevel.md#log-levels)
-- each message will be color-coded based on the [LogLevel](./api/loglevel.md#log-levels)
+- default [LogLevel](./api/logLevel.md#log-levels) is ['INFO'](./api/logLevel.md#log-levels)
+- each message will be color-coded based on the [LogLevel](./api/logLevel.md#log-levels)
 
 <br>
 
@@ -126,15 +126,15 @@ The logger is the "public api" for the logging mechanism. It has the following m
 |---|---|
 [`enabled`](./api/iLog.md#enabled)|Gets or sets whether the logger is enabled.
 [`setLevel`](./api/iLog.md#setLevel)|Sets the level of all [`channel`](./api/IChannel.md#top)s on the logger.
-[`fatal`](./api/iLog.md#fatal) | Writes a message at the [`FATAL`](./api/loglevel.md#log-levels) level.
-[`error`](./api/iLog.md#error) | Writes a message at the [`ERROR`](./api/loglevel.md#log-levels) level.
-[`warn`](./api/iLog.md#warn) | Writes a message at the [`WARN`](./api/loglevel.md#log-levels) level.
-[`info`](./api/iLog.md#info) | Writes a message at the [`INFO`](./api/loglevel.md#log-levels) level.
-[`debug`](./api/iLog.md#debug) | Writes a message at the [`DEBUG`](./api/loglevel.md#log-levels) level.
-[`trace`](./api/iLog.md#trace) | Writes a message at the [`TRACE`](./api/loglevel.md#log-levels) level.
-[`failure`](./api/iStatusLog.md#failure) | Writes a message at the [`INFO`](./api/loglevel.md#log-levels) level, using the color specified for the [`FAILURE`](api/logstatus.md#entry-statuses) status (default: red).
-[`mark`](./api/iStatusLog.md#mark) | Writes a message at the [`INFO`](./api/loglevel.md#log-levels) level, using the color specified for the [`MARK`](api/logstatus.md#entry-statuses) status (default: magenta).
-[`success`](./api/iStatusLog.md#success) | Writes a message at the [`INFO`](./api/loglevel.md#log-levels) level, using the color specified for the [`SUCCESS`](api/logstatus.md#entry-statuses) status (default: green).
+[`fatal`](./api/iLog.md#fatal) | Writes a message at the [`FATAL`](./api/logLevel.md#log-levels) level.
+[`error`](./api/iLog.md#error) | Writes a message at the [`ERROR`](./api/logLevel.md#log-levels) level.
+[`warn`](./api/iLog.md#warn) | Writes a message at the [`WARN`](./api/logLevel.md#log-levels) level.
+[`info`](./api/iLog.md#info) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level.
+[`debug`](./api/iLog.md#debug) | Writes a message at the [`DEBUG`](./api/logLevel.md#log-levels) level.
+[`trace`](./api/iLog.md#trace) | Writes a message at the [`TRACE`](./api/logLevel.md#log-levels) level.
+[`failure`](./api/iStatusLog.md#failure) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level, using the color specified for the [`FAILURE`](api/logstatus.md#entry-statuses) status (default: red).
+[`mark`](./api/iStatusLog.md#mark) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level, using the color specified for the [`MARK`](api/logstatus.md#entry-statuses) status (default: magenta).
+[`success`](./api/iStatusLog.md#success) | Writes a message at the [`INFO`](./api/logLevel.md#log-levels) level, using the color specified for the [`SUCCESS`](api/logstatus.md#entry-statuses) status (default: green).
 
 <br>
 
