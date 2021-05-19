@@ -69,7 +69,7 @@ Distributed under the MIT license. See [`LICENSE`][license] for more information
 
 <br>
 
-[home]: https://github.com/auturge/logger#readme
+[home]: https://github.com/auturge/logger#top
 [discussions]: https://github.com/auturge/logger/discussions/
 [github-url]: https://github.com/auturge/logger
 
