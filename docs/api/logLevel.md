@@ -30,7 +30,7 @@ See also the table of [log levels](#log-levels).
 
 ## `level` ##
 
-> ```javascript
+> ```typescript
 > LogLevel.level: number;
 > ```
 
@@ -44,7 +44,7 @@ A `number` that represents the severity of the `LogLevel`. Higher values represe
 
 ## `name` ##
 
-> ```javascript
+> ```typescript
 > LogLevel.name: string;
 > ```
 
@@ -58,7 +58,7 @@ The name of the `LogLevel`.
 
 ## `displayName` ##
 
-> ```javascript
+> ```typescript
 > LogLevel.displayName: string;
 > ```
 

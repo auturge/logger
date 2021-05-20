@@ -39,7 +39,7 @@ along with several logging-specific methods:
 
 ## `channels` ##
 
-> ```javascript
+> ```typescript
 > ILog.channels: IChannel[];
 > ```
 
@@ -53,7 +53,7 @@ Returns the underlying logging [channel][ichannel]s.
 
 ## `name` ##
 
-> ```javascript
+> ```typescript
 > ILog.name: string;
 > ```
 
@@ -67,7 +67,7 @@ Returns the name of the logger.
 
 ## `enabled` ##
 
-> ```javascript
+> ```typescript
 > ILog.enabled: boolean;
 > ```
 
@@ -81,7 +81,7 @@ Gets or sets whether the logger is enabled.
 
 ## `setLevel` ##
 
-> ```javascript
+> ```typescript
 > ILog.setLevel(level: LogLevel): void;
 > ```
 
@@ -95,7 +95,7 @@ Sets the `LogLevel` for all [channel][ichannel]s on this `ILog`.
 
 ## `fatal` ##
 
-> ```javascript
+> ```typescript
 > ILog.fatal(message: string): void;
 > ILog.fatal(message: string, obj: any): void;
 > ILog.fatal(message: string, obj: any, prettyPrint: boolean): void;
@@ -113,7 +113,7 @@ This is the log level that tells the user that the application has encountered a
 
 ## `error` ##
 
-> ```javascript
+> ```typescript
 > ILog.error(message: string): void;
 > ILog.error(message: string, obj: any): void;
 > ILog.error(message: string, obj: any, prettyPrint: boolean): void;
@@ -131,7 +131,7 @@ This tells the user that the application has hit an issue preventing one or more
 
 ## `warn` ##
 
-> ```javascript
+> ```typescript
 > ILog.warn(message: string): void;
 > ILog.warn(message: string, obj: any): void;
 > ILog.warn(message: string, obj: any, prettyPrint: boolean): void;
@@ -149,7 +149,7 @@ This tells the user that something unexpected happened in the application: a pro
 
 ## `info` ##
 
-> ```javascript
+> ```typescript
 > ILog.info(message: string): void;
 > ILog.info(message: string, obj: any): void;
 > ILog.info(message: string, obj: any, prettyPrint: boolean): void;
@@ -167,7 +167,7 @@ This is the standard log level indicating that something happened, the applicati
 
 ## `debug` ##
 
-> ```javascript
+> ```typescript
 > ILog.debug(message: string): void;
 > ILog.debug(message: string, obj: any): void;
 > ILog.debug(message: string, obj: any, prettyPrint: boolean): void;
@@ -185,7 +185,7 @@ This level is less granular compared to the TRACE level, but it is more than you
 
 ## `trace` ##
 
-> ```javascript
+> ```typescript
 > ILog.trace(message: string): void;
 > ILog.trace(message: string, obj: any): void;
 > ILog.trace(message: string, obj: any, prettyPrint: boolean): void;

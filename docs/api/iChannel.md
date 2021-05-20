@@ -30,7 +30,7 @@ The `IChannel` interface exposes the following members:
 
 ## `enabled` ##
 
-> ```javascript
+> ```typescript
 > IChannel.enabled: boolean;
 > ```
 

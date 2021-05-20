@@ -25,7 +25,7 @@ See also [`IEmitter`][iEmitter] and [`EventHandler`][event-handler].
 
 ## `subscribers` ##
 
-> ```javascript
+> ```typescript
 > Emitter.subscribers: EventHandler<TEventArgs>[];
 > ```
 

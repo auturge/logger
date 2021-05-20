@@ -21,7 +21,7 @@ See also [`Emitter`][emitter] and [`EventHandler`][event-handler].
 
 ## `clear` ##
 
-> ```javascript
+> ```typescript
 > IEmitter.clear(): void;
 > ```
 
@@ -35,7 +35,7 @@ Clears the list of subscribers.
 
 ## `emit` ##
 
-> ```javascript
+> ```typescript
 > IEmitter.emit(args: TEventArgs): void;
 > ```
 
@@ -49,7 +49,7 @@ Calls all subscribers, passing the given arguments.
 
 ## `subscribe` ##
 
-> ```javascript
+> ```typescript
 > IEmitter.subscribe(handler: EventHandler<TEventArgs>): void;
 > ```
 
@@ -63,7 +63,7 @@ Adds the given event handler to the list of subscribers.
 
 ## `unsubscribe` ##
 
-> ```javascript
+> ```typescript
 > IEmitter.unsubscribe(handler: EventHandler<TEventArgs>): void;
 > ```
 

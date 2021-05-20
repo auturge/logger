@@ -2,23 +2,29 @@
 
 # <h1 align="center">ConsoleLog</h1> #
 
->
-> [![Work In Progress][WIP-badge]](#top)
->
-> This documentation is incomplete.
->
-> I'm working on it, but I also have to sleep sometimes! :sleeping:
-
-<br>
-
 `ConsoleLog` is the default logger for the browser console.
-It has a single channel, called 'console', utilizing a [`ConsoleWriter`][console-writer], and also configured at [`LogLevel.INFO`][log-levels].
+
+It has a single channel, called 'console', utilizing a [`ConsoleWriter`][writer], and also configured at [`LogLevel.INFO`][log-levels].
 
 <br>
 
 <a href="#top">(go to top)</a>
 
-[WIP-badge]: https://img.shields.io/static/v1?label=WIP:&message=Work-in-Progress&color=blueviolet
+----
 
-[console-writer]: ConsoleWriter.md#top
+## Properties ##
+
+|Property|Value|
+|---|---|
+| type | [`IStatusLog`][status-log] |
+| name | `console` |
+| channels | - `console`: [ConsoleWriter][writer] at [`LogLevel.INFO`][log-levels] |
+| enabled | true |
+
+<br>
+
+<a href="#top">(go to top)</a>
+
+[writer]: ConsoleWriter.md#top
 [log-levels]: logLevel.md#log-levels
+[status-log]: iStatusLog.md#top

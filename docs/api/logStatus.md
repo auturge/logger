@@ -25,7 +25,7 @@ See also the table of [log statuses](#entry-statuses).
 
 ## `name` ##
 
-> ```javascript
+> ```typescript
 > LogStatus.name: string;
 > ```
 
@@ -39,7 +39,7 @@ The name of the `LogStatus`.
 
 ## `displayName` ##
 
-> ```javascript
+> ```typescript
 > LogStatus.displayName: string;
 > ```
 

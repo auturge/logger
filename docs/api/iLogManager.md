@@ -51,7 +51,7 @@ For more details, see the [ILogBuilder][iLogBuilder] abstraction.
 
 ## `disable` ##
 
-> ```javascript
+> ```typescript
 > ILogManager.disable(logName: string): void;
 > ```
 
@@ -65,7 +65,7 @@ Disables the log with the given name.
 
 ## `enable` ##
 
-> ```javascript
+> ```typescript
 > ILogManager.enable(logName: string): void;
 > ```
 
@@ -79,7 +79,7 @@ Enables the log with the given name.
 
 ## `getLog` ##
 
-> ```javascript
+> ```typescript
 > ILogManager.getLog(logName: string): ILog | null;
 > ```
 

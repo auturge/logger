@@ -2,19 +2,29 @@
 
 # <h1 align="center">TerminalLog</h1> #
 
->
-> [![Work In Progress][WIP-badge]](#top)
->
-> This documentation is incomplete.
->
-> I'm working on it, but I also have to sleep sometimes! :sleeping:
+> `TerminalLog`: The default logger for the command-line terminal.
 
-<br>
-
-<!-- `CONSOLE` is the default writer for the browser console. -->
+It has a single channel, called 'console', utilizing a [`TerminalWriter`][writer], and also configured at [`LogLevel.INFO`][log-levels].
 
 <br>
 
 <a href="#top">(go to top)</a>
 
-[WIP-badge]: https://img.shields.io/static/v1?label=WIP:&message=Work-in-Progress&color=blueviolet
+----
+
+## Properties ##
+
+|Property|Value|
+|---|---|
+| type | [`IStatusLog`][status-log] |
+| name | `console` |
+| channels | - `console`: [TerminalWriter][writer] at [`LogLevel.INFO`][log-levels] |
+| enabled | true |
+
+<br>
+
+<a href="#top">(go to top)</a>
+
+[writer]: TerminalWriter.md#top
+[log-levels]: logLevel.md#log-levels
+[status-log]: iStatusLog.md#top
