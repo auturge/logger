@@ -3,7 +3,7 @@ import { AnyRandom, CharacterSet, Scale } from "@auturge/testing";
 import { Emitter } from "@src/core/events";
 
 import { LogStatus } from "@src/logging/LogStatus";
-import { IChannel } from "@src/logging/IChannel";
+import { IChannel } from "@src/logging/StatusLog/Channel";
 import { LogLevel } from "@src/logging/LogLevel";
 import { IStatusData, IStatusEntry } from "@src/logging/StatusLog/IStatusEntry";
 import { NULL } from "./NullWriter";

@@ -17,7 +17,8 @@ export { TerminalWriter } from './logging/writers/TerminalWriter';
 export { ConsoleWriter } from './logging/writers/ConsoleWriter';
 
 export {
-    ILog, IChannel, ILogEntry, ILogEntryWriter, IWriter, ILogEntryData,
+    ILog, ILogEntry, IWriter, ILogEntryData,
+    IStatusLog, IStatusEntry, IStatusData,
     ILogManager, ILogBuilder,
     LogLevel, LogStatus
 } from './logging/index';

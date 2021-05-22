@@ -1,12 +1,17 @@
 import { ILog } from "./ILog";
 import { ILogBuilder } from "./ILogBuilder";
+import { IStatusLog } from "./StatusLog/StatusLog";
+import { IStatusLogBuilder } from "./StatusLog/StatusLogBuilder";
 
 // TODO: Add interface description comment
 
-export interface ILogManager<TLog extends ILog = ILog> {
+export interface ILogManager<
+    TLog extends ILog = IStatusLog,
+    TLogBuilder extends ILogBuilder = IStatusLogBuilder
+    > {
 
     /** A builder for generating new ILog channels. */
-    initialize: ILogBuilder<TLog>;
+    initialize: TLogBuilder;
 
     /** Disables the log. */
     disable(logName: string): TLog;

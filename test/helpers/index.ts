@@ -4,8 +4,8 @@ import { AnyRandom } from "@auturge/testing";
 
 import { throwIfNullOrEmpty } from "@src/functions/guards";
 
-import { IChannel } from "@src/logging/IChannel";
 import { ILogEntry } from "@src/logging/ILogEntry";
+import { Channel } from "@src/logging/StatusLog/Channel";
 
 export function stub(owner, method): Sinon.SinonStub {
     return Sinon.stub(<any>owner, method);
@@ -32,7 +32,7 @@ export function other<T>(array: T[], badValue: T): T {
     return item;
 }
 
-export function channelMatches<TEntry extends ILogEntry>(expected: IChannel<TEntry>, actual: IChannel<TEntry>) {
+export function channelMatches<TEntry extends ILogEntry>(expected: Channel, actual: Channel) {
     // assert.equal(actual.enabled, expected.enabled, "'enabled' does not match");
     assert.equal(actual.name, expected.name, "'name' does not match");
     // assert.deepEqual(actual.formatter, expected.formatter, "'formatter' does not match");

@@ -1,11 +1,12 @@
 import { LogLevel } from "./LogLevel";
+import { IStatusData } from "./StatusLog/IStatusEntry";
 
 export interface ILogEntryData {
     prettyPrint?: boolean;
     obj?: any;
 }
 
-export interface ILogEntry<TData extends ILogEntryData = any> {
+export interface ILogEntry<TData extends ILogEntryData = IStatusData> {
 
     /** Any accompanying data that should be included and logged. */
     data?: TData;

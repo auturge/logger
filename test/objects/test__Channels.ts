@@ -1,4 +1,4 @@
-import { IChannel } from "@src/logging";
+import { IChannel } from "@src/logging/StatusLog/Channel";
 import { LogLevel } from "@src/logging/LogLevel";
 import { IStatusEntry } from "@src/logging/StatusLog/IStatusEntry";
 import { ConsoleWriter } from "@src/logging/writers/ConsoleWriter";

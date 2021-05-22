@@ -1,12 +1,7 @@
-import { IChannel } from "./IChannel";
-import { ILogEntry } from "./ILogEntry";
 import { LogLevel } from "./LogLevel";
 
-/** An interface describing a multi-channel logging mechanism. */
-interface ILoggerBase<TEntry extends ILogEntry = ILogEntry> {
-
-    /** Gets the underlying logging channels. */
-    readonly channels: IChannel<TEntry>[];
+/** An interface describing the properties and methods used to log messages. */
+export interface ILog {
 
     /** The name of this logger. */
     readonly name: string;
@@ -16,10 +11,6 @@ interface ILoggerBase<TEntry extends ILogEntry = ILogEntry> {
 
     /** Sets the `LogLevel` for all channels. */
     setLevel(level: LogLevel): void;
-}
-
-/** An interface describing the properties and methods used to log messages. */
-export interface ILog<TEntry extends ILogEntry = ILogEntry> extends ILoggerBase<TEntry> {
 
     /** Formats and writes a fatal log message.
      *

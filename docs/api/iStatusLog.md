@@ -31,7 +31,7 @@ In addition, `IStatusLog` exposes the following additional members:
 
 ## `failure` ##
 
-> ```javascript
+> ```typescript
 > IStatusLog.failure(message: string): void;
 > IStatusLog.failure(message: string, obj: any): void;
 > IStatusLog.failure(message: string, obj: any, prettyPrint: boolean): void;
@@ -58,7 +58,7 @@ Some examples of `failure` messages:
 
 ## `mark` ##
 
-> ```javascript
+> ```typescript
 > IStatusLog.mark(message: string): void;
 > IStatusLog.mark(message: string, obj: any): void;
 > IStatusLog.mark(message: string, obj: any, prettyPrint: boolean): void;
@@ -83,7 +83,7 @@ Some examples of `mark` messages:
 
 ## `success` ##
 
-> ```javascript
+> ```typescript
 > IStatusLog.success(message: string): void;
 > IStatusLog.success(message: string, obj: any): void;
 > IStatusLog.success(message: string, obj: any, prettyPrint: boolean): void;

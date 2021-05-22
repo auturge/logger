@@ -3,8 +3,7 @@ import { AnyRandom } from '@auturge/testing';
 import { TEST_CHANNEL_1, TEST_CHANNEL_2 } from '@test/objects';
 
 import { StatusLog } from '@src/logging/StatusLog/StatusLog';
-import { IChannel } from '@src/logging/IChannel';
-import { IStatusEntry } from '@src/logging/StatusLog/IStatusEntry';
+import { IChannel } from '@src/logging/StatusLog/Channel';
 import { StatusLogBuilder } from '@src/logging/StatusLog/StatusLogBuilder';
 import { LogManager } from '@src/logging/implementation/LogManager';
 
@@ -12,7 +11,7 @@ describe('LogManager', () => {
 
     let builder, manager, logName;
 
-    function getTestLogger(name: string, channels: IChannel<IStatusEntry>[] = []) {
+    function getTestLogger(name: string, channels: IChannel[] = []) {
         if (!channels.length) {
             channels.push(TEST_CHANNEL_1);
         }

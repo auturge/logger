@@ -1,16 +1,21 @@
-import { getNullOrUndefinedErrorMessage, throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
+import { getNullOrUndefinedErrorMessage, throwIfNullOrEmpty } from "@src/functions/guards";
 import { ILog } from "../ILog";
 import { ILogBuilder } from "../ILogBuilder";
 import { ILogManager } from "../ILogManager";
+import { IStatusLog } from "../StatusLog/StatusLog";
+import { IStatusLogBuilder } from "../StatusLog/StatusLogBuilder";
 
 // TODO: Add class description comment
 
-export class LogManager<TLog extends ILog = ILog> implements ILogManager<TLog> {
+export class LogManager<
+    TLog extends ILog = IStatusLog,
+    TLogBuilder extends ILogBuilder = IStatusLogBuilder
+    > implements ILogManager<TLog, TLogBuilder> {
 
     private _logNames: string[] = [];
     private _logs: TLog[] = [];
 
-    constructor(builder: ILogBuilder<TLog>) {
+    constructor(builder: TLogBuilder) {
         if (builder == null)
             throw new Error(getNullOrUndefinedErrorMessage('builder'));
 
@@ -19,7 +24,7 @@ export class LogManager<TLog extends ILog = ILog> implements ILogManager<TLog> {
     }
 
     /** A builder for generating new ILog channels. */
-    public readonly initialize: ILogBuilder<TLog>;
+    public readonly initialize: TLogBuilder;
 
     /** Disables the log. */
     public disable(logName: string): TLog {
@@ -45,6 +50,7 @@ export class LogManager<TLog extends ILog = ILog> implements ILogManager<TLog> {
         return log;
     }
 
+    /** Gets a log by name. Returns `null` if no such log exists. */
     public getLog(logName: string): TLog | null {
         throwIfNullOrEmpty(logName, 'logName');
 
@@ -56,9 +62,7 @@ export class LogManager<TLog extends ILog = ILog> implements ILogManager<TLog> {
         return log;
     }
 
-    private onLogCreated(log: TLog): void {
-        throwIfNullOrUndefined(log, 'log');
-
+    private onLogCreated(log: any): void {
         // use a special array of JUST the names,
         // in the same exact order as the array of logs.
         // search for the index in the NAMES array,

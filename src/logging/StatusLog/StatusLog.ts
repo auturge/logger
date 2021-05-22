@@ -1,13 +1,13 @@
 import { throwIfNullOrEmpty, throwIfNullOrUndefined } from "@src/functions/guards";
 import { LogLevel } from "../LogLevel";
-import { IChannel } from "../IChannel";
 import { LogStatus } from "../LogStatus";
 import { ILog } from "../ILog";
 import { IStatusEntry } from "./IStatusEntry";
+import { IChannel } from "./Channel";
 
 // TODO: Add class description comment
 
-export interface IStatusLog extends ILog<IStatusEntry> {
+export interface IStatusLog extends ILog {
 
     /** Formats and writes a failure log message. */
     failure(message: string): void;
@@ -31,10 +31,10 @@ export class StatusLog implements IStatusLog {
     private _dateStamper = () => { return new Date(); };
     private _enabled = true;
 
-    public readonly channels: IChannel<IStatusEntry>[];
+    public readonly channels: IChannel[];
     public readonly name: string;
 
-    public constructor(name: string, channels: IChannel<IStatusEntry>[]) {
+    public constructor(name: string, channels: IChannel[]) {
         throwIfNullOrEmpty(name, 'name');
         throwIfNullOrEmpty(channels, 'channels');
         this.channels = channels;
@@ -112,7 +112,7 @@ export class StatusLog implements IStatusLog {
 
     private output(entry: IStatusEntry): void {
         if (!this.enabled) return;
-        this.channels.forEach((channel: IChannel<IStatusEntry>) => {
+        this.channels.forEach((channel: IChannel) => {
             channel.log(entry);
         });
     }

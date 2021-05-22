@@ -6,6 +6,9 @@
     - Emitter - removed 'handlers' (use 'subscribers' instead).
     - Token arguments with values must now include a `key`.
         - ex: DateToken `format` and `timezone`
+    - Removed:
+        - ILoggerBase
+        - LogBuilder
 
 - Added
     - Docs!
