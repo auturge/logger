@@ -76,6 +76,40 @@ export class LogLevel {
     /** A log level describing the lowest level possible. */
     public static readonly ALL: LogLevel = Object.freeze(new LogLevel(0, "ALL"));
 
+    /** Attempts to coerce a value into the corresponding LogLevel. */
+    public static coerce(value: LogLevel | string | number): LogLevel | null {
+        if (value == null)
+            return null;
+
+        if (typeof value === "object" && value instanceof LogLevel)
+            return value;
+
+        function fromLevel(level: number): LogLevel {
+            const item = LOG_LEVELS.find(it => it.level == level);
+            if (item)
+                return item;
+
+            throw new Error(`No LogLevel exists with level [${ level }].`);
+        }
+
+        function fromName(name: string): LogLevel {
+            const item = LOG_LEVELS.find(it => it.name.toLowerCase() == name.toLowerCase());
+            if (item)
+                return item;
+
+            throw new Error(`No LogLevel exists with name [${ name }].`);
+        }
+
+        if (typeof value === "string")
+            return fromName(value);
+
+        if (typeof value === "number")
+            return fromLevel(value);
+
+        // not found
+        throw new Error(`Could not normalize loglevel value [${ value }].`);
+    }
+
     // #endregion
 
 }
