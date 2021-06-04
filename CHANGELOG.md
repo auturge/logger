@@ -15,6 +15,7 @@
     - Export: TerminalWriter, ConsoleWriter, DateFormat
     - SourceToken
     - EntryColorizer
+    - LogLevel.coerce(...) - Attempts to coerce a `LogLevel` from the given name, level, or `LogLevel`
 
 - Changed
     - IWriter.reconfigure now returns an IWriter.
