@@ -1,6 +1,6 @@
 <div id="top" align="right"><a href="https://github.com/auturge/logger#top">(home)</a></div>
 
-# <h1 align="center">Emitter&lt;TEventArgs&gt;</h1> #
+<h1 align="center">Emitter&lt;TEventArgs&gt;</h1>
 
 > `Emitter<TEventArgs>`: An object used to emit event-like messages.
 

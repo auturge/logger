@@ -1,6 +1,6 @@
 <div id="top" align="right"><a href="https://github.com/auturge/logger#top">(home)</a></div>
 
-# <h1 align="center">Log</h1> #
+<h1 align="center">Log</h1>
 
 > Log: A default terminal logger for quick out-of-the-box logging.
 

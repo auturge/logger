@@ -1,6 +1,6 @@
 <div id="top" align="right"><a href="https://github.com/auturge/logger#top">(home)</a></div>
 
-# <h1 align="center">TerminalLog</h1> #
+<h1 align="center">TerminalLog</h1>
 
 > `TerminalLog`: The default logger for the command-line terminal.
 

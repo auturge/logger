@@ -1,6 +1,6 @@
 <div id="top" align="right"><a href="https://github.com/auturge/logger#top">(home)</a></div>
 
-# <h1 align="center">ILogManager</h1> #
+<h1 align="center">ILogManager</h1>
 
 > `ILogManager`: An interface describing a log manager implementation.
 

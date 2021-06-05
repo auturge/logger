@@ -1,6 +1,6 @@
 <div id="top" align="right"><a href="https://github.com/auturge/logger#top">(home)</a></div>
 
-# <h1 align="center">ILog</h1> #
+<h1 align="center">ILog</h1>
 
 > `ILog`: An interface describing the properties and methods used to log messages.
 
