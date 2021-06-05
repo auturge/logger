@@ -1,4 +1,4 @@
-# <h1 id="top" align="center">auturge/logger</h1> #
+<h1 id="top" align="center">auturge/logger</h1>
 
 <p align="center">
   A flexible logging platform for Javascript/TypeScript.
